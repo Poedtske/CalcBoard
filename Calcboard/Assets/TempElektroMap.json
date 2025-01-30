@@ -6,177 +6,154 @@
     "tiles": [
       {
         "id": 1,
-        "img": "trump.png",
-        "meanings": {
-          "English": "trump",
-          "Nederlands": "trump"
-        }
+        "img": "trump",
+        "meanings": [
+          "temp","temp"
+        ]
       },
       {
         "id": 2,
-        "img": "obama.png",
-        "meanings": {
-          "English": "obama",
-          "Nederlands": "obama"
-        }
+        "img": "obama",
+        "meanings": [
+          "temp","temp"
+        ]
       },
       {
         "id": 3,
-        "img": "kennedy.png",
-        "meanings": {
-          "English": "kennedy",
-          "Nederlands": "kennedy"
-        }
+        "img": "kennedy",
+        "meanings": [
+          "temp","temp"
+        ]
       },
       {
         "id": 4,
-        "img": "bush.png",
-        "meanings": {
-          "English": "bush",
-          "Nederlands": "bush"
-        }
+        "img": "bush",
+        "meanings": [
+          "temp","temp"
+        ]
       },
       {
         "id": 5,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 6,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 7,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 8,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 9,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 10,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 11,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 12,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 13,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 14,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 15,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 16,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 17,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 18,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 19,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 20,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 21,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 22,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 23,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       },{
         "id": 24,
-        "img": "temp.png",
-        "meanings": {
-          "English": "temp",
-          "Nederlands": "temp"
-        }
+        "img": "temp",
+        "meanings": [
+          "temp","temp"
+        ]
       }
     ],
-    "img": "temp_test_map.png"
+    "img": "temp_test_map"
   }
+

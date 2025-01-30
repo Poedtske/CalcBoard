@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ElektroTile : MonoBehaviour
 {
     private Sprite imgComponent;
-    private Dictionary<string, string> languageDic;
+    private List<string> languageDic;
     private int tileNr;
     private Sprite defaultSprite;
 
@@ -21,7 +21,7 @@ public class ElektroTile : MonoBehaviour
         imgComponent = defaultSprite;
     }
 
-    public void Initialize(int id, string imgPath, Dictionary<string, string> meanings)
+    public void Initialize(int id, string imgPath, List<string> meanings)
     {
         tileNr = id;
         languageDic = meanings;

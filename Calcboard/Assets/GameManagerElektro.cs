@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -25,15 +25,24 @@ public class GameManagerElektro : MonoBehaviour
         if (File.Exists(filePath))
         {
             string jsonData = File.ReadAllText(filePath);
-            ElektroMap mapData = JsonConvert.DeserializeObject<ElektroMap>(jsonData);
-            Debug.Log(jsonData);
+            Debug.Log("Raw JSON: " + jsonData); // 🔍 Check JSON before deserialization
 
-            foreach (var tileData in mapData.tiles)
+            try
             {
-                ElektroTile newTile = new GameObject($"Tile_{tileData.id}").AddComponent<ElektroTile>();
-                newTile.Initialize(tileData.id, tileData.img, tileData.meanings);
-                Debug.Log(newTile.ToString());
-                elektroTiles.Add(newTile);
+                ElektroMap mapData = JsonConvert.DeserializeObject<ElektroMap>(jsonData);
+                Debug.Log("JSON Parsed Successfully!");
+
+                foreach (var tileData in mapData.tiles)
+                {
+                    ElektroTile newTile = new GameObject($"Tile_{tileData.id}").AddComponent<ElektroTile>();
+                    newTile.Initialize(tileData.id, tileData.img, tileData.meanings);
+                    Debug.Log(newTile.ToString());
+                    elektroTiles.Add(newTile);
+                }
+            }
+            catch (JsonException ex)
+            {
+                Debug.LogError("JSON Deserialization Error: " + ex.Message);
             }
         }
         else
@@ -59,5 +68,5 @@ public class TileData
 {
     public int id;
     public string img;
-    public Dictionary<string, string> meanings;
+    public List<string> meanings;
 }
