@@ -1,0 +1,26 @@
+:root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    width: 594px; /* Specific width */
+    height: 420px; /* Specific height */
+    justify-content: flex-start; /* Ensures items fill the row */
+    align-content: flex-start; /* Aligns the rows properly */
+    border: 2px solid red; /* Red border around the grid */
+    background-color: white;
+}
+
+.grid-item {
+    width:calc(100%/6);
+    height: 105px;
+    background-color: lightgray;
+    border-width: 1px;
+    border-color: blue;
+}

@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/styles.uss?fileID=7433441132597879392&amp;guid=1c34c0ad33915df47b4cfd380f446bf0&amp;type=3#styles" />
+    <ui:VisualElement name="CalcBoard" style="flex-grow: 1;" />
+</ui:UXML>
