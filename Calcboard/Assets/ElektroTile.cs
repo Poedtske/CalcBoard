@@ -9,6 +9,31 @@ public class ElektroTile : MonoBehaviour
     private int tileNr;
     private Sprite defaultSprite;
 
+    // Public properties for accessing private fields
+    public int TileNr
+    {
+        get => tileNr;
+        private set => tileNr = value;
+    }
+
+    public List<string> LanguageDic
+    {
+        get => languageDic;
+        private set => languageDic = value;
+    }
+
+    public Sprite ImgComponent
+    {
+        get => imgComponent;
+        private set => imgComponent = value;
+    }
+
+    public Sprite DefaultSprite
+    {
+        get => defaultSprite;
+        private set => defaultSprite = value;
+    }
+
     void Awake()
     {
         // Load default sprite safely

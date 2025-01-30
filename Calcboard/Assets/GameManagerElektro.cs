@@ -2,6 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerElektro : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class GameManagerElektro : MonoBehaviour
         if (File.Exists(filePath))
         {
             string jsonData = File.ReadAllText(filePath);
-            Debug.Log("Raw JSON: " + jsonData); // 🔍 Check JSON before deserialization
+            Debug.Log("Raw JSON: " + jsonData);
 
             try
             {
@@ -34,10 +35,40 @@ public class GameManagerElektro : MonoBehaviour
 
                 foreach (var tileData in mapData.tiles)
                 {
-                    ElektroTile newTile = new GameObject($"Tile_{tileData.id}").AddComponent<ElektroTile>();
-                    newTile.Initialize(tileData.id, tileData.img, tileData.meanings);
-                    Debug.Log(newTile.ToString());
-                    elektroTiles.Add(newTile);
+                    // Find the existing GameObject by name
+                    GameObject existingTile = GameObject.Find($"ElectroTile ({tileData.id})");
+
+                    if (existingTile != null)
+                    {
+                        // Get the ElektroTile component
+                        //ElektroTile newTile = new ElektroTile();
+
+                        Texture2D temp = Resources.Load<Texture2D>(tileData.img);
+                        Sprite sprite = Sprite.Create(temp, new Rect(0, 0, temp.width, temp.height), new Vector2(0.5f, 0.5f));
+
+                        
+                        ElektroTile newTile = existingTile.AddComponent<ElektroTile>();
+                        newTile.Initialize(tileData.id, tileData.img, tileData.meanings);
+                        Image tempImg=existingTile.AddComponent<Image>();
+                        tempImg.sprite = sprite;
+
+                        if (newTile != null)
+                        {
+                            newTile.Initialize(tileData.id, tileData.img, tileData.meanings);
+                            Debug.Log($"Initialized: {newTile}");
+                            elektroTiles.Add(newTile);
+                        }
+                        else
+                        {
+                            Debug.LogError($"ElektroTile component not found on: {existingTile.name}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"GameObject ElektroTile ({tileData.id}) not found in the scene!");
+                    }
+
+
                 }
             }
             catch (JsonException ex)
