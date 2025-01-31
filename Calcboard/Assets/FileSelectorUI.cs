@@ -9,7 +9,7 @@ public class FileSelectorUI : MonoBehaviour
     public RawImage imagePreview;
 
     private string selectedFilePath;
-    private string saveFolderPath = "SavedImages"; // Folder name for saved images
+    private string saveFolderPath = "elektro/maps/"; // Folder name for saved images
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +26,7 @@ public class FileSelectorUI : MonoBehaviour
     void OpenFilePicker()
     {
         // Open file dialog for PNG/JPG
-        var paths = StandaloneFileBrowser.OpenFilePanel("Select Image", ".png,.jpg,.jpeg", "", false);
+        var paths = StandaloneFileBrowser.OpenFilePanel("Select Image", "png,jpg,jpeg", "", false);
 
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
         {
@@ -39,14 +39,16 @@ public class FileSelectorUI : MonoBehaviour
     {
         byte[] fileData = File.ReadAllBytes(filePath);
 
-        // Ensure save directory exists
-        string directoryPath = Path.Combine(Application.persistentDataPath, saveFolderPath);
-        if (!Directory.Exists(directoryPath))
-            Directory.CreateDirectory(directoryPath);
+        // Save the file inside the Unity project root
+        string projectRoot = Application.dataPath; // "Assets" folder path
+        string saveDirectory = Path.Combine(projectRoot, "..", saveFolderPath); // Move to project root
 
-        // Save file in Unity's persistent data path
+        if (!Directory.Exists(saveDirectory))
+            Directory.CreateDirectory(saveDirectory);
+
+        // Save file in Elektro/maps
         string fileName = Path.GetFileName(filePath);
-        string savePath = Path.Combine(directoryPath, fileName);
+        string savePath = Path.Combine(saveDirectory, fileName);
         File.WriteAllBytes(savePath, fileData);
 
         Debug.Log("Image saved at: " + savePath);
