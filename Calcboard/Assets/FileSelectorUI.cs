@@ -9,7 +9,7 @@ public class FileSelectorUI : MonoBehaviour
     public RawImage imagePreview;
 
     private string selectedFilePath;
-    private string saveFolderPath = "elektro/maps/"; // Folder name for saved images
+    private string saveFolderPath = "games/elektro/maps/"; // Folder name for saved images
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
