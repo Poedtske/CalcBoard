@@ -234,7 +234,7 @@ public class ElektroMap
         this.tiles = new List<TileData>();
         for (int i = 1; i <= 24; i++)
         {
-            tiles.Add(new TileData(i,"temp.jpg"));
+            tiles.Add(new TileData(i,"temp.jpg", languages.Count));
         }
         this.img = null;
     }
@@ -247,11 +247,15 @@ public class TileData
     public string img;
     public List<string> meanings;
 
-    public TileData(int id, string img)
+    public TileData(int id, string img, int languageCount)
     {
         this.id = id;
         this.img = img;
         this.meanings = new List<string>();
+        for (int i = 0; i < languageCount; i++)
+        {
+            meanings.Add("temp");
+        }
     }
 }
 
