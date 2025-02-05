@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3798875}
   - component: {fileID: 3798879}
-  - component: {fileID: 3798876}
+  - component: {fileID: 3798880}
   m_Layer: 0
   m_Name: ElectroTile (17)
   m_TagString: Untagged
@@ -156,7 +156,15 @@ RectTransform:
   m_AnchoredPosition: {x: 148.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3798876
+--- !u!222 &3798879
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3798874}
+  m_CullTransparentMesh: 1
+--- !u!114 &3798880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,15 +207,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &3798879
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798874}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &5228542
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5228543}
   - component: {fileID: 5228547}
-  - component: {fileID: 5228544}
+  - component: {fileID: 5228548}
   m_Layer: 0
   m_Name: ElectroTile (13)
   m_TagString: Untagged
@@ -245,7 +269,15 @@ RectTransform:
   m_AnchoredPosition: {x: -247.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5228544
+--- !u!222 &5228547
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5228542}
+  m_CullTransparentMesh: 1
+--- !u!114 &5228548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,15 +320,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &5228547
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228542}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &29040739
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61831226}
   - component: {fileID: 61831230}
-  - component: {fileID: 61831227}
+  - component: {fileID: 61831231}
   m_Layer: 0
   m_Name: ElectroTile (21)
   m_TagString: Untagged
@@ -470,7 +518,15 @@ RectTransform:
   m_AnchoredPosition: {x: -49.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &61831227
+--- !u!222 &61831230
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61831225}
+  m_CullTransparentMesh: 1
+--- !u!114 &61831231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,15 +569,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &61831230
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61831225}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &66193354
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,9 +700,9 @@ RectTransform:
   - {fileID: 2006527027}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -165}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84422209
@@ -806,9 +878,9 @@ RectTransform:
   - {fileID: 1726027057}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &90759379
@@ -1096,7 +1168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 137909404}
   - component: {fileID: 137909408}
-  - component: {fileID: 137909405}
+  - component: {fileID: 137909409}
   m_Layer: 0
   m_Name: ElectroTile (8)
   m_TagString: Untagged
@@ -1123,7 +1195,15 @@ RectTransform:
   m_AnchoredPosition: {x: -148.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &137909405
+--- !u!222 &137909408
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137909403}
+  m_CullTransparentMesh: 1
+--- !u!114 &137909409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1166,15 +1246,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &137909408
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137909403}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &145497592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,9 +1441,9 @@ RectTransform:
   - {fileID: 1147417906}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -215}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &165640067
@@ -1499,7 +1595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222466616}
   - component: {fileID: 222466620}
-  - component: {fileID: 222466617}
+  - component: {fileID: 222466621}
   m_Layer: 0
   m_Name: ElectroTile (23)
   m_TagString: Untagged
@@ -1526,7 +1622,15 @@ RectTransform:
   m_AnchoredPosition: {x: 148.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &222466617
+--- !u!222 &222466620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222466615}
+  m_CullTransparentMesh: 1
+--- !u!114 &222466621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1569,15 +1673,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &222466620
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222466615}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &267198631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,9 +2077,9 @@ RectTransform:
   - {fileID: 1948093085}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -565}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320959778
@@ -2163,7 +2283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349670316}
   - component: {fileID: 349670320}
-  - component: {fileID: 349670317}
+  - component: {fileID: 349670321}
   m_Layer: 0
   m_Name: ElectroTile (7)
   m_TagString: Untagged
@@ -2190,7 +2310,15 @@ RectTransform:
   m_AnchoredPosition: {x: -247.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &349670317
+--- !u!222 &349670320
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349670315}
+  m_CullTransparentMesh: 1
+--- !u!114 &349670321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2233,15 +2361,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &349670320
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349670315}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &382046792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,7 +2553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417071150}
   - component: {fileID: 417071154}
-  - component: {fileID: 417071151}
+  - component: {fileID: 417071155}
   m_Layer: 0
   m_Name: ElectroTile (5)
   m_TagString: Untagged
@@ -2436,7 +2580,15 @@ RectTransform:
   m_AnchoredPosition: {x: 148.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &417071151
+--- !u!222 &417071154
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417071149}
+  m_CullTransparentMesh: 1
+--- !u!114 &417071155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2479,15 +2631,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &417071154
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417071149}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &426948108
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,9 +3557,9 @@ RectTransform:
   - {fileID: 848156129}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -515}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &706559718
@@ -3889,13 +4057,14 @@ GameObject:
   - component: {fileID: 786248898}
   - component: {fileID: 786248900}
   - component: {fileID: 786248899}
+  - component: {fileID: 786248901}
   m_Layer: 5
   m_Name: TilePanel
-  m_TagString: Untagged
+  m_TagString: EditTilePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &786248898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3958,6 +4127,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786248897}
   m_CullTransparentMesh: 1
+--- !u!114 &786248901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786248897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc08077daed87149bab5fb4c553e55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectImg: {fileID: 1595747400}
+  languages: {fileID: 628406504}
+  saveButton: {fileID: 1692581356}
+  img: {fileID: 66193358}
+  gameManager: {fileID: 1335632286}
 --- !u!1 &786939867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,8 +4333,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1786935801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.62455875}
+  m_AnchorMax: {x: 1, y: 0.99999994}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4545,7 +4731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932954985}
   - component: {fileID: 932954989}
-  - component: {fileID: 932954986}
+  - component: {fileID: 932954990}
   m_Layer: 0
   m_Name: ElectroTile (10)
   m_TagString: Untagged
@@ -4572,7 +4758,15 @@ RectTransform:
   m_AnchoredPosition: {x: 49.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &932954986
+--- !u!222 &932954989
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932954984}
+  m_CullTransparentMesh: 1
+--- !u!114 &932954990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4615,15 +4809,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &932954989
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932954984}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1020013682
 GameObject:
   m_ObjectHideFlags: 0
@@ -4658,9 +4868,9 @@ RectTransform:
   - {fileID: 1685665437}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -665}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1020013684
@@ -4836,9 +5046,9 @@ RectTransform:
   - {fileID: 1656298909}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -615}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061884423
@@ -5014,9 +5224,9 @@ RectTransform:
   - {fileID: 2070978983}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -115}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062011171
@@ -5290,9 +5500,9 @@ RectTransform:
   - {fileID: 426948109}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -415}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091637194
@@ -6070,7 +6280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234534995}
   - component: {fileID: 1234534999}
-  - component: {fileID: 1234534996}
+  - component: {fileID: 1234535000}
   m_Layer: 0
   m_Name: ElectroTile (9)
   m_TagString: Untagged
@@ -6097,7 +6307,15 @@ RectTransform:
   m_AnchoredPosition: {x: -49.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1234534996
+--- !u!222 &1234534999
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234534994}
+  m_CullTransparentMesh: 1
+--- !u!114 &1234535000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6140,15 +6358,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1234534999
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234534994}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1239491261
 GameObject:
   m_ObjectHideFlags: 0
@@ -6552,7 +6786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318808817}
   - component: {fileID: 1318808821}
-  - component: {fileID: 1318808818}
+  - component: {fileID: 1318808822}
   m_Layer: 0
   m_Name: ElectroTile (15)
   m_TagString: Untagged
@@ -6579,7 +6813,15 @@ RectTransform:
   m_AnchoredPosition: {x: -49.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1318808818
+--- !u!222 &1318808821
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318808816}
+  m_CullTransparentMesh: 1
+--- !u!114 &1318808822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6622,15 +6864,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1318808821
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318808816}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1334012531
 GameObject:
   m_ObjectHideFlags: 0
@@ -6641,7 +6899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334012532}
   - component: {fileID: 1334012536}
-  - component: {fileID: 1334012533}
+  - component: {fileID: 1334012537}
   m_Layer: 0
   m_Name: ElectroTile (14)
   m_TagString: Untagged
@@ -6668,7 +6926,15 @@ RectTransform:
   m_AnchoredPosition: {x: -148.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1334012533
+--- !u!222 &1334012536
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334012531}
+  m_CullTransparentMesh: 1
+--- !u!114 &1334012537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6711,15 +6977,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1334012536
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334012531}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1335632285
 GameObject:
   m_ObjectHideFlags: 0
@@ -6731,7 +7013,7 @@ GameObject:
   - component: {fileID: 1335632287}
   - component: {fileID: 1335632286}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7068,7 +7350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1376391970}
   - component: {fileID: 1376391974}
-  - component: {fileID: 1376391971}
+  - component: {fileID: 1376391975}
   m_Layer: 0
   m_Name: ElectroTile (4)
   m_TagString: Untagged
@@ -7095,7 +7377,15 @@ RectTransform:
   m_AnchoredPosition: {x: 49.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1376391971
+--- !u!222 &1376391974
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376391969}
+  m_CullTransparentMesh: 1
+--- !u!114 &1376391975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7138,15 +7428,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1376391974
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376391969}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1377579477
 GameObject:
   m_ObjectHideFlags: 0
@@ -7450,7 +7756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477827397}
   - component: {fileID: 1477827401}
-  - component: {fileID: 1477827398}
+  - component: {fileID: 1477827402}
   m_Layer: 0
   m_Name: ElectroTile (16)
   m_TagString: Untagged
@@ -7477,7 +7783,15 @@ RectTransform:
   m_AnchoredPosition: {x: 49.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1477827398
+--- !u!222 &1477827401
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477827396}
+  m_CullTransparentMesh: 1
+--- !u!114 &1477827402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7520,15 +7834,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1477827401
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1477827396}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1497757011
 GameObject:
   m_ObjectHideFlags: 0
@@ -7675,7 +8005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1500964658}
   - component: {fileID: 1500964662}
-  - component: {fileID: 1500964659}
+  - component: {fileID: 1500964663}
   m_Layer: 0
   m_Name: ElectroTile (1)
   m_TagString: Untagged
@@ -7702,7 +8032,15 @@ RectTransform:
   m_AnchoredPosition: {x: -247.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1500964659
+--- !u!222 &1500964662
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500964657}
+  m_CullTransparentMesh: 1
+--- !u!114 &1500964663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7745,15 +8083,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1500964662
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500964657}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1517308283
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,9 +8142,9 @@ RectTransform:
   - {fileID: 433696443}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -465}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1517308285
@@ -8701,7 +9055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663036811}
   - component: {fileID: 1663036815}
-  - component: {fileID: 1663036812}
+  - component: {fileID: 1663036816}
   m_Layer: 0
   m_Name: ElectroTile (11)
   m_TagString: Untagged
@@ -8728,7 +9082,15 @@ RectTransform:
   m_AnchoredPosition: {x: 148.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1663036812
+--- !u!222 &1663036815
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663036810}
+  m_CullTransparentMesh: 1
+--- !u!114 &1663036816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8771,15 +9133,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1663036815
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663036810}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1666780621
 GameObject:
   m_ObjectHideFlags: 0
@@ -8985,7 +9363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1688237261
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9522,7 +9900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742538804}
   - component: {fileID: 1742538808}
-  - component: {fileID: 1742538805}
+  - component: {fileID: 1742538809}
   m_Layer: 0
   m_Name: ElectroTile (22)
   m_TagString: Untagged
@@ -9549,7 +9927,15 @@ RectTransform:
   m_AnchoredPosition: {x: 49.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1742538805
+--- !u!222 &1742538808
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742538803}
+  m_CullTransparentMesh: 1
+--- !u!114 &1742538809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9592,15 +9978,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1742538808
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742538803}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1754007994
 GameObject:
   m_ObjectHideFlags: 0
@@ -9822,7 +10224,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000015258789}
-  m_SizeDelta: {x: 100, y: 0}
+  m_SizeDelta: {x: 100, y: 424.7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1812608895
 MonoBehaviour:
@@ -9874,7 +10276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829766290}
   - component: {fileID: 1829766294}
-  - component: {fileID: 1829766291}
+  - component: {fileID: 1829766295}
   m_Layer: 0
   m_Name: ElectroTile (24)
   m_TagString: Untagged
@@ -9901,7 +10303,15 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1829766291
+--- !u!222 &1829766294
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829766289}
+  m_CullTransparentMesh: 1
+--- !u!114 &1829766295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9944,15 +10354,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1829766294
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829766289}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1853276241
 GameObject:
   m_ObjectHideFlags: 0
@@ -9963,7 +10389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1853276242}
   - component: {fileID: 1853276246}
-  - component: {fileID: 1853276243}
+  - component: {fileID: 1853276247}
   m_Layer: 0
   m_Name: ElectroTile (20)
   m_TagString: Untagged
@@ -9990,7 +10416,15 @@ RectTransform:
   m_AnchoredPosition: {x: -148.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1853276243
+--- !u!222 &1853276246
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853276241}
+  m_CullTransparentMesh: 1
+--- !u!114 &1853276247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10033,15 +10467,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1853276246
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853276241}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1856040963
 GameObject:
   m_ObjectHideFlags: 0
@@ -10076,9 +10526,9 @@ RectTransform:
   - {fileID: 346765221}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -315}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856040965
@@ -10230,7 +10680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1942613470}
   - component: {fileID: 1942613474}
-  - component: {fileID: 1942613471}
+  - component: {fileID: 1942613475}
   m_Layer: 0
   m_Name: ElectroTile (2)
   m_TagString: Untagged
@@ -10257,7 +10707,15 @@ RectTransform:
   m_AnchoredPosition: {x: -148.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1942613471
+--- !u!222 &1942613474
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942613469}
+  m_CullTransparentMesh: 1
+--- !u!114 &1942613475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10300,15 +10758,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1942613474
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942613469}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1948093084
 GameObject:
   m_ObjectHideFlags: 0
@@ -10395,9 +10869,9 @@ RectTransform:
   - {fileID: 1064809344}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -365}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1985057816
@@ -10549,7 +11023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1995895625}
   - component: {fileID: 1995895629}
-  - component: {fileID: 1995895626}
+  - component: {fileID: 1995895630}
   m_Layer: 0
   m_Name: ElectroTile (12)
   m_TagString: Untagged
@@ -10576,7 +11050,15 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: 52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1995895626
+--- !u!222 &1995895629
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995895624}
+  m_CullTransparentMesh: 1
+--- !u!114 &1995895630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10619,15 +11101,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &1995895629
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995895624}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2006527026
 GameObject:
   m_ObjectHideFlags: 0
@@ -10690,7 +11188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2008818819}
   - component: {fileID: 2008818823}
-  - component: {fileID: 2008818820}
+  - component: {fileID: 2008818824}
   m_Layer: 0
   m_Name: ElectroTile (19)
   m_TagString: Untagged
@@ -10717,7 +11215,15 @@ RectTransform:
   m_AnchoredPosition: {x: -247.5, y: -157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2008818820
+--- !u!222 &2008818823
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008818818}
+  m_CullTransparentMesh: 1
+--- !u!114 &2008818824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10760,15 +11266,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &2008818823
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008818818}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2014751760
 GameObject:
   m_ObjectHideFlags: 0
@@ -10803,9 +11325,9 @@ RectTransform:
   - {fileID: 291464913}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -265}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2014751762
@@ -10957,7 +11479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016360151}
   - component: {fileID: 2016360155}
-  - component: {fileID: 2016360152}
+  - component: {fileID: 2016360156}
   m_Layer: 0
   m_Name: ElectroTile (18)
   m_TagString: Untagged
@@ -10984,7 +11506,15 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -52.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2016360152
+--- !u!222 &2016360155
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016360150}
+  m_CullTransparentMesh: 1
+--- !u!114 &2016360156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11027,15 +11557,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &2016360155
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016360150}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2049458200
 GameObject:
   m_ObjectHideFlags: 0
@@ -11046,7 +11592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049458201}
   - component: {fileID: 2049458205}
-  - component: {fileID: 2049458202}
+  - component: {fileID: 2049458206}
   m_Layer: 0
   m_Name: ElectroTile (3)
   m_TagString: Untagged
@@ -11073,7 +11619,15 @@ RectTransform:
   m_AnchoredPosition: {x: -49.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2049458202
+--- !u!222 &2049458205
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049458200}
+  m_CullTransparentMesh: 1
+--- !u!114 &2049458206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11116,15 +11670,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &2049458205
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049458200}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2070978982
 GameObject:
   m_ObjectHideFlags: 0
@@ -11211,9 +11781,9 @@ RectTransform:
   - {fileID: 727755643}
   m_Father: {fileID: 1812608894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -65}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087973696
@@ -11365,7 +11935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109639387}
   - component: {fileID: 2109639391}
-  - component: {fileID: 2109639388}
+  - component: {fileID: 2109639392}
   m_Layer: 0
   m_Name: ElectroTile (6)
   m_TagString: Untagged
@@ -11392,7 +11962,15 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: 157.5}
   m_SizeDelta: {x: 99, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2109639388
+--- !u!222 &2109639391
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109639386}
+  m_CullTransparentMesh: 1
+--- !u!114 &2109639392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11435,15 +12013,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!222 &2109639391
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109639386}
-  m_CullTransparentMesh: 1
+      m_Calls:
+      - m_Target: {fileID: 1688237260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 786248897}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

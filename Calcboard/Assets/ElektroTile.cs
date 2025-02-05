@@ -4,16 +4,16 @@ using UnityEngine.UI;
 
 public class ElektroTile : MonoBehaviour
 {
-    private Sprite imgComponent;
+    private string img;
     private List<string> languageDic;
-    private int tileNr;
+    private int tileId;
     private Sprite defaultSprite;
 
     // Public properties for accessing private fields
-    public int TileNr
+    public int TileId
     {
-        get => tileNr;
-        private set => tileNr = value;
+        get => tileId;
+        private set => tileId = value;
     }
 
     public List<string> LanguageDic
@@ -22,10 +22,10 @@ public class ElektroTile : MonoBehaviour
         private set => languageDic = value;
     }
 
-    public Sprite ImgComponent
+    public string Img
     {
-        get => imgComponent;
-        private set => imgComponent = value;
+        get => img;
+        private set => img = value;
     }
 
     public Sprite DefaultSprite
@@ -34,38 +34,20 @@ public class ElektroTile : MonoBehaviour
         private set => defaultSprite = value;
     }
 
-    void Awake()
-    {
-        // Load default sprite safely
-        defaultSprite = Resources.Load<Sprite>("Square");
-        if (defaultSprite == null)
-        {
-            Debug.LogError("Default sprite 'Square' not found in Resources!");
-        }
 
-        imgComponent = defaultSprite;
-    }
-
-    public void Initialize(int id, string imgPath, List<string> meanings)
+    public void Initialize(int id, string img, List<string> meanings)
     {
-        tileNr = id;
+        tileId = id;
         languageDic = meanings;
-
-        // Load the sprite
-        Sprite loadedSprite = Resources.Load<Sprite>(imgPath);
-        if (loadedSprite == null)
-        {
-            Debug.LogWarning($"Sprite '{imgPath}' not found! Using default.");
-            loadedSprite = defaultSprite;
-        }
-
-        imgComponent = loadedSprite;
+        this.img = img;
     }
 
     public override string ToString()
     {
-        // Safely handle null imgComponent or sprite
-        string spriteName = imgComponent != null && imgComponent != null ? imgComponent.name : "None";
-        return $"Image: {spriteName}\nID: {tileNr}";
+        // Safely handle null img or sprite
+        string spriteName = img != null && img != null ? img : "None";
+        return $"Image: {spriteName}\nID: {tileId}";
     }
+
+    
 }
