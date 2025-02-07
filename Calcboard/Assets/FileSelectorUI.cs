@@ -7,62 +7,103 @@ public class FileSelectorUI : MonoBehaviour
 {
     public Button selectFileButton;
     public RawImage imagePreview;
+    public GameManagerElektro gameManagerElektro;
 
     private string selectedFilePath;
-    private string saveFolderPath = "games/elektro/maps/"; // Folder name for saved images
+    private string saveFolderPath; // Folder name for saved images
+    private string tempImg;
+    private string saveDirectory;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        selectFileButton.onClick.AddListener(OpenFilePicker);
+        saveFolderPath = gameManagerElektro.gamePath;
+        saveDirectory = Path.Combine(Application.dataPath, "..", saveFolderPath, "images"); // Move to project root
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenImageFilePicker(ElektroTile tile)
     {
-        
-    }
-
-    void OpenFilePicker()
-    {
-        // Open file dialog for PNG/JPG
+        // Open file dialog for PNG/JPG/JPEG
         var paths = StandaloneFileBrowser.OpenFilePanel("Select Image", "png,jpg,jpeg", "", false);
 
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
         {
             selectedFilePath = paths[0];
-            SaveAndLoadImage(selectedFilePath);
+            SaveAndLoadNewImageInTemp(selectedFilePath, tile);
         }
     }
 
-    void SaveAndLoadImage(string filePath)
+    void SaveAndLoadNewImageInTemp(string filePath, ElektroTile tile)
     {
         byte[] fileData = File.ReadAllBytes(filePath);
 
-        // Save the file inside the Unity project root
-        string projectRoot = Application.dataPath; // "Assets" folder path
-        string saveDirectory = Path.Combine(projectRoot, "..", saveFolderPath); // Move to project root
+        // Define temp save directory inside Unity project root
+        string tempDirectory = Path.Combine(Application.dataPath, "..", "TempImages");
 
+        if (!Directory.Exists(tempDirectory))
+            Directory.CreateDirectory(tempDirectory);
+
+        // Get file extension
+        string fileExtension = Path.GetExtension(filePath);
+        string tempFileName = "temp" + tile.TileId + fileExtension;
+        string tempFilePath = Path.Combine(tempDirectory, tempFileName);
+
+        // **Remove existing temp files with the same TileId (any extension)**
+        string[] existingTempFiles = Directory.GetFiles(tempDirectory, "temp" + tile.TileId + ".*");
+        foreach (string tempFile in existingTempFiles)
+        {
+            File.Delete(tempFile);
+            Debug.Log("Deleted existing temp file: " + tempFile);
+        }
+
+        // Save the new temp image
+        File.WriteAllBytes(tempFilePath, fileData);
+        Debug.Log("Temp image saved at: " + tempFilePath);
+
+        tempImg = tempFileName;
+        LoadImage(fileData);
+    }
+
+    public void SaveImg(ElektroTile tile)
+    {
         if (!Directory.Exists(saveDirectory))
             Directory.CreateDirectory(saveDirectory);
 
-        // Save file in Elektro/maps
-        string fileName = Path.GetFileName(filePath);
-        string savePath = Path.Combine(saveDirectory, fileName);
-        File.WriteAllBytes(savePath, fileData);
-        
-        Debug.Log("Image saved at: " + savePath);
+        string fileExtension = Path.GetExtension(tempImg);
+        string savedFileName = tile.TileId + fileExtension;
+        string savedFilePath = Path.Combine(saveDirectory, savedFileName);
 
-        LoadImage(fileData);
+        // **Remove existing saved files with the same name (any extension)**
+        string[] existingFiles = Directory.GetFiles(saveDirectory, tile.TileId + ".*");
+        foreach (string existingFile in existingFiles)
+        {
+            File.Delete(existingFile);
+            Debug.Log("Deleted existing saved file: " + existingFile);
+        }
+
+        // **Move temp file to permanent save directory, removing "temp"**
+        if (tempImg == null)
+            return;
+
+        string tempFilePath = Path.Combine(Application.dataPath, "..", "TempImages", tempImg);
+        if (File.Exists(tempFilePath))
+        {
+            File.Move(tempFilePath, savedFilePath);
+            Debug.Log("Image saved permanently at: " + savedFilePath);
+            tile.Img = savedFileName;
+        }
+        else
+        {
+            Debug.LogError("Temp file not found: " + tempFilePath);
+        }
     }
 
     public void LoadImage(byte[] fileData)
     {
-        // Load and display the image
         Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(fileData);
-        imagePreview.texture = texture;
-        imagePreview.SetNativeSize();
+        if (texture.LoadImage(fileData))
+        {
+            imagePreview.texture = ResizeTexture(texture, 500, 500);
+        }
     }
 
     public Texture2D LoadImage(string imgPath)
@@ -95,13 +136,11 @@ public class FileSelectorUI : MonoBehaviour
         return resizedTexture;
     }
 
-
-
     Texture2D LoadTextureFromFile(string path)
     {
         byte[] fileData = File.ReadAllBytes(path);
         Texture2D texture = new Texture2D(2, 2);
-        if (texture.LoadImage(fileData)) // Automatically resizes the texture
+        if (texture.LoadImage(fileData))
         {
             return texture;
         }

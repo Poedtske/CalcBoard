@@ -25,7 +25,7 @@ public class ElektroTile : MonoBehaviour
     public string Img
     {
         get => img;
-        private set => img = value;
+        set => img = value;
     }
 
     public Sprite DefaultSprite

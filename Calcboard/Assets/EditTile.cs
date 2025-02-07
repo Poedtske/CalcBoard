@@ -22,6 +22,11 @@ public class EditTile : MonoBehaviour
         fileSelectorUI = FindAnyObjectByType<FileSelectorUI>();
     }
 
+    private void Start()
+    {
+        selectImg.onClick.AddListener(() => fileSelectorUI.OpenImageFilePicker(tile));
+    }
+
     private void OnEnable()
     {
         tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
@@ -96,6 +101,8 @@ public class EditTile : MonoBehaviour
                 Debug.Log(inputFields[i].text);
             }
         }
+
+        fileSelectorUI.SaveImg(tile);
 
         Debug.Log("Tile language data updated successfully!");
     }
