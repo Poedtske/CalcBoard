@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour
     [Header("Volume Setting")]
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
+    [SerializeField] private float defaultVolume = 1.0f;
 
     [Header("Confirmation Prompt")]
     [SerializeField] private GameObject comfirmationPrompt = null;
@@ -44,6 +45,17 @@ public class MenuController : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Volume", AudioListener.volume);
         StartCoroutine(ConfirmationBox());
+    }
+
+    public void VolumeReset(string MenuType)
+    {
+       if(MenuType == "Audio")
+        {
+            AudioListener.volume = defaultVolume;
+            volumeSlider.value = defaultVolume;
+            volumeTextValue.text = defaultVolume.ToString("0.0");
+            VolumeApply();
+        }   
     }
 
     public IEnumerator ConfirmationBox()
