@@ -34,10 +34,31 @@ public class GameManagerElektro : MonoBehaviour
 
     }
 
-    private void Save()
+    public void Save()
     {
+        try
+        {
+            // Convert map object to JSON format
+            string jsonData = JsonConvert.SerializeObject(map, Formatting.Indented);
 
+            // Define the file path
+            string filePath = Path.Combine(gamePath, jsonFileName);
+
+            // Write JSON data to the file
+            File.WriteAllText(filePath, jsonData);
+
+            Debug.Log("Map saved successfully to: " + filePath);
+        }
+        catch (IOException ex)
+        {
+            Debug.LogError("File IO Error: " + ex.Message);
+        }
+        catch (JsonException ex)
+        {
+            Debug.LogError("JSON Serialization Error: " + ex.Message);
+        }
     }
+
 
     public void ReloadImages()
     {
@@ -52,13 +73,13 @@ public class GameManagerElektro : MonoBehaviour
 
                 if (existingTile != null)
                 {
-                    string imagePath = Path.Combine(Application.dataPath, "..", "games", map.game, "maps", map.name, "images", tile.Img);
+                    string imagePath = Path.Combine(Application.dataPath, "..", "games", map.game, "maps", map.name, "images", tileData.img);
 
                     Texture2D texture = LoadTextureFromFile(imagePath);
                     if (texture != null)
                     {
 
-                        Debug.Log(imagePath);
+                       //Debug.Log(imagePath);
 
                         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
@@ -69,9 +90,10 @@ public class GameManagerElektro : MonoBehaviour
 
                         if (tile != null)
                         {
+                            
+                            Debug.Log(map.ToString());
+                            //elektroTiles.Add(tile);
 
-                            Debug.Log($"Initialized: {tile}");
-                            elektroTiles.Add(tile);
 
                         }
                         else
@@ -279,7 +301,6 @@ public class GameManagerElektro : MonoBehaviour
 [System.Serializable]
 public class ElektroMap
 {
-
     public int id;
     public string game;
     public string name;
@@ -293,11 +314,23 @@ public class ElektroMap
         this.name = name;
         this.languages = languages;
         this.tiles = new List<TileData>();
+
         for (int i = 1; i <= 24; i++)
         {
-            tiles.Add(new TileData(i,"temp.jpg", languages.Count));
+            tiles.Add(new TileData(i, "temp.jpg", languages.Count));
         }
+
         this.img = null;
+    }
+
+    public override string ToString()
+    {
+        string tileDataString = "";
+        foreach (var tile in tiles)
+        {
+            tileDataString += tile.ToString() + "\n";
+        }
+        return $"ElektroMap: ID={id}, Game={game}, Name={name}, Languages=[{string.Join(", ", languages)}], Img={img}\nTiles:\n{tileDataString}";
     }
 }
 
@@ -313,10 +346,16 @@ public class TileData
         this.id = id;
         this.img = img;
         this.meanings = new List<string>();
+
         for (int i = 0; i < languageCount; i++)
         {
             meanings.Add("");
         }
+    }
+
+    public override string ToString()
+    {
+        return $"TileData: ID={id}, Img={img}, Meanings=[{string.Join(", ", meanings)}]";
     }
 }
 

@@ -30,7 +30,7 @@ public class EditTile : MonoBehaviour
     private void OnEnable()
     {
         tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
-        selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.TileId.ToString();
+        //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.TileId.ToString();
 
         string imgPath = Path.Combine(Application.dataPath, "..", "games", gameManager.Map.game, "maps", gameManager.Map.name, "images", tile.Img);
         Debug.Log("Image Path: " + imgPath);
@@ -103,6 +103,7 @@ public class EditTile : MonoBehaviour
         }
 
         fileSelectorUI.SaveImg(tile);
+        Debug.Log(tile.Img);
 
         Debug.Log("Tile language data updated successfully!");
     }

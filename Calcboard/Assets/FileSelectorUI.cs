@@ -68,11 +68,14 @@ public class FileSelectorUI : MonoBehaviour
         if (!Directory.Exists(saveDirectory))
             Directory.CreateDirectory(saveDirectory);
 
+        if (tempImg == null)
+            return;
+
         string fileExtension = Path.GetExtension(tempImg);
         string savedFileName = tile.TileId + fileExtension;
         string savedFilePath = Path.Combine(saveDirectory, savedFileName);
 
-        // **Remove existing saved files with the same name (any extension)**
+        // Remove existing saved files with the same name
         string[] existingFiles = Directory.GetFiles(saveDirectory, tile.TileId + ".*");
         foreach (string existingFile in existingFiles)
         {
@@ -80,22 +83,37 @@ public class FileSelectorUI : MonoBehaviour
             Debug.Log("Deleted existing saved file: " + existingFile);
         }
 
-        // **Move temp file to permanent save directory, removing "temp"**
-        if (tempImg == null)
-            return;
-
+        // Move temp file to permanent save directory
         string tempFilePath = Path.Combine(Application.dataPath, "..", "TempImages", tempImg);
         if (File.Exists(tempFilePath))
         {
             File.Move(tempFilePath, savedFilePath);
             Debug.Log("Image saved permanently at: " + savedFilePath);
+
+            // Update `ElektroTile`
             tile.Img = savedFileName;
+
+            // **Find and update the corresponding TileData in ElektroMap**
+            TileData tileData = gameManagerElektro.Map.tiles.Find(t => t.id == tile.TileId);
+            if (tileData != null)
+            {
+                tileData.img = savedFileName;  // <-- This updates the actual TileData
+                Debug.Log($"Updated TileData: ID={tileData.id}, Img={tileData.img}");
+            }
+            else
+            {
+                Debug.LogError($"TileData not found for ID: {tile.TileId}");
+            }
+
+            // Save the entire map so that changes persist
+            gameManagerElektro.Save();
         }
         else
         {
             Debug.LogError("Temp file not found: " + tempFilePath);
         }
     }
+
 
     public void LoadImage(byte[] fileData)
     {
