@@ -19,9 +19,7 @@ public class ElektroMapManager : MonoBehaviour
 
     private void Awake()
     {
-        List<string> lan=new List<string>();
-        lan.Add("English");
-        lan.Add("Dutch");
+        List<string> lan=new() {"English", "Nederlands" };
         map = gameObject.AddComponent<ElektroMap>();
         map.Initialize(1, "elektro", "Temp Test", null, lan);
         gamePath += map.MapName;

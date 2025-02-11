@@ -67,11 +67,18 @@ public class EditTile : MonoBehaviour
             entry.transform.SetParent(languages.transform, false);
             entry.AddComponent<VerticalLayoutGroup>(); // Ensures correct layout
 
+            // Set fixed width of 400
+            RectTransform entryRect = entry.GetComponent<RectTransform>();
+            entryRect.sizeDelta = new Vector2(400, entryRect.sizeDelta.y); // Width = 400, height unchanged
+            entryRect.anchorMin = new Vector2(0.5f, 0.5f); // Centered
+            entryRect.anchorMax = new Vector2(0.5f, 0.5f);
+            entryRect.pivot = new Vector2(0.5f, 0.5f);
+
             // Create Label
             TextMeshProUGUI label = new GameObject("Label").AddComponent<TextMeshProUGUI>();
             label.transform.SetParent(entry.transform, false);
             label.text = languageName; // Set label text
-            label.fontSize = 20;
+            label.fontSize = 40;
             label.alignment = TextAlignmentOptions.Center;
 
             // Create Input Field
@@ -79,6 +86,11 @@ public class EditTile : MonoBehaviour
             input.name = $"InputField_{i}"; // Name input fields by index
             input.text = tileValue; // Set input field value
             input.image.enabled = true;
+            // Set Placeholder Text Correctly
+            if (input.placeholder is TextMeshProUGUI placeholderText)
+            {
+                placeholderText.text = languageName;
+            }
             input.GetComponent<TMP_InputField>().enabled = true;
 
             inputFields.Add(input); // Store reference
