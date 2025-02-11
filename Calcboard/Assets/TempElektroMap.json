@@ -1,159 +1,204 @@
 {
-    "id":1,
-    "game": "Elektro",
-    "name": "Temp Test",
-    "languages": ["English","Nederlands"],
-    "tiles": [
-      {
-        "id": 1,
-        "img": "trump",
-        "meanings": [
-          "temp","temp"
-        ]
-      },
-      {
-        "id": 2,
-        "img": "obama",
-        "meanings": [
-          "temp","temp"
-        ]
-      },
-      {
-        "id": 3,
-        "img": "kennedy",
-        "meanings": [
-          "temp","temp"
-        ]
-      },
-      {
-        "id": 4,
-        "img": "bush",
-        "meanings": [
-          "temp","temp"
-        ]
-      },
-      {
-        "id": 5,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 6,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 7,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 8,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 9,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 10,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 11,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 12,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 13,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 14,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 15,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 16,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 17,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 18,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 19,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 20,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 21,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 22,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 23,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      },{
-        "id": 24,
-        "img": "temp",
-        "meanings": [
-          "temp","temp"
-        ]
-      }
-    ],
-    "img": "temp_test_map"
-  }
-
+  "id": 0,
+  "game": "elektro",
+  "name": "Temp Test",
+  "languages": [
+    "English",
+    "Dutch"
+  ],
+  "tiles": [
+    {
+      "id": 1,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 2,
+      "img": "2.jpg",
+      "meanings": [
+        "gg",
+        "gggg"
+      ]
+    },
+    {
+      "id": 3,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 4,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 6,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 8,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 9,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 10,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 11,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 12,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 13,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 14,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 15,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 16,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 17,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 18,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 19,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 20,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 21,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 22,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 23,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 24,
+      "img": "temp.jpg",
+      "meanings": [
+        "",
+        ""
+      ]
+    }
+  ],
+  "img": null
+}

@@ -2,70 +2,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ElektroTile : MonoBehaviour
+public class ElektroTile : CalcBoardTile
 {
-    private Sprite imgComponent;
-    private List<string> languageDic;
-    private int tileNr;
-    private Sprite defaultSprite;
+    private string img;
+    private List<string> meanings;
+    
 
     // Public properties for accessing private fields
-    public int TileNr
+    
+
+    public List<string> Meanings
     {
-        get => tileNr;
-        private set => tileNr = value;
+        get => meanings;
+        private set => meanings = value;
     }
 
-    public List<string> LanguageDic
+    public string Img
     {
-        get => languageDic;
-        private set => languageDic = value;
+        get => img;
+        set => img = value;
     }
 
-    public Sprite ImgComponent
+    public void Initialize(int id, string img, int lanCount)
     {
-        get => imgComponent;
-        private set => imgComponent = value;
-    }
-
-    public Sprite DefaultSprite
-    {
-        get => defaultSprite;
-        private set => defaultSprite = value;
-    }
-
-    void Awake()
-    {
-        // Load default sprite safely
-        defaultSprite = Resources.Load<Sprite>("Square");
-        if (defaultSprite == null)
+        this.id = id;
+        
+        
+        this.meanings =new();
+        for (int i = 0; i<lanCount;i++)
         {
-            Debug.LogError("Default sprite 'Square' not found in Resources!");
+            meanings.Add("");
         }
-
-        imgComponent = defaultSprite;
-    }
-
-    public void Initialize(int id, string imgPath, List<string> meanings)
-    {
-        tileNr = id;
-        languageDic = meanings;
-
-        // Load the sprite
-        Sprite loadedSprite = Resources.Load<Sprite>(imgPath);
-        if (loadedSprite == null)
-        {
-            Debug.LogWarning($"Sprite '{imgPath}' not found! Using default.");
-            loadedSprite = defaultSprite;
-        }
-
-        imgComponent = loadedSprite;
+        this.img = img;
     }
 
     public override string ToString()
     {
-        // Safely handle null imgComponent or sprite
-        string spriteName = imgComponent != null && imgComponent != null ? imgComponent.name : "None";
-        return $"Image: {spriteName}\nID: {tileNr}";
+        // Safely handle null img or sprite
+        string spriteName = img != null && img != null ? img : "None";
+        return $"Image: {spriteName}\nID: {id}";
     }
+    
 }
