@@ -12,12 +12,18 @@ public class FileSelectorUI : MonoBehaviour
     private string selectedFilePath;
     private string saveFolderPath; // Folder name for saved images
     private string tempImg;
-    private string saveDirectory;
+    private string saveImageDirectory;
+
+    public string TempImg
+    {
+        get => tempImg;
+        set => tempImg = value;
+    }
 
     void Start()
     {
         saveFolderPath = gameManagerElektro.gamePath;
-        saveDirectory = Path.Combine(Application.dataPath, "..", saveFolderPath, "images"); // Move to project root
+        saveImageDirectory = Path.Combine(Application.dataPath, "..", saveFolderPath, "images"); // Move to project root
     }
 
     public void OpenImageFilePicker(ElektroTile tile)
@@ -65,18 +71,18 @@ public class FileSelectorUI : MonoBehaviour
 
     public void SaveImg(ElektroTile tile)
     {
-        if (!Directory.Exists(saveDirectory))
-            Directory.CreateDirectory(saveDirectory);
+        if (!Directory.Exists(saveImageDirectory))
+            Directory.CreateDirectory(saveImageDirectory);
 
         if (tempImg == null)
             return;
 
         string fileExtension = Path.GetExtension(tempImg);
         string savedFileName = tile.Id + fileExtension;
-        string savedFilePath = Path.Combine(saveDirectory, savedFileName);
+        string savedFilePath = Path.Combine(saveImageDirectory, savedFileName);
 
         // Remove existing saved files with the same name
-        string[] existingFiles = Directory.GetFiles(saveDirectory, tile.Id + ".*");
+        string[] existingFiles = Directory.GetFiles(saveImageDirectory, tile.Id + ".*");
         foreach (string existingFile in existingFiles)
         {
             File.Delete(existingFile);
@@ -92,21 +98,21 @@ public class FileSelectorUI : MonoBehaviour
 
             // Update `ElektroTile`
             tile.Img = savedFileName;
-
+            tempImg = null;
             // **Find and update the corresponding TileData in ElektroMapData**
-            TileData tileData = gameManagerElektro.Map.tiles.Find(t => t.id == tile.Id);
-            if (tileData != null)
-            {
-                tileData.img = savedFileName;  // <-- This updates the actual TileData
-                Debug.Log($"Updated TileData: ID={tileData.id}, Img={tileData.img}");
-            }
-            else
-            {
-                Debug.LogError($"TileData not found for ID: {tile.Id}");
-            }
+            //ElektroTile tileData = gameManagerElektro.Map.Tiles.Find(t => t.Id == tile.Id);
+            //if (tileData != null)
+            //{
+            //    tileData.Img = savedFileName;  // <-- This updates the actual TileData
+            //    Debug.Log($"Updated TileData: ID={tileData.Id}, Img={tileData.Img}");
+            //}
+            //else
+            //{
+            //    Debug.LogError($"TileData not found for ID: {tile.Id}");
+            //}
 
             // Save the entire map so that changes persist
-            gameManagerElektro.Save();
+            //gameManagerElektro.Save();
         }
         else
         {

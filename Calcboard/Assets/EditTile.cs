@@ -14,6 +14,7 @@ public class EditTile : MonoBehaviour
     public ElektroMapManager gameManager;
     private FileSelectorUI fileSelectorUI;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
+    private string imagesPath;
 
     private List<TMP_InputField> inputFields = new List<TMP_InputField>(); // Store references to inputs
 
@@ -25,14 +26,17 @@ public class EditTile : MonoBehaviour
     private void Start()
     {
         selectImg.onClick.AddListener(() => fileSelectorUI.OpenImageFilePicker(tile));
+        
     }
 
     private void OnEnable()
     {
-        tile = gameManager.FindTile(PlayerPrefs.GetInt("id"));
+        imagesPath = Path.Combine(Application.dataPath, "..", "games", gameManager.Map.Game, "maps", gameManager.Map.MapName, "images");
+        tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
+        //fileSelectorUI.TempImg = null;
         //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
 
-        string imgPath = Path.Combine(Application.dataPath, "..", "games", gameManager.Map.game, "maps", gameManager.Map.name, "images", tile.Img);
+        string imgPath = Path.Combine(imagesPath, tile.Img);
         Debug.Log("Image Path: " + imgPath);
 
         Texture2D loadedTexture = fileSelectorUI.LoadImage(imgPath);
@@ -53,10 +57,10 @@ public class EditTile : MonoBehaviour
         inputFields.Clear(); // Clear the list
 
         // Add new GameObject containing both Label and Input Field
-        for (int i = 0; i < gameManager.Map.languages.Count; i++)
+        for (int i = 0; i < gameManager.Map.Languages.Count; i++)
         {
-            string languageName = gameManager.Map.languages[i]; // e.g., "English"
-            string tileValue = (i < tile.LanguageDic.Count) ? tile.LanguageDic[i] : ""; // e.g., "Chair"
+            string languageName = gameManager.Map.Languages[i]; // e.g., "English"
+            string tileValue = (i < tile.Meanings.Count) ? tile.Meanings[i] : ""; // e.g., "Chair"
 
             // Create Parent GameObject
             GameObject entry = new GameObject($"LanguageEntry_{i}");
@@ -85,19 +89,19 @@ public class EditTile : MonoBehaviour
 
     public void SaveChanges()
     {
-        if (tile.LanguageDic == null)
+        if (tile.Meanings == null)
         {
-            Debug.LogError("tile.LanguageDic is null!");
+            Debug.LogError("tile.Meanings is null!");
             return;
         }
         
-        // Update LanguageDic with input field values
+        // Update Meanings with input field values
         for (int i = 0; i < inputFields.Count; i++)
         {
-            Debug.Log(tile.LanguageDic.Count);
-            if (i < tile.LanguageDic.Count)
+            Debug.Log(tile.Meanings.Count);
+            if (i < tile.Meanings.Count)
             {
-                tile.LanguageDic[i] = inputFields[i].text;
+                tile.Meanings[i] = inputFields[i].text;
                 Debug.Log(inputFields[i].text);
             }
         }

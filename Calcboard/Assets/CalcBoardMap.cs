@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CalcBoardMap : MonoBehaviour
@@ -25,6 +26,14 @@ public class CalcBoardMap : MonoBehaviour
     {
         get => img;
         private set => img = value;
+    }
+
+    public void Initialize(int id, string game, string mapName, string img)
+    {
+        this.id = id;
+        this.game = game;
+        this.mapName = mapName;
+        this.img = img;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

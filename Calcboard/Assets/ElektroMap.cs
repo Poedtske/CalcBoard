@@ -1,20 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElektroMap : MonoBehaviour
+public class ElektroMap : CalcBoardMap
 {
     private List<string> languages;
-    private List<TileData> tiles;
+    private List<ElektroTile> tiles;
 
     public List<string> Languages
     {
         get => languages;
         private set => languages = value;
     }
-    public List<TileData> Tiles
+    public List<ElektroTile> Tiles
     {
         get => tiles;
         private set => tiles = value;
+    }
+
+    public void Initialize(int id, string game, string mapName, string img, List<string> languages)
+    {
+        base.Initialize(id, game, mapName, img);
+        this.languages = languages;
+        tiles = new List<ElektroTile>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,5 +34,10 @@ public class ElektroMap : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public ElektroMapData toData()
+    {
+        return new ElektroMapData(this);
     }
 }

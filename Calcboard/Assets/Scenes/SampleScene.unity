@@ -2544,7 +2544,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335632285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfbadbbf047c194f9034aa79fb9d976, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e23d6a217d3a2f4797dac7313719a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFileName: TempElektroMap.json
@@ -3407,7 +3407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerElektro: {fileID: 1335632286}
-  startup: 1
 --- !u!1 &1692581354
 GameObject:
   m_ObjectHideFlags: 0
