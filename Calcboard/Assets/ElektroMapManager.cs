@@ -5,16 +5,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GameManagerElektro : MonoBehaviour
+public class ElektroMapManager : MonoBehaviour
 {
     public string jsonFileName = "TempElektroMap.json"; // Adjust the path if needed
     private List<ElektroTile> elektroTiles = new List<ElektroTile>();
-    private ElektroMap map;
+    private ElektroMapData map;
     public GameObject tilePanel;
     public GameObject editTilePanel;
     public string gamePath = "games/elektro/maps/";
 
-    public ElektroMap Map => map;
+    public ElektroMapData Map => map;
 
 
     private void Awake()
@@ -22,7 +22,7 @@ public class GameManagerElektro : MonoBehaviour
         List<string> lan=new List<string>();
         lan.Add("English");
         lan.Add("Dutch");
-        map = new ElektroMap("elektro", "Temp Test",lan);
+        map = new ElektroMapData("elektro", "Temp Test",lan);
         gamePath += map.name;
     }
 
@@ -122,7 +122,7 @@ public class GameManagerElektro : MonoBehaviour
     {
         foreach (var tile in elektroTiles)
         {
-            if (tile.TileId == id)
+            if (tile.Id == id)
             {
                 return tile;
             }
@@ -207,7 +207,7 @@ public class GameManagerElektro : MonoBehaviour
     private void setIdAction(int id)
     {
         
-        PlayerPrefs.SetInt("tileId",id);
+        PlayerPrefs.SetInt("id",id);
 
         editTilePanel.SetActive(true);
         tilePanel.SetActive(false);
@@ -235,7 +235,7 @@ public class GameManagerElektro : MonoBehaviour
 
     //        try
     //        {
-    //            ElektroMap mapData = JsonConvert.DeserializeObject<ElektroMap>(jsonData);
+    //            ElektroMapData mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
     //            Debug.Log("JSON Parsed Successfully!");
 
     //            foreach (var tileData in mapData.tiles)
@@ -299,7 +299,7 @@ public class GameManagerElektro : MonoBehaviour
 }
 
 [System.Serializable]
-public class ElektroMap
+public class ElektroMapData
 {
     public int id;
     public string game;
@@ -308,7 +308,7 @@ public class ElektroMap
     public List<TileData> tiles;
     public string img;
 
-    public ElektroMap(string game, string name, List<string> languages)
+    public ElektroMapData(string game, string name, List<string> languages)
     {
         this.game = game;
         this.name = name;
@@ -330,7 +330,7 @@ public class ElektroMap
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"ElektroMap: ID={id}, Game={game}, Name={name}, Languages=[{string.Join(", ", languages)}], Img={img}\nTiles:\n{tileDataString}";
+        return $"ElektroMapData: ID={id}, Game={game}, Name={name}, Languages=[{string.Join(", ", languages)}], Img={img}\nTiles:\n{tileDataString}";
     }
 }
 

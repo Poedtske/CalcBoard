@@ -11,7 +11,7 @@ public class EditTile : MonoBehaviour
     public Button saveButton;
     public RawImage img;
     private ElektroTile tile;
-    public GameManagerElektro gameManager;
+    public ElektroMapManager gameManager;
     private FileSelectorUI fileSelectorUI;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
 
@@ -29,8 +29,8 @@ public class EditTile : MonoBehaviour
 
     private void OnEnable()
     {
-        tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
-        //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.TileId.ToString();
+        tile = gameManager.FindTile(PlayerPrefs.GetInt("id"));
+        //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
 
         string imgPath = Path.Combine(Application.dataPath, "..", "games", gameManager.Map.game, "maps", gameManager.Map.name, "images", tile.Img);
         Debug.Log("Image Path: " + imgPath);
