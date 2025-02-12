@@ -215,90 +215,6 @@ public class ElektroMapManager : MonoBehaviour
         editTilePanel.SetActive(true);
         tilePanel.SetActive(false);
     }
-
-    //void LoadTiles()
-    //{
-    //    string filePath = Path.Combine(Application.dataPath, jsonFileName);
-
-    //    Texture2D LoadTextureFromFile(string path)
-    //    {
-    //        byte[] fileData = File.ReadAllBytes(path);
-    //        Texture2D texture = new Texture2D(2, 2);
-    //        if (texture.LoadImage(fileData)) // Automatically resizes the texture
-    //        {
-    //            return texture;
-    //        }
-    //        return null;
-    //    }
-
-    //    if (File.Exists(filePath))
-    //    {
-    //        string jsonData = File.ReadAllText(filePath);
-    //        Debug.Log("Raw JSON: " + jsonData);
-
-    //        try
-    //        {
-    //            ElektroMapData mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
-    //            Debug.Log("JSON Parsed Successfully!");
-
-    //            foreach (var tile in mapData.tiles)
-    //            {
-    //                // Find the existing GameObject by name
-    //                GameObject existingTile = GameObject.Find($"ElectroTile ({tile.id})");
-
-    //                if (existingTile != null)
-    //                {
-    //                    // Get the ElektroTile component
-    //                    //ElektroTile tile = new ElektroTile();
-
-    //                    string imagePath = Path.Combine(Application.dataPath, "..", "games", "elektro", "maps", tile.img);
-
-    //                    Texture2D texture = LoadTextureFromFile(imagePath);
-    //                    if (texture != null )
-    //                    {
-    //                        Texture2D temp = texture;
-    //                        Debug.Log(imagePath);
-
-    //                        Sprite sprite = Sprite.Create(temp, new Rect(0, 0, temp.width, temp.height), new Vector2(0.5f, 0.5f));
-
-
-    //                        ElektroTile tile = existingTile.AddComponent<ElektroTile>();
-    //                        tile.Initialize(tile.id, tile.img, tile.meanings);
-    //                        Image tempImg = existingTile.AddComponent<Image>();
-    //                        tempImg.sprite = sprite;
-
-    //                        if (tile != null)
-    //                        {
-    //                            tile.Initialize(tile.id, tile.img, tile.meanings);
-    //                            Debug.Log($"Initialized: {tile}");
-    //                            elektroTiles.Add(tile);
-    //                        }
-    //                        else
-    //                        {
-    //                            Debug.LogError($"ElektroTile component not found on: {existingTile.name}");
-    //                        }
-    //                    }
-
-
-    //                }
-    //                else
-    //                {
-    //                    Debug.LogError($"GameObject ElektroTile ({tile.id}) not found in the scene!");
-    //                }
-
-
-    //            }
-    //        }
-    //        catch (JsonException ex)
-    //        {
-    //            Debug.LogError("JSON Deserialization Error: " + ex.Message);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError($"JSON file not found: {filePath}");
-    //    }
-    //}
 }
 
 [System.Serializable]
@@ -308,7 +224,7 @@ public class ElektroMapData
     public string game;
     public string name;
     public List<string> languages;
-    public List<TileData> tiles;
+    public List<ElektroTileData> tiles;
     public string img;
 
     public ElektroMapData(string game, string name, List<string> languages)
@@ -316,22 +232,24 @@ public class ElektroMapData
         this.game = game;
         this.name = name;
         this.languages = languages;
-        this.tiles = new List<TileData>();
+        this.tiles = new List<ElektroTileData>();
 
         for (int i = 1; i <= 24; i++)
         {
-            tiles.Add(new TileData(i, "temp.jpg", languages.Count));
+            tiles.Add(new ElektroTileData(i, "temp.jpg", languages.Count));
         }
 
         this.img = null;
     }
+
+    public ElektroMapData() { }
 
     public ElektroMapData(ElektroMap map)
     {
         this.game = map.Game;
         this.name = map.MapName;
         this.languages = map.Languages;
-        this.tiles = new List<TileData>();
+        this.tiles = new List<ElektroTileData>();
 
         foreach (var tile in map.Tiles)
         {
@@ -354,13 +272,13 @@ public class ElektroMapData
 }
 
 [System.Serializable]
-public class TileData
+public class ElektroTileData
 {
     public int id;
     public string img;
     public List<string> meanings;
 
-    public TileData(int id, string img, int languageCount)
+    public ElektroTileData(int id, string img, int languageCount)
     {
         this.id = id;
         this.img = img;
@@ -371,8 +289,8 @@ public class TileData
             meanings.Add("");
         }
     }
-
-    public TileData(ElektroTile tile)
+    public ElektroTileData() { }
+    public ElektroTileData(ElektroTile tile)
     {
         this.id = tile.Id;
         this.img = tile.Img;
@@ -381,7 +299,7 @@ public class TileData
 
     public override string ToString()
     {
-        return $"TileData: ID={id}, Img={img}, Meanings=[{string.Join(", ", meanings)}]";
+        return $"ElektroTileData: ID={id}, Img={img}, Meanings=[{string.Join(", ", meanings)}]";
     }
 }
 

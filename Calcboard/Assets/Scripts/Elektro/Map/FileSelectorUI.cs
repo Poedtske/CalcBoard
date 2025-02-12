@@ -99,16 +99,16 @@ public class FileSelectorUI : MonoBehaviour
             // Update `ElektroTile`
             tile.Img = savedFileName;
             tempImg = null;
-            // **Find and update the corresponding TileData in ElektroMapData**
+            // **Find and update the corresponding ElektroTileData in ElektroMapData**
             //ElektroTile tileData = gameManagerElektro.Map.Tiles.Find(t => t.Id == tile.Id);
             //if (tileData != null)
             //{
-            //    tileData.Img = savedFileName;  // <-- This updates the actual TileData
-            //    Debug.Log($"Updated TileData: ID={tileData.Id}, Img={tileData.Img}");
+            //    tileData.Img = savedFileName;  // <-- This updates the actual ElektroTileData
+            //    Debug.Log($"Updated ElektroTileData: ID={tileData.Id}, Img={tileData.Img}");
             //}
             //else
             //{
-            //    Debug.LogError($"TileData not found for ID: {tile.Id}");
+            //    Debug.LogError($"ElektroTileData not found for ID: {tile.Id}");
             //}
 
             // Save the entire map so that changes persist
