@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,5 +43,11 @@ public class ElektroTile : CalcBoardTile
         string spriteName = img != null && img != null ? img : "None";
         return $"Image: {spriteName}\nID: {id}";
     }
-    
+
+    internal void Load(ElektroTileData elektroTileData)
+    {
+        this.id=elektroTileData.id;
+        this.img=elektroTileData.img;
+        this.meanings = elektroTileData.meanings;
+    }
 }

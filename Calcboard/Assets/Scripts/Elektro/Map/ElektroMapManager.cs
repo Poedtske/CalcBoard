@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ElektroMapManager : MonoBehaviour
+public class ElektroMapManager : MonoBehaviour, IDataPersistance
 {
     public string jsonFileName = "TempElektroMap.json"; // Adjust the path if needed
     private List<ElektroTile> elektroTiles = new List<ElektroTile>();
@@ -155,7 +155,7 @@ public class ElektroMapManager : MonoBehaviour
                     // Find the existing GameObject by name
                     GameObject existingTile = GameObject.Find($"ElectroTile ({i})");
                     Button btn= existingTile.GetComponent<Button>();
-                int index = i;
+                    int index = i;
                     btn.onClick.AddListener(() => setIdAction(index));
 
                 if (existingTile != null)
@@ -215,91 +215,19 @@ public class ElektroMapManager : MonoBehaviour
         editTilePanel.SetActive(true);
         tilePanel.SetActive(false);
     }
-}
 
-[System.Serializable]
-public class ElektroMapData
-{
-    public int id;
-    public string game;
-    public string name;
-    public List<string> languages;
-    public List<ElektroTileData> tiles;
-    public string img;
-
-    public ElektroMapData(string game, string name, List<string> languages)
+    public void LoadData(ElektroMapData data)
     {
-        this.game = game;
-        this.name = name;
-        this.languages = languages;
-        this.tiles = new List<ElektroTileData>();
-
-        for (int i = 1; i <= 24; i++)
-        {
-            tiles.Add(new ElektroTileData(i, "temp.jpg", languages.Count));
-        }
-
-        this.img = null;
+        map.Load(data);
     }
 
-    public ElektroMapData() { }
-
-    public ElektroMapData(ElektroMap map)
+    public void SaveData(ref ElektroMapData data)
     {
-        this.game = map.Game;
-        this.name = map.MapName;
-        this.languages = map.Languages;
-        this.tiles = new List<ElektroTileData>();
-
-        foreach (var tile in map.Tiles)
-        {
-            this.tiles.Add(new(tile));
-        }
-
-        //not implemented
-        this.img = null;
-    }
-
-    public override string ToString()
-    {
-        string tileDataString = "";
-        foreach (var tile in tiles)
-        {
-            tileDataString += tile.ToString() + "\n";
-        }
-        return $"ElektroMapData: ID={id}, Game={game}, Name={name}, Languages=[{string.Join(", ", languages)}], Img={img}\nTiles:\n{tileDataString}";
+        data = map.toData();
     }
 }
 
-[System.Serializable]
-public class ElektroTileData
-{
-    public int id;
-    public string img;
-    public List<string> meanings;
 
-    public ElektroTileData(int id, string img, int languageCount)
-    {
-        this.id = id;
-        this.img = img;
-        this.meanings = new List<string>();
 
-        for (int i = 0; i < languageCount; i++)
-        {
-            meanings.Add("");
-        }
-    }
-    public ElektroTileData() { }
-    public ElektroTileData(ElektroTile tile)
-    {
-        this.id = tile.Id;
-        this.img = tile.Img;
-        this.meanings = tile.Meanings;
-    }
 
-    public override string ToString()
-    {
-        return $"ElektroTileData: ID={id}, Img={img}, Meanings=[{string.Join(", ", meanings)}]";
-    }
-}
 

@@ -1,0 +1,16 @@
+.options {
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    align-self: center;
+}
+
+.img {
+    width: 50%;
+    height: 50%;
+    align-self: center;
+}
+
+.container {
+}

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine.UIElements;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem.Layouts;
 
 public class ElektroGameManager : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class ElektroGameManager : MonoBehaviour
     private Label label;
     ElektroMapData mapData;
     public int language=0;
+    private List<ElektroTileData> tileList;
+    private ElektroTileData selectedTile;
+    public string input;
+    private int score = 0;
+    private int rounds = 0;
+    private bool untilEverytingIsCorrect;
     private void Awake()
     {
         doc = GetComponent<UIDocument>();
@@ -35,14 +42,68 @@ public class ElektroGameManager : MonoBehaviour
     void Start()
     {
         LoadTiles();
-        PlayGame();
+        tileList = new List<ElektroTileData>(mapData.tiles); // Create a copy of the tile list
+        SelectTile();
     }
 
-    private void PlayGame()
+    private void SelectTile()
     {
-        List<ElektroTileData> tileList = mapData.tiles;
-        foreach(ElektroTileData tile in tileList) { }
+        
+        if (tileList.Count == 0)
+        {
+            Debug.Log("No tiles to play.");
+            return;
+        }
+        else
+        {
+            int randomIndex = UnityEngine.Random.Range(0, tileList.Count);
+            selectedTile = tileList[randomIndex];
+            label.text = selectedTile.meanings[language];
+            tileList.RemoveAt(randomIndex); // Remove the selected tile from the list
+
+            // Here, you can process the selected tile (e.g., display it in the UI, wait for user input, etc.)
+        }
+
+        //while (tileList.Count > 0)
+        //{
+            
+        //}
+
+        //Debug.Log("All tiles have been used!");
     }
+
+    private void Update()
+    {
+        if (!string.IsNullOrEmpty(input))
+        {
+            if (ValidateInput())
+            {
+                score++;
+                SelectTile();
+                Debug.Log("correct");
+            }
+            else
+            {
+                Debug.Log("incorrect");
+            }
+            rounds++;
+            input = null;
+        }
+    }
+
+    private bool ValidateInput()
+    {
+        if (input == selectedTile.id.ToString())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
 
     private void LoadTiles()
     {
