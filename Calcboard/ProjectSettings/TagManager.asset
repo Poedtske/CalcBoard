@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EditTilePanel
   - TilePanel
+  - map
   layers:
   - Default
   - TransparentFX

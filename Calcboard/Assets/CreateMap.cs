@@ -69,7 +69,7 @@ public class CreateMap : MonoBehaviour
         elektroMapData = elektroMap;
 
         // Load the next scene, mometeel is deze scene een test moet dus vervanger worde deor de juiste scene
-        SceneManager.LoadScene("TestMapCreate");
+        SceneManager.LoadScene("ElektroMapCreation");
 
 
         // een gameobject aanmaken dat naar de volgende scene gaat en de mapdata meeneemt

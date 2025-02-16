@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ElektroMapManager : MonoBehaviour, IDataPersistance
 {
-    public string jsonFileName = "TempElektroMap.json"; // Adjust the path if needed
+    private string jsonFileName; // Adjust the path if needed
     private List<ElektroTile> elektroTiles = new List<ElektroTile>();
     private ElektroMap map;
     public GameObject tilePanel;
@@ -19,16 +21,20 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
     private void Awake()
     {
-        List<string> lan=new() {"English", "Nederlands" };
-        map = gameObject.AddComponent<ElektroMap>();
-        map.Initialize(1, "elektro", "Temp Test", null, lan);
+        //List<string> lan = new() { "English", "Nederlands" };
+        //map = gameObject.AddComponent<ElektroMap>();
+        //map.Initialize(1, "elektro", "Temp Test", null, lan);
+        //gamePath += map.MapName;
+
+        map = FindAnyObjectByType<ElektroMap>();
         gamePath += map.MapName;
+        jsonFileName = map.MapName + ".json";
     }
 
     void Start()
     {
         LoadTiles();
-
+        Debug.Log(map);
 
 
     }
@@ -46,6 +52,8 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
             // Write JSON data to the file
             File.WriteAllText(filePath, jsonData);
+
+            SceneManager.LoadScene("URP2DSceneTemplate");
 
             Debug.Log("Map saved successfully to: " + filePath);
         }
@@ -73,9 +81,20 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
                 if (existingTile != null)
                 {
-                    string imagePath = Path.Combine(Application.dataPath, "..", "games", map.Game, "maps", map.MapName, "images", tile.Img);
+                    string imagePath="";
+                    Texture2D texture;
+                    if (tile.Img=="")
+                    {
+                        
+                        texture=LoadResourceTextureFromFile("temp");
+                    }
+                    else
+                    {
+                        imagePath = Path.Combine(Application.dataPath, "..", "games", map.Game, "maps", map.MapName, "images", tile.Img);
+                        texture = LoadTextureFromFile(imagePath);
+                    }
 
-                    Texture2D texture = LoadTextureFromFile(imagePath);
+                     
                     if (texture != null)
                     {
 
@@ -140,6 +159,16 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
         }
         return null;
     }
+    Texture2D LoadResourceTextureFromFile(string fileName)
+    {
+        
+        Texture2D texture = Resources.Load<Texture2D>(fileName);
+        if (texture!=null) // Automatically resizes the texture
+        {
+            return texture;
+        }
+        return null;
+    }
 
     public void LoadTiles()
     {
@@ -160,9 +189,9 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
                 if (existingTile != null)
                     {
-                        string imagePath = Path.Combine(Application.dataPath, "..", "games", map.Game, "maps", map.MapName, "images", "temp.jpg");
 
-                        Texture2D texture = LoadTextureFromFile(imagePath);
+
+                        Texture2D texture=LoadResourceTextureFromFile("temp");
                         if (texture != null)
                         {
                             
@@ -172,7 +201,7 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
 
                             ElektroTile newTile = existingTile.AddComponent<ElektroTile>();
-                            newTile.Initialize(i, "temp.jpg",map.Languages.Count);
+                            newTile.Initialize(i, "",map.Languages.Count);
                             this.map.Tiles.Add(newTile);
                             Image tempImg = existingTile.AddComponent<Image>();
                             tempImg.sprite = sprite;
@@ -224,6 +253,16 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
     public void SaveData(ref ElektroMapData data)
     {
         data = map.toData();
+    }
+
+    public string getImg()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void setImg(string img)
+    {
+        throw new System.NotImplementedException();
     }
 }
 

@@ -141,7 +141,7 @@ public class demoGameManager : MonoBehaviour
 
     private void LoadTiles()
     {
-        string filePath = Path.Combine(Application.dataPath, "..", gamePath, jsonFileName);
+        string filePath = Path.Combine(Application.dataPath, "..", gamePath, PlayerPrefs.GetString("mapName"), PlayerPrefs.GetString("mapName")+".json");
 
         if (!File.Exists(filePath))
         {

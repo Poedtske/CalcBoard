@@ -143,6 +143,20 @@ public class FileSelectorUI : MonoBehaviour
         return ResizeTexture(originalTexture, 500, 500);
     }
 
+    public Texture2D LoadFromResourceImage(string imgPath)
+    {
+        Texture2D originalTexture = Resources.Load<Texture2D>(imgPath); ;
+
+        if (originalTexture == null)
+        {
+            Debug.LogError("Failed to load texture from: " + imgPath);
+            return null;
+        }
+
+        return ResizeTexture(originalTexture, 500, 500);
+    }
+
+
     private Texture2D ResizeTexture(Texture2D originalTexture, int targetWidth, int targetHeight)
     {
         RenderTexture rt = new RenderTexture(targetWidth, targetHeight, 24);

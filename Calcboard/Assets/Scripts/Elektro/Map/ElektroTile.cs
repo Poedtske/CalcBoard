@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ElektroTile : CalcBoardTile
+public class ElektroTile : CalcBoardTile, ITileImg
 {
     private string img;
     private List<string> meanings;
@@ -24,6 +24,11 @@ public class ElektroTile : CalcBoardTile
         set => img = value;
     }
 
+    public string getImg()
+    {
+        return img;
+    }
+
     public void Initialize(int id, string img, int lanCount)
     {
         this.id = id;
@@ -34,6 +39,11 @@ public class ElektroTile : CalcBoardTile
         {
             meanings.Add("");
         }
+        this.img = img;
+    }
+
+    public void setImg(string img)
+    {
         this.img = img;
     }
 
