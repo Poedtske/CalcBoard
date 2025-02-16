@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Settings/Scenes/games/Electro.unity
     guid: e45cafbac0cb9b64ea88c1b97755f957
+  - enabled: 1
+    path: Assets/Scenes/TestMapCreate.unity
+    guid: 10ef80d87aaada540a69186a8d1cabc2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
