@@ -13,6 +13,7 @@ public class FileSelectorUI : MonoBehaviour
     private string saveFolderPath; // Folder name for saved images
     private string tempImg;
     private string saveImageDirectory;
+    private string root = Path.Combine(Application.dataPath, "..");
 
     public string TempImg
     {
@@ -20,10 +21,12 @@ public class FileSelectorUI : MonoBehaviour
         set => tempImg = value;
     }
 
+
+
     void Start()
     {
         saveFolderPath = gameManagerElektro.gamePath;
-        saveImageDirectory = Path.Combine(Application.dataPath, "..", saveFolderPath, "images"); // Move to project root
+        saveImageDirectory = Path.Combine(root, saveFolderPath, "images"); // Move to project root
     }
 
     public void OpenImageFilePicker(ElektroTile tile)

@@ -9,7 +9,6 @@ public class demoGameManager : MonoBehaviour
 {
     private string gamePath = "games/elektro/maps/";
     private string imgPath;
-    private string jsonFileName = "Temp Test/TempElektroMap.json"; // Adjusted to match your JSON location
     private UIDocument doc;
     private VisualElement visualElement;
     private Label label1;
