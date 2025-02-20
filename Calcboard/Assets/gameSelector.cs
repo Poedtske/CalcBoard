@@ -12,7 +12,7 @@ public class gameSelector : MonoBehaviour
     //Function to load spefiek games
     public void OpenScene()
     {
-        SceneManager.LoadScene("Electro");
+        SceneManager.LoadScene(Scenes.ELEKTRO_ACTIONS);
     }
 
 

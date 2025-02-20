@@ -95,8 +95,6 @@ public class FileSelectorUI<T,Y>
             // Write JSON data to the file
             File.WriteAllText(filePath, jsonData);
 
-            SceneManager.LoadScene("URP2DSceneTemplate");
-
             Debug.Log("Map saved successfully to: " + filePath);
         }
         catch (IOException ex)

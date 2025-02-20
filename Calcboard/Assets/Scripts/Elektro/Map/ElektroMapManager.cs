@@ -65,6 +65,7 @@ public class ElektroMapManager : MonoBehaviour
     public void Save()
     {
         fileSelectorUI.Save(map);
+        SceneManager.LoadScene(Scenes.MAIN_MENU);
     }
 
 
@@ -73,7 +74,7 @@ public class ElektroMapManager : MonoBehaviour
         try
         {
             // Find the existing GameObject by mapNameGameObject.Find($"ElectroTile ({i})");
-            GameObject tileObject = GameObject.Find($"ElectroTile ({PlayerPrefs.GetInt("tileId")})");
+            GameObject tileObject = GameObject.Find($"Tile ({PlayerPrefs.GetInt("tileId")})");
             //ElektroTile tile = tileObject.GetComponent<ElektroTile>();
             Image tempImg = tileObject.GetComponent<Image>();
             ElektroTileData tile = FindTile(PlayerPrefs.GetInt("tileId"));
@@ -123,7 +124,7 @@ public class ElektroMapManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError($"GameObject ElektroTile ({tile.Id}) not found in the scene!");
+                Debug.LogError($"GameObject Tile ({tile.Id}) not found in the scene!");
             }
         }
         catch (JsonException ex)
@@ -158,8 +159,8 @@ public class ElektroMapManager : MonoBehaviour
             for (int i=1;i<=24;i++)
             {
                 // Find the existing GameObject by mapName
-                GameObject existingTile = GameObject.Find($"ElectroTile ({i})");
-                Button btn= existingTile.GetComponent<Button>();
+                GameObject existingTile = GameObject.Find($"Tile ({i})");
+                Button btn= existingTile.AddComponent<Button>();
                 Image tempImg = existingTile.AddComponent<Image>();
                 int index = i;
                 btn.onClick.AddListener(() => setIdAction(index));
