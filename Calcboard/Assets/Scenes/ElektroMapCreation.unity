@@ -901,6 +901,50 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &400329564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400329566}
+  - component: {fileID: 400329565}
+  m_Layer: 0
+  m_Name: TileHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &400329565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400329564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0aadd708b337a847ab6fe568ec70714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &400329566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400329564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1211.5043, y: 460.69177, z: -9.206737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417071149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,6 +1356,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &555789827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555789828}
+  m_Layer: 0
+  m_Name: MapHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555789828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555789827}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1211.5043, y: 460.69177, z: -9.206737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1910,9 +1985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2720a77d6bb37a941a018cc600a03796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectFileButton: {fileID: 1595747400}
-  imagePreview: {fileID: 66193358}
-  gameManagerElektro: {fileID: 1335632286}
 --- !u!4 &1065893767
 Transform:
   m_ObjectHideFlags: 0
@@ -2547,7 +2619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e23d6a217d3a2f4797dac7313719a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: TempElektroMap.json
   tilePanel: {fileID: 1688237260}
   editTilePanel: {fileID: 786248897}
   gamePath: games/elektro/maps/
@@ -3406,7 +3477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aaf754bd27c22d49b55e514b1f11a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManagerElektro: {fileID: 1335632286}
+  elektroMapManager: {fileID: 1335632286}
 --- !u!1 &1692581354
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,6 +4684,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 555789828}
+  - {fileID: 400329566}
   - {fileID: 1335632287}
   - {fileID: 1065893767}
   - {fileID: 460558590}

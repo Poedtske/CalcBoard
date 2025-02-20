@@ -3,58 +3,28 @@ using UnityEngine;
 using static Unity.VisualScripting.Icons;
 
 [System.Serializable]
-public class ElektroMapData
+public class ElektroMapData : CalcBoardMapData<ElektroMapData,ElektroTileData>
 {
-    public int id;
-    public string game;
-    public string name;
-    public List<string> languages;
-    public List<ElektroTileData> tiles;
-    public string img;
+    private List<string> categories;
 
-    public ElektroMapData(string game, string name, List<string> languages)
+    public List<string> Categories
     {
-        this.game = game;
-        this.name = name;
-        this.languages = languages;
+        get { return categories; }
+        set { categories = value; }
+    }
+
+    public ElektroMapData(string game, string name, string img, List<string> languages) : base(game, name,img)
+    {
+        this.categories = languages;
         this.tiles = new List<ElektroTileData>();
 
         for (int i = 1; i <= 24; i++)
         {
-            tiles.Add(new ElektroTileData(i, "temp.jpg", languages.Count));
+            tiles.Add(new ElektroTileData(i, "", languages.Count));
         }
-
-        this.img = null;
     }
 
     public ElektroMapData() { }
-
-    public ElektroMapData(ElektroMap map)
-    {
-        this.game = map.Game;
-        this.name = map.MapName;
-        this.languages = map.Languages;
-        this.tiles = new List<ElektroTileData>();
-
-        foreach (var tile in map.Tiles)
-        {
-            this.tiles.Add(new(tile));
-        }
-
-        //not implemented
-        this.img = null;
-    }
-
-    public ElektroMap ToComponent()
-    {
-        ElektroMap component = new ElektroMap();
-        component.Initialize(id, game, name, img);
-        for (int i = 0; i < this.tiles.Count; i++)
-        {
-            component.Tiles[i].Initialize(tiles[i].id, tiles[i].img, languages.Count);
-        }
-        return component;
-    }
 
     public override string ToString()
     {
@@ -63,6 +33,6 @@ public class ElektroMapData
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"ElektroMapData: ID={id}, Game={game}, Name={name}, Languages=[{string.Join(", ", languages)}], Img={img}\nTiles:\n{tileDataString}";
+        return $"ElektroMapData: ID={id}, Game={game}, Name={mapName}, Languages=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
     }
 }

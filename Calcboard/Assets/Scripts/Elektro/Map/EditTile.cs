@@ -10,34 +10,39 @@ public class EditTile : MonoBehaviour
     public GameObject languages; // Parent object containing input fields
     public Button saveButton;
     public RawImage img;
-    private ElektroTile tile;
+    private ElektroTileData tile;
     public ElektroMapManager gameManager;
-    private FileSelectorUI fileSelectorUI;
+    private FileSelectorUI<ElektroMapData,ElektroTileData> fileSelectorUI;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
-    private string imagesPath;
+
+    
+
+    public ElektroTileData Tile
+    {
+        get { return tile; }
+        set { tile = value; }
+    }
 
     private List<TMP_InputField> inputFields = new List<TMP_InputField>(); // Store references to inputs
 
     private void Awake()
     {
-        fileSelectorUI = FindAnyObjectByType<FileSelectorUI>();
+        fileSelectorUI = FindAnyObjectByType<ElektroMapManager>().fileSelectorUI;
     }
 
     private void Start()
     {
-        selectImg.onClick.AddListener(() => fileSelectorUI.OpenImageFilePicker(tile));
+        selectImg.onClick.AddListener(() => fileSelectorUI.OpenImageFilePicker(tile, img));
         
     }
 
     private void OnEnable()
     {
-        imagesPath = Path.Combine(Application.dataPath, "..", "games", gameManager.Map.Game, "maps", gameManager.Map.MapName, "images");
-        tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
-        //fileSelectorUI.TempImg = null;
-        //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
+        fileSelectorUI.TempImg = null;
+        selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
 
-        string imgPath = Path.Combine(imagesPath, tile.Img);
-        Debug.Log("Image Path: " + imgPath);
+
+
         Texture2D loadedTexture;
         if (tile.Img == "")
         {
@@ -45,12 +50,12 @@ public class EditTile : MonoBehaviour
         }
         else
         {
-            loadedTexture = fileSelectorUI.LoadImage(imgPath);
+            loadedTexture = fileSelectorUI.LoadImage(tile.Img);
         }
-        
+
         if (loadedTexture == null)
         {
-            Debug.LogError("Failed to load texture from: " + imgPath);
+            Debug.LogError("Failed to load texture from: " + tile.Img);
         }
         else
         {
@@ -65,10 +70,10 @@ public class EditTile : MonoBehaviour
         inputFields.Clear(); // Clear the list
 
         // Add new GameObject containing both Label and Input Field
-        for (int i = 0; i < gameManager.Map.Languages.Count; i++)
+        for (int i = 0; i < gameManager.Map.Categories.Count; i++)
         {
-            string languageName = gameManager.Map.Languages[i]; // e.g., "English"
-            string tileValue = (i < tile.Meanings.Count) ? tile.Meanings[i] : ""; // e.g., "Chair"
+            string languageName = gameManager.Map.Categories[i]; // e.g., "English"
+            string tileValue = (i < tile.Words.Count) ? tile.Words[i] : ""; // e.g., "Chair"
 
             // Create Parent GameObject
             GameObject entry = new GameObject($"LanguageEntry_{i}");
@@ -109,19 +114,19 @@ public class EditTile : MonoBehaviour
 
     public void SaveChanges()
     {
-        if (tile.Meanings == null)
+        if (tile.Words == null)
         {
             Debug.LogError("tile.Meanings is null!");
             return;
         }
-        
+
         // Update Meanings with input field values
         for (int i = 0; i < inputFields.Count; i++)
         {
-            Debug.Log(tile.Meanings.Count);
-            if (i < tile.Meanings.Count)
+            Debug.Log(tile.Words.Count);
+            if (i < tile.Words.Count)
             {
-                tile.Meanings[i] = inputFields[i].text;
+                tile.Words[i] = inputFields[i].text;
                 Debug.Log(inputFields[i].text);
             }
         }

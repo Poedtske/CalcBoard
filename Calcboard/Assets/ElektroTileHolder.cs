@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class CalcBoardTile : MonoBehaviour
+public class ElektroTileHolder : MonoBehaviour
 {
-    protected int id;
-
-    public int Id
-    {
-        get => id;
-        private set => id = value;
-    }
+    public ElektroTileData tile;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

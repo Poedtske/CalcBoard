@@ -12,7 +12,7 @@ public class CreateMap : MonoBehaviour
     public static CreateMap Instance { get; private set; }
 
     // This will hold the data for the ElektroMap across scenes
-    public ElektroMap elektroMapData;
+    //public ElektroMap elektroMapData;
 
     public TMP_InputField languageInputField; // TextMeshPro InputField
     public Transform languageContainer; // Parent container with Vertical Layout Group
@@ -58,18 +58,18 @@ public class CreateMap : MonoBehaviour
     public void SaveAndGoToNextScene()
     {
 
-        // Map name to string
-        string mapName = mapNameInputField.text.Trim();
+        //// Map mapName to string
+        //string mapName = mapNameInputField.text.Trim();
 
-        GameObject map = GameObject.Find("CreateMap");
-        ElektroMap elektroMap = map.AddComponent<ElektroMap>();
+        //GameObject map = GameObject.Find("CreateMap");
+        //ElektroMap elektroMap = map.AddComponent<ElektroMap>();
 
-        elektroMap.Initialize(0, "elektro", mapName, "img", new List<string>(languages));
+        //elektroMap.Initialize(0, "elektro", mapName, "img", new List<string>(languages));
 
-        elektroMapData = elektroMap;
+        //elektroMapData = elektroMap;
 
-        // Load the next scene, mometeel is deze scene een test moet dus vervanger worde deor de juiste scene
-        SceneManager.LoadScene("ElektroMapCreation");
+        //// Load the next scene, mometeel is deze scene een test moet dus vervanger worde deor de juiste scene
+        //SceneManager.LoadScene("ElektroMapCreation");
 
 
         // een gameobject aanmaken dat naar de volgende scene gaat en de mapdata meeneemt

@@ -2,33 +2,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ElektroTileData
+public class ElektroTileData : CalcBoardTileData<ElektroTileData>, IHasImg
 {
-    public int id;
-    public string img;
-    public List<string> meanings;
+    private string img;
+    private List<string> words;
 
-    public ElektroTileData(int id, string img, int languageCount)
+    public string Img
     {
-        this.id = id;
-        this.img = img;
-        this.meanings = new List<string>();
+        get { return img; }
+        set { img = value; }
+    }
 
-        for (int i = 0; i < languageCount; i++)
+    public List<string> Words
+    {
+        get { return words; }
+        set { words = value; }
+    }
+
+    public ElektroTileData(int id, string img, int categoriesCount) : base(id)
+    {
+        this.img = img;
+        this.words = new List<string>();
+
+        for (int i = 0; i < categoriesCount; i++)
         {
-            meanings.Add("");
+            words.Add("");
         }
     }
     public ElektroTileData() { }
-    public ElektroTileData(ElektroTile tile)
-    {
-        this.id = tile.Id;
-        this.img = tile.Img;
-        this.meanings = tile.Meanings;
-    }
 
     public override string ToString()
     {
-        return $"ElektroTileData: ID={id}, Img={img}, Meanings=[{string.Join(", ", meanings)}]";
+        return $"ElektroTileData: ID={id}, Img={img}, Words=[{string.Join(", ", words)}]";
+    }
+
+    public string GetImg()
+    {
+        return img ;
     }
 }

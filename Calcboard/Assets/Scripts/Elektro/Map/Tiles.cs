@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tiles : MonoBehaviour
 {
-    public ElektroMapManager gameManagerElektro;
+    public ElektroMapManager elektroMapManager;
     private bool startup = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,7 +18,7 @@ public class Tiles : MonoBehaviour
         }
         else
         {
-            gameManagerElektro.ReloadImages();
+            elektroMapManager.ReloadTile();
         }
     }
 

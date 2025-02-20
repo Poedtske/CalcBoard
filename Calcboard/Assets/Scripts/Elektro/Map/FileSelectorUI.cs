@@ -1,19 +1,63 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using SFB; // StandaloneFileBrowser for file selection
+using SFB;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class FileSelectorUI : MonoBehaviour
+public class FileSelectorUI<T,Y>
+    where T : CalcBoardMapData<T, Y>
+    where Y : CalcBoardTileData<Y>
 {
-    public Button selectFileButton;
-    public RawImage imagePreview;
+    
     public ElektroMapManager gameManagerElektro;
+    private RawImage img;
 
     private string selectedFilePath;
-    private string saveFolderPath; // Folder name for saved images
     private string tempImg;
-    private string saveImageDirectory;
+
+    // Paths
+    private string mapFolderPath;
+    private string saveImgPath;
     private string root = Path.Combine(Application.dataPath, "..");
+    private string tempDirectory = Path.Combine(Application.dataPath, "..", "TempImages");
+
+    private string game;
+    private string mapName;
+
+    public FileSelectorUI(T map)
+    {
+        this.mapName = map.MapName;
+        this.game = map.Game;
+        SetPaths();
+    }
+
+    private void CheckExistanceDirectory(string path)
+    {
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+    }
+
+    private void SetPaths()
+    {
+        // Set paths for the map
+        mapFolderPath = Path.Combine(root, "games", game, "maps", mapName);
+        saveImgPath = Path.Combine(mapFolderPath, "images");
+
+        List<string> paths = new()
+        {
+            mapFolderPath,
+            saveImgPath,
+            tempDirectory
+        };
+
+        foreach (var path in paths)
+        {
+            CheckExistanceDirectory(path);
+        }
+    }
 
     public string TempImg
     {
@@ -21,19 +65,10 @@ public class FileSelectorUI : MonoBehaviour
         set => tempImg = value;
     }
 
-
-
-    void Start()
+    public void OpenImageFilePicker(ElektroTileData tile, RawImage img)
     {
-        saveFolderPath = gameManagerElektro.gamePath;
-        saveImageDirectory = Path.Combine(root, saveFolderPath, "images"); // Move to project root
-    }
-
-    public void OpenImageFilePicker(ElektroTile tile)
-    {
-        // Open file dialog for PNG/JPG/JPEG
+        this.img=img;
         var paths = StandaloneFileBrowser.OpenFilePanel("Select Image", "png,jpg,jpeg", "", false);
-
         if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
         {
             selectedFilePath = paths[0];
@@ -41,124 +76,103 @@ public class FileSelectorUI : MonoBehaviour
         }
     }
 
-    void SaveAndLoadNewImageInTemp(string filePath, ElektroTile tile)
+    public Texture2D LoadResourceTextureFromFile(string fileName)
+    {
+        return Resources.Load<Texture2D>(fileName) ?? null;
+    }
+
+    public void Save(T map)
+    {
+        try
+        {
+
+            // Convert map object to JSON format
+            string jsonData = JsonConvert.SerializeObject(map, Formatting.Indented);
+
+            // Define the file path
+            string filePath = Path.Combine(mapFolderPath, map.MapName+".json");
+
+            // Write JSON data to the file
+            File.WriteAllText(filePath, jsonData);
+
+            SceneManager.LoadScene("URP2DSceneTemplate");
+
+            Debug.Log("Map saved successfully to: " + filePath);
+        }
+        catch (IOException ex)
+        {
+            Debug.LogError("File IO Error: " + ex.Message);
+        }
+        catch (JsonException ex)
+        {
+            Debug.LogError("JSON Serialization Error: " + ex.Message);
+        }
+    }
+
+    void SaveAndLoadNewImageInTemp(string filePath, ElektroTileData tile)
     {
         byte[] fileData = File.ReadAllBytes(filePath);
 
-        // Define temp save directory inside Unity project root
-        string tempDirectory = Path.Combine(Application.dataPath, "..", "TempImages");
-
-        if (!Directory.Exists(tempDirectory))
-            Directory.CreateDirectory(tempDirectory);
-
-        // Get file extension
         string fileExtension = Path.GetExtension(filePath);
         string tempFileName = "temp" + tile.Id + fileExtension;
         string tempFilePath = Path.Combine(tempDirectory, tempFileName);
 
-        // **Remove existing temp files with the same Id (any extension)**
         string[] existingTempFiles = Directory.GetFiles(tempDirectory, "temp" + tile.Id + ".*");
         foreach (string tempFile in existingTempFiles)
         {
             File.Delete(tempFile);
-            Debug.Log("Deleted existing temp file: " + tempFile);
         }
 
-        // Save the new temp image
         File.WriteAllBytes(tempFilePath, fileData);
-        Debug.Log("Temp image saved at: " + tempFilePath);
-
         tempImg = tempFileName;
         LoadImage(fileData);
     }
 
-    public void SaveImg(ElektroTile tile)
+    public void SaveImg<U>(U tile) where U :Y, IHasImg
     {
-        if (!Directory.Exists(saveImageDirectory))
-            Directory.CreateDirectory(saveImageDirectory);
 
         if (tempImg == null)
             return;
 
         string fileExtension = Path.GetExtension(tempImg);
         string savedFileName = tile.Id + fileExtension;
-        string savedFilePath = Path.Combine(saveImageDirectory, savedFileName);
+        string savedFilePath = Path.Combine(saveImgPath, savedFileName);
 
-        // Remove existing saved files with the same name
-        string[] existingFiles = Directory.GetFiles(saveImageDirectory, tile.Id + ".*");
+        string[] existingFiles = Directory.GetFiles(saveImgPath, tile.Id + ".*");
         foreach (string existingFile in existingFiles)
         {
             File.Delete(existingFile);
-            Debug.Log("Deleted existing saved file: " + existingFile);
         }
 
-        // Move temp file to permanent save directory
-        string tempFilePath = Path.Combine(Application.dataPath, "..", "TempImages", tempImg);
+        string tempFilePath = Path.Combine(tempDirectory, tempImg);
         if (File.Exists(tempFilePath))
         {
             File.Move(tempFilePath, savedFilePath);
-            Debug.Log("Image saved permanently at: " + savedFilePath);
-
-            // Update `ElektroTile`
             tile.Img = savedFileName;
             tempImg = null;
-            // **Find and update the corresponding ElektroTileData in ElektroMapData**
-            //ElektroTile tileData = gameManagerElektro.Map.Tiles.Find(t => t.Id == tile.Id);
-            //if (tileData != null)
-            //{
-            //    tileData.Img = savedFileName;  // <-- This updates the actual ElektroTileData
-            //    Debug.Log($"Updated ElektroTileData: ID={tileData.Id}, Img={tileData.Img}");
-            //}
-            //else
-            //{
-            //    Debug.LogError($"ElektroTileData not found for ID: {tile.Id}");
-            //}
-
-            // Save the entire map so that changes persist
-            //gameManagerElektro.Save();
-        }
-        else
-        {
-            Debug.LogError("Temp file not found: " + tempFilePath);
         }
     }
-
 
     public void LoadImage(byte[] fileData)
     {
         Texture2D texture = new Texture2D(2, 2);
         if (texture.LoadImage(fileData))
         {
-            imagePreview.texture = ResizeTexture(texture, 500, 500);
+            img.texture =ResizeTexture(texture, 500, 500);
         }
     }
 
-    public Texture2D LoadImage(string imgPath)
+    public Texture2D LoadImage(string fileName)
     {
-        Texture2D originalTexture = LoadTextureFromFile(imgPath);
-
-        if (originalTexture == null)
-        {
-            Debug.LogError("Failed to load texture from: " + imgPath);
-            return null;
-        }
-
-        return ResizeTexture(originalTexture, 500, 500);
+        Texture2D originalTexture = LoadTextureFromFile(fileName);
+        return originalTexture == null ? null : ResizeTexture(originalTexture, 500, 500);
     }
 
     public Texture2D LoadFromResourceImage(string imgPath)
     {
-        Texture2D originalTexture = Resources.Load<Texture2D>(imgPath); ;
-
-        if (originalTexture == null)
-        {
-            Debug.LogError("Failed to load texture from: " + imgPath);
-            return null;
-        }
-
-        return ResizeTexture(originalTexture, 500, 500);
+        Texture2D originalTexture = Resources.Load<Texture2D>(imgPath);
+        return originalTexture == null ? null : ResizeTexture(originalTexture, 500, 500);
     }
-
 
     private Texture2D ResizeTexture(Texture2D originalTexture, int targetWidth, int targetHeight)
     {
@@ -177,14 +191,10 @@ public class FileSelectorUI : MonoBehaviour
         return resizedTexture;
     }
 
-    Texture2D LoadTextureFromFile(string path)
+    private Texture2D LoadTextureFromFile(string imgName)
     {
-        byte[] fileData = File.ReadAllBytes(path);
+        byte[] fileData = File.ReadAllBytes(Path.Combine(saveImgPath, imgName));
         Texture2D texture = new Texture2D(2, 2);
-        if (texture.LoadImage(fileData))
-        {
-            return texture;
-        }
-        return null;
+        return texture.LoadImage(fileData) ? texture : null;
     }
 }

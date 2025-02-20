@@ -33,10 +33,7 @@ public class CalcBoardLayout : MonoBehaviour
 
         // Create an ArrayList with 24 entries
         ArrayList items = new ArrayList();
-        for (int i = 0; i < 24; i++)
-        {
-            items.Add(gameObject.AddComponent<ElektroTile>());
-        }
+        
 
         // Loop over the ArrayList and create elements
         foreach (var item in items)
