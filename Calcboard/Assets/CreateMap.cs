@@ -1,37 +1,29 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class CreateMap : MonoBehaviour
 {
-
-    // Singleton pattern to ensure only one instance of MapManager exists
     public static CreateMap Instance { get; private set; }
 
-    // This will hold the data for the ElektroMap across scenes
-    //public ElektroMap elektroMapData;
+    public TMP_InputField languageInputField; // User types language name here
+    public Transform languageContainer; // Parent container (should have VerticalLayoutGroup)
+    public TMP_InputField mapNameInputField;
 
-    public TMP_InputField languageInputField; // TextMeshPro InputField
-    public Transform languageContainer; // Parent container with Vertical Layout Group
-    public GameObject languagePrefab; // Prefab with a Text UI
-    public TMP_InputField mapNameInputField; 
-
-    private List<string> languages = new List<string>();
-
+    private List<string> languages = new();
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep this object alive across scenes
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances
+            Destroy(gameObject);
         }
     }
 
@@ -49,33 +41,66 @@ public class CreateMap : MonoBehaviour
 
     private void CreateLanguageUI(string language)
     {
-        GameObject newLang = Instantiate(languagePrefab, languageContainer);
-        TMP_Text languageText = newLang.transform.Find("LanguageText").GetComponent<TMP_Text>();
+        // Create Parent GameObject
+        GameObject entry = new GameObject($"LanguageEntry_{language}");
+        
+        GameObject contentBox = GameObject.Find("ElektroCategoriesContent");
+        entry.transform.SetParent(contentBox.transform, false);
+        HorizontalLayoutGroup layout = entry.AddComponent<HorizontalLayoutGroup>();
+        layout.spacing = 10;
+        layout.childAlignment = TextAnchor.MiddleLeft;
+
+        // Create Language Text
+        GameObject textObj = new GameObject("LanguageText");
+        textObj.transform.SetParent(entry.transform, false);
+        TMP_Text languageText = textObj.AddComponent<TextMeshProUGUI>();
         languageText.text = language;
+        languageText.fontSize = 36;
+        languageText.color = Color.white;
+        languageText.alignment = TextAlignmentOptions.Left;
+
+        // Create Delete Button
+        GameObject buttonObj = new GameObject("DeleteButton");
+        buttonObj.transform.SetParent(entry.transform, false);
+        Button deleteButton = buttonObj.AddComponent<Button>();
+        Image buttonImage = buttonObj.AddComponent<Image>();
+        buttonImage.color = Color.red; // Make the button red
+
+        // Add Text to Button
+        GameObject buttonTextObj = new GameObject("ButtonText");
+        buttonTextObj.transform.SetParent(buttonObj.transform, false);
+        TMP_Text buttonText = buttonTextObj.AddComponent<TextMeshProUGUI>();
+        buttonText.text = "X";
+        buttonText.fontSize = 30;
+        buttonText.alignment = TextAlignmentOptions.Center;
+
+        // Resize and Position Elements
+        RectTransform entryRect = entry.GetComponent<RectTransform>();
+        entryRect.sizeDelta = new Vector2(350, 60); // Width and height
+        RectTransform textRect = textObj.GetComponent<RectTransform>();
+        textRect.sizeDelta = new Vector2(400, 60);
+        RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
+        buttonRect.sizeDelta = new Vector2(60, 60);
+        RectTransform buttonTextRect = buttonTextObj.GetComponent<RectTransform>();
+        buttonTextRect.sizeDelta = new Vector2(60, 60);
+
+        // Set Button Action
+        deleteButton.onClick.AddListener(() => RemoveLanguage(language, entry));
     }
 
+    private void RemoveLanguage(string language, GameObject entry)
+    {
+        languages.Remove(language);
+        Destroy(entry);
+    }
 
     public void SaveAndGoToNextScene()
     {
+        string mapName = mapNameInputField.text.Trim();
 
-        //// Map mapName to string
-        //string mapName = mapNameInputField.text.Trim();
+        MapHolder holder = FindAnyObjectByType<MapHolder>();
+        holder.map = new("elektro", mapName, null, languages);
 
-        //GameObject map = GameObject.Find("CreateMap");
-        //ElektroMap elektroMap = map.AddComponent<ElektroMap>();
-
-        //elektroMap.Initialize(0, "elektro", mapName, "img", new List<string>(languages));
-
-        //elektroMapData = elektroMap;
-
-        //// Load the next scene, mometeel is deze scene een test moet dus vervanger worde deor de juiste scene
-        //SceneManager.LoadScene("ElektroMapCreation");
-
-
-        // een gameobject aanmaken dat naar de volgende scene gaat en de mapdata meeneemt
-
-        
-
+        SceneManager.LoadScene("ElektroMapCreation");
     }
-
 }

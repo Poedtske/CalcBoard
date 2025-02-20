@@ -33,6 +33,6 @@ public class ElektroMapData : CalcBoardMapData<ElektroMapData,ElektroTileData>
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"ElektroMapData: ID={id}, Game={game}, Name={mapName}, Languages=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
+        return $"ElektroMapData: ID={id}, Game={game}, Name={mapName}, Categories=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
     }
 }

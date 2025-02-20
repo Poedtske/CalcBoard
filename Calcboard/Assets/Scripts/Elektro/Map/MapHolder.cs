@@ -1,8 +1,13 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MapHolder : MonoBehaviour
 {
     private static MapHolder _instance; // Singleton instance
+    [Header("Fields ElektroMap")]
+    [SerializeField] public string gameName="elektro";
+    [SerializeField] public string nameMap;
+    [SerializeField] public List<string> categoryList;
 
     public static MapHolder Instance
     {
@@ -18,6 +23,7 @@ public class MapHolder : MonoBehaviour
                     // If none exists, create a new GameObject and attach this component
                     GameObject singletonObject = new GameObject(typeof(MapHolder).Name);
                     _instance = singletonObject.AddComponent<MapHolder>();
+                    DontDestroyOnLoad(singletonObject); // Ensure it persists
                 }
             }
             return _instance;
