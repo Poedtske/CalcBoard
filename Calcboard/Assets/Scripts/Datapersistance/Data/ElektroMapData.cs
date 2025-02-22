@@ -3,9 +3,10 @@ using UnityEngine;
 using static Unity.VisualScripting.Icons;
 
 [System.Serializable]
-public class ElektroMapData : CalcBoardMapData<ElektroMapData,ElektroTileData>
+public class ElektroMapData : CalcBoardMapData<ElektroMapData, ElektroTileData>
 {
     private List<string> categories;
+    private new const string game = Games.ELEKTRO;
 
     public List<string> Categories
     {
@@ -13,7 +14,7 @@ public class ElektroMapData : CalcBoardMapData<ElektroMapData,ElektroTileData>
         set { categories = value; }
     }
 
-    public ElektroMapData(string game, string name, string img, List<string> languages) : base(game, name,img)
+    public ElektroMapData(string name, string img, List<string> languages) : base(name,img)
     {
         this.categories = languages;
         this.tiles = new List<ElektroTileData>();
@@ -33,6 +34,11 @@ public class ElektroMapData : CalcBoardMapData<ElektroMapData,ElektroTileData>
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"ElektroMapData: ID={id}, Game={game}, Name={mapName}, Categories=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
+        return $"ElektroMapData: ID={id}, Game={Game()}, Name={mapName}, Categories=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
+    }
+
+    public override string Game()
+    {
+        return game;
     }
 }

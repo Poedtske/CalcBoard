@@ -23,7 +23,7 @@ public class demoGameManager : MonoBehaviour
     private int score = 0;
     private int rounds = 0;
     private bool untilEverytingIsCorrect;
-    private FileSelectorUI<ElektroMapData,ElektroTileData> fileSelectorUI;
+    private FileManager<ElektroMapData,ElektroTileData> fileSelectorUI;
     private string correctTile;
 
     private void Awake()

@@ -99,7 +99,7 @@ public class CreateMap : MonoBehaviour
         string mapName = mapNameInputField.text.Trim();
 
         MapHolder holder = FindAnyObjectByType<MapHolder>();
-        holder.map = new("elektro", mapName, null, languages);
+        holder.map = new(mapName, null, languages);
 
         SceneManager.LoadScene("ElektroMapCreation");
     }

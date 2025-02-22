@@ -33,7 +33,7 @@ public class ElektroTileData : CalcBoardTileData<ElektroTileData>, IHasImg
 
     public override string ToString()
     {
-        return $"ElektroTileData: ID={id}, Img={img}, Words=[{string.Join(", ", words)}]";
+        return $"ElektroTileData: ID={id}, Img={img}, SoundFiles=[{string.Join(", ", words)}]";
     }
 
     public string GetImg()

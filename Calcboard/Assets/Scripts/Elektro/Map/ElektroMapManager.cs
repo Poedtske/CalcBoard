@@ -7,15 +7,24 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ElektroMapManager : MonoBehaviour
+public class ElektroMapManager : CalcBoardMapMananger
 {
-    private string jsonFileName; // Adjust the path if needed
-    private List<ElektroTileData> elektroTiles = new();
+   
     private ElektroMapData map;
-    public GameObject tilePanel;
-    public GameObject editTilePanel;
-    public FileSelectorUI<ElektroMapData,ElektroTileData> fileSelectorUI;
-    public string gamePath = "games/elektro/maps/";
+    private FileManager<ElektroMapData, ElektroTileData> fileManager;
+
+
+    [Header("Unity Components")]
+    [SerializeField] private GameObject tilePanel;
+    [SerializeField] private GameObject editTilePanel;
+
+    public FileManager<ElektroMapData, ElektroTileData> FileManager 
+    { 
+        get { return fileManager; } 
+    }
+
+
+
 
     public ElektroMapData Map
     {
@@ -33,19 +42,19 @@ public class ElektroMapManager : MonoBehaviour
         if (mapHolder != null)
         {
             map = mapHolder.map; // Get the map directly from the MapHolder
-            gamePath += map.MapName; // Update gamePath with the MapName
-            jsonFileName = map.MapName + ".json";
-            fileSelectorUI = new FileSelectorUI<ElektroMapData, ElektroTileData>(map);
+
+            //map.MapName += ".json";
+            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
         }
         else if(GameObject.Find($"MapHolder")!=null)
         {
             GameObject mapHolderObject = GameObject.Find($"MapHolder");
             mapHolder=mapHolderObject.AddComponent<MapHolder>();
-            mapHolder.Initialize(new("elektro", "test", null, new() { "dutch", "english" }));
+            mapHolder.Initialize(new("test", null, new() { "dutch", "english" }));
             map = mapHolder.map; // Get the map directly from the MapHolder
-            gamePath += map.MapName; // Update gamePath with the MapName
-            jsonFileName = map.MapName + ".json";
-            fileSelectorUI = new FileSelectorUI<ElektroMapData, ElektroTileData>(map);
+
+            //map.MapName += ".json";
+            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
 
         }
         else
@@ -62,14 +71,14 @@ public class ElektroMapManager : MonoBehaviour
 
     }
 
-    public void Save()
+    public override void Save()
     {
-        fileSelectorUI.Save(map);
+        fileManager.Save(map);
         SceneManager.LoadScene(Scenes.MAIN_MENU);
     }
 
 
-    public void ReloadTile()
+    public override void ReloadTile()
     {
         try
         {
@@ -85,12 +94,12 @@ public class ElektroMapManager : MonoBehaviour
                 if (tile.Img == "")
                 {
 
-                    texture = fileSelectorUI.LoadResourceTextureFromFile("temp");
+                    texture = fileManager.LoadResourceTextureFromFile("temp");
                 }
                 else
                 {
 
-                    texture = fileSelectorUI.LoadImage(tile.Img);
+                    texture = fileManager.LoadImage(tile.Img);
                 }
 
 
@@ -147,7 +156,7 @@ public class ElektroMapManager : MonoBehaviour
 
     
 
-    public void LoadTiles()
+    public override void LoadTiles()
     {
         //string filePath = Path.Combine(Application.dataPath, jsonFileName);
 
@@ -163,10 +172,10 @@ public class ElektroMapManager : MonoBehaviour
                 Button btn= existingTile.AddComponent<Button>();
                 Image tempImg = existingTile.AddComponent<Image>();
                 int index = i;
-                btn.onClick.AddListener(() => setIdAction(index));
+                btn.onClick.AddListener(() => SetIdAction(index));
                 if (existingTile != null)
                 { 
-                    Texture2D texture=fileSelectorUI.LoadResourceTextureFromFile("temp");
+                    Texture2D texture=fileManager.LoadResourceTextureFromFile("temp");
                     if (texture != null)
                     {
                             
@@ -192,7 +201,7 @@ public class ElektroMapManager : MonoBehaviour
         }    
     }
 
-    private void setIdAction(int id)
+    public override void SetIdAction(int id)
     {
         
         PlayerPrefs.SetInt("tileId",id);
@@ -201,11 +210,6 @@ public class ElektroMapManager : MonoBehaviour
         editTilePanel.GetComponent<EditTile>().Tile=FindTile(id);
         editTilePanel.SetActive(true);
         tilePanel.SetActive(false);
-    }
-
-    public string getImg()
-    {
-        throw new System.NotImplementedException();
     }
 }
 

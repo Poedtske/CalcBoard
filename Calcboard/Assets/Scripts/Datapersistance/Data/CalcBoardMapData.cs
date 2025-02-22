@@ -7,21 +7,17 @@ public abstract class CalcBoardMapData<T, Y>
     where Y : CalcBoardTileData<Y>
 {
     protected int id;
-    protected string game;
     protected string mapName;
     protected List<Y> tiles; // Now uses the specific tile type
     protected string img;
+    protected const string game="";
+
+    public abstract string Game();
 
     public int Id
     {
         get => id;
         set => id = value;
-    }
-
-    public string Game
-    {
-        get => game;
-        set => game = value;
     }
 
     public string MapName
@@ -36,9 +32,8 @@ public abstract class CalcBoardMapData<T, Y>
         set => tiles = value;
     }
 
-    public CalcBoardMapData(string game, string name, string img)
+    public CalcBoardMapData(string name, string img)
     {
-        this.game = game;
         this.mapName = name;
         this.tiles = new List<Y>(); // Now correctly initializes the specific tile type
         this.img = img;
@@ -56,6 +51,6 @@ public abstract class CalcBoardMapData<T, Y>
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"CalcBoardMapData: ID={id}, Game={game}, Name={mapName}, Img={img}\nTiles:\n{tileDataString}";
+        return $"CalcBoardMapData: ID={id}, Game={Game()}, Name={mapName}, Img={img}\nTiles:\n{tileDataString}";
     }
 }
