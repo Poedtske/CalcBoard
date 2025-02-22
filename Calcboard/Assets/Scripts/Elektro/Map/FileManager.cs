@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class FileSelectorUI<T,Y>
+public class FileManager<T,Y>
     where T : CalcBoardMapData<T, Y>
     where Y : CalcBoardTileData<Y>
 {
@@ -27,10 +27,10 @@ public class FileSelectorUI<T,Y>
     private string game;
     private string mapName;
 
-    public FileSelectorUI(T map)
+    public FileManager(T map)
     {
         this.mapName = map.MapName;
-        this.game = map.Game;
+        this.game = map.Game();
         SetPaths();
     }
 
@@ -65,7 +65,7 @@ public class FileSelectorUI<T,Y>
         set => tempImg = value;
     }
 
-    public void OpenImageFilePicker(ElektroTileData tile, RawImage img)
+    public void OpenImageFilePicker<U>(U tile, RawImage img) where U : Y, IHasImg
     {
         this.img=img;
         var paths = StandaloneFileBrowser.OpenFilePanel("Select Image", "png,jpg,jpeg", "", false);
@@ -107,7 +107,7 @@ public class FileSelectorUI<T,Y>
         }
     }
 
-    void SaveAndLoadNewImageInTemp(string filePath, ElektroTileData tile)
+    void SaveAndLoadNewImageInTemp<U>(string filePath, U tile) where U :Y, IHasImg
     {
         byte[] fileData = File.ReadAllBytes(filePath);
 

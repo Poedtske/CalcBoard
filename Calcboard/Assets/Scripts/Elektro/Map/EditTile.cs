@@ -12,7 +12,7 @@ public class EditTile : MonoBehaviour
     public RawImage img;
     private ElektroTileData tile;
     public ElektroMapManager gameManager;
-    private FileSelectorUI<ElektroMapData,ElektroTileData> fileSelectorUI;
+    private FileManager<ElektroMapData,ElektroTileData> fileSelectorUI;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
 
     
@@ -27,7 +27,7 @@ public class EditTile : MonoBehaviour
 
     private void Awake()
     {
-        fileSelectorUI = FindAnyObjectByType<ElektroMapManager>().fileSelectorUI;
+        fileSelectorUI = FindAnyObjectByType<ElektroMapManager>().FileManager ;
     }
 
     private void Start()
