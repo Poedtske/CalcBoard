@@ -16,7 +16,7 @@ public class LoginManager : MonoBehaviour
     public Button loginButton;
     public Text errorMessage;
 
-    private string apiUrl = "http://localhost:8000/api/auth/login";
+    private string apiUrl = "http://localhost:8081/login";
 
 
     public GameObject loginContainer; // The login UI panel
@@ -40,7 +40,7 @@ public class LoginManager : MonoBehaviour
     IEnumerator SendLoginRequest(string username, string password)
     {
         // Prepare JSON payload
-        string jsonData = $"{{\"username\":\"{username}\",\"password\":\"{password}\"}}";
+        string jsonData = $"{{\"email\":\"{username}\",\"password\":\"{password}\"}}";
 
         using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
         {
