@@ -1,57 +1,35 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-public class MapHolder : MonoBehaviour
+public abstract class MapHolder : MonoBehaviour
 {
     private static MapHolder _instance; // Singleton instance
-    [Header("Fields ElektroMap")]
-    [SerializeField] public string gameName="elektro";
-    [SerializeField] public string nameMap;
-    [SerializeField] public List<string> categoryList;
 
-    public static MapHolder Instance
+    public static T GetInstance<T>() where T : MapHolder
     {
-        get
+        if (_instance == null || !(_instance is T))
         {
+            // Try to find an existing instance in the scene
+            _instance = FindAnyObjectByType<T>();
+
             if (_instance == null)
             {
-                // Try to find an existing instance in the scene
-                _instance = FindAnyObjectByType<MapHolder>();
-
-                if (_instance == null)
-                {
-                    // If none exists, create a new GameObject and attach this component
-                    GameObject singletonObject = new GameObject(typeof(MapHolder).Name);
-                    _instance = singletonObject.AddComponent<MapHolder>();
-                    DontDestroyOnLoad(singletonObject); // Ensure it persists
-                }
+                // If none exists, create a new GameObject and attach the correct type
+                GameObject singletonObject = ReturnMapHolderIfNoneExist();
+                _instance = singletonObject.AddComponent<T>();
             }
-            return _instance;
         }
+        return _instance as T;
     }
 
-    public ElektroMapData map; // Reference to the map
-
-    public void Initialize(ElektroMapData newMap)
+    public static GameObject ReturnMapHolderIfNoneExist()
     {
-        if (map != null)
-        {
-            Debug.LogWarning("MapHolder is already initialized with a map.");
-            return; // Prevent re-initialization if already set
-        }
-        map = newMap; // Assign the new map
+        GameObject singletonObject = new GameObject(nameof(MapHolder));
+        DontDestroyOnLoad(singletonObject);
+        return singletonObject;
     }
 
-    void Start()
-    {
-        if (map != null)
-        {
-            Debug.Log($"MapHolder initialized with map: {map.MapName}");
-        }
-    }
-
-    // Optional: Ensure the singleton instance is not destroyed on scene load
-    private void Awake()
+    // Ensure the singleton instance is not destroyed on scene load
+    protected virtual void Awake()
     {
         if (_instance != null && _instance != this)
         {

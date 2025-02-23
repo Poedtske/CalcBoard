@@ -38,10 +38,10 @@ public class ElektroMapManager : CalcBoardMapMananger
         //map = gameObject.AddComponent<ElektroMap>();
         //map.Initialize(1, "elektro", "Temp Test", null, lan);
         //gamePath += map.MapName;
-        var mapHolder = FindAnyObjectByType<MapHolder>();
+        var mapHolder = FindAnyObjectByType<ElektroMapHolder>();
         if (mapHolder != null)
         {
-            map = mapHolder.map; // Get the map directly from the MapHolder
+            map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
             fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
@@ -49,9 +49,9 @@ public class ElektroMapManager : CalcBoardMapMananger
         else if(GameObject.Find($"MapHolder")!=null)
         {
             GameObject mapHolderObject = GameObject.Find($"MapHolder");
-            mapHolder=mapHolderObject.AddComponent<MapHolder>();
+            mapHolder=mapHolderObject.AddComponent<ElektroMapHolder>();
             mapHolder.Initialize(new("test", null, new() { "dutch", "english" }));
-            map = mapHolder.map; // Get the map directly from the MapHolder
+            map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
             fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
