@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 
@@ -71,15 +72,16 @@ public class MapLoader : MonoBehaviour
 
             buttonText.text = mapName;
             string selectedMapPath = folder;
-            button.GetComponent<Button>().onClick.AddListener(() => LoadMap(selectedMapPath));
+            button.GetComponent<Button>().onClick.AddListener(() => LoadMap(mapName));
 
         }
     }
 
-    void LoadMap(string filePath)
+    void LoadMap(string mapName)
     {
-        Debug.Log("Loading map: " + filePath);
-        // Implement your map-loading logic here
+        Debug.Log("Loading map: " + mapName);
+        PlayerPrefs.SetString("mapName", mapName);
+        SceneManager.LoadScene("ElektroGame");
     }
 
 

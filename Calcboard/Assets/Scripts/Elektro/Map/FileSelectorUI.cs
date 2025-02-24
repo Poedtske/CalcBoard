@@ -13,6 +13,7 @@ public class FileSelectorUI : MonoBehaviour
     private string saveFolderPath; // Folder name for saved images
     private string tempImg;
     private string saveImageDirectory;
+    private string root = Path.Combine(Application.dataPath, "..");
 
     public string TempImg
     {
@@ -20,10 +21,12 @@ public class FileSelectorUI : MonoBehaviour
         set => tempImg = value;
     }
 
+
+
     void Start()
     {
         saveFolderPath = gameManagerElektro.gamePath;
-        saveImageDirectory = Path.Combine(Application.dataPath, "..", saveFolderPath, "images"); // Move to project root
+        saveImageDirectory = Path.Combine(root, saveFolderPath, "images"); // Move to project root
     }
 
     public void OpenImageFilePicker(ElektroTile tile)
@@ -99,16 +102,16 @@ public class FileSelectorUI : MonoBehaviour
             // Update `ElektroTile`
             tile.Img = savedFileName;
             tempImg = null;
-            // **Find and update the corresponding TileData in ElektroMapData**
+            // **Find and update the corresponding ElektroTileData in ElektroMapData**
             //ElektroTile tileData = gameManagerElektro.Map.Tiles.Find(t => t.Id == tile.Id);
             //if (tileData != null)
             //{
-            //    tileData.Img = savedFileName;  // <-- This updates the actual TileData
-            //    Debug.Log($"Updated TileData: ID={tileData.Id}, Img={tileData.Img}");
+            //    tileData.Img = savedFileName;  // <-- This updates the actual ElektroTileData
+            //    Debug.Log($"Updated ElektroTileData: ID={tileData.Id}, Img={tileData.Img}");
             //}
             //else
             //{
-            //    Debug.LogError($"TileData not found for ID: {tile.Id}");
+            //    Debug.LogError($"ElektroTileData not found for ID: {tile.Id}");
             //}
 
             // Save the entire map so that changes persist
@@ -142,6 +145,20 @@ public class FileSelectorUI : MonoBehaviour
 
         return ResizeTexture(originalTexture, 500, 500);
     }
+
+    public Texture2D LoadFromResourceImage(string imgPath)
+    {
+        Texture2D originalTexture = Resources.Load<Texture2D>(imgPath); ;
+
+        if (originalTexture == null)
+        {
+            Debug.LogError("Failed to load texture from: " + imgPath);
+            return null;
+        }
+
+        return ResizeTexture(originalTexture, 500, 500);
+    }
+
 
     private Texture2D ResizeTexture(Texture2D originalTexture, int targetWidth, int targetHeight)
     {

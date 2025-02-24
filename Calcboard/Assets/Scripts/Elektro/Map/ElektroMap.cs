@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,5 +40,19 @@ public class ElektroMap : CalcBoardMap
     public ElektroMapData toData()
     {
         return new ElektroMapData(this);
+    }
+
+    internal void Load(ElektroMapData data)
+    {
+        this.game = data.game;
+        this.img = data.img;
+        this.id= data.id;
+        this.mapName=data.name;
+        this.languages= data.languages;
+
+        for (int i = 0; i < this.tiles.Count; i++) 
+        {
+            this.tiles[i].Load(data.tiles[i]);
+        }
     }
 }

@@ -38,8 +38,16 @@ public class EditTile : MonoBehaviour
 
         string imgPath = Path.Combine(imagesPath, tile.Img);
         Debug.Log("Image Path: " + imgPath);
-
-        Texture2D loadedTexture = fileSelectorUI.LoadImage(imgPath);
+        Texture2D loadedTexture;
+        if (tile.Img == "")
+        {
+            loadedTexture = fileSelectorUI.LoadFromResourceImage("temp");
+        }
+        else
+        {
+            loadedTexture = fileSelectorUI.LoadImage(imgPath);
+        }
+        
         if (loadedTexture == null)
         {
             Debug.LogError("Failed to load texture from: " + imgPath);

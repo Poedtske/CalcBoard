@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/styles.uss?fileID=7433441132597879392&amp;guid=1c34c0ad33915df47b4cfd380f446bf0&amp;type=3#styles" />
-    <ui:VisualElement name="CalcBoard" style="flex-grow: 1;" />
+    <ui:VisualElement class="darkmode" style="flex-grow: 1; width: 100%;">
+        <ui:Label text="Label" style="height: 60%; width: 60%; position: relative; white-space: pre; justify-content: space-between; align-self: center; align-content: center; align-items: center; -unity-text-align: middle-center; font-size: 40px;" />
+    </ui:VisualElement>
 </ui:UXML>
