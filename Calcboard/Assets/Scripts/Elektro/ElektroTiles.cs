@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tiles : MonoBehaviour
+public class ElektroTiles : MonoBehaviour
 {
     public ElektroMapManager elektroMapManager;
     private bool startup = true;

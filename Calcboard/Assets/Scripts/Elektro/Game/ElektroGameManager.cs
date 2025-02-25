@@ -42,7 +42,7 @@ public class ElektroGameManager : MonoBehaviour
     //void Start()
     //{
     //    LoadTiles();
-    //   // tileList = new List<ElektroTileData>(mapData.tiles); // Create a copy of the tile list
+    //   // tileList = new List<ElektroTileData>(mapData.tileIds); // Create a copy of the tile list
     //    SelectTile();
     //}
 
@@ -51,14 +51,14 @@ public class ElektroGameManager : MonoBehaviour
         
     //    if (tileList.Count == 0)
     //    {
-    //        Debug.Log("No tiles to play.");
+    //        Debug.Log("No tileIds to play.");
     //        return;
     //    }
     //    else
     //    {
     //        int randomIndex = UnityEngine.Random.Range(0, tileList.Count);
     //        selectedTile = tileList[randomIndex];
-    //        label.text = selectedTile.words[language];
+    //        label.text = selectedTile.soundFiles[language];
     //        tileList.RemoveAt(randomIndex); // Remove the selected tile from the list
 
     //        // Here, you can process the selected tile (e.g., display it in the UI, wait for user input, etc.)
@@ -69,7 +69,7 @@ public class ElektroGameManager : MonoBehaviour
             
     //    //}
 
-    //    //Debug.Log("All tiles have been used!");
+    //    //Debug.Log("All tileIds have been used!");
     //}
 
     //private void Update()

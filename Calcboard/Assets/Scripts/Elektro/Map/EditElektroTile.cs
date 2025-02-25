@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class EditTile : MonoBehaviour
+public class EditElektroTile : MonoBehaviour
 {
     public Button selectImg;
     public GameObject languages; // Parent object containing input fields
@@ -12,7 +12,7 @@ public class EditTile : MonoBehaviour
     public RawImage img;
     private ElektroTileData tile;
     public ElektroMapManager gameManager;
-    private FileManager<ElektroMapData,ElektroTileData> fileSelectorUI;
+    private FileManager<ElektroMapData,ElektroTileData> fileManager;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
 
     
@@ -27,30 +27,31 @@ public class EditTile : MonoBehaviour
 
     private void Awake()
     {
-        fileSelectorUI = FindAnyObjectByType<ElektroMapManager>().FileManager ;
+        fileManager = FindAnyObjectByType<ElektroMapManager>().FileManager ;
     }
 
     private void Start()
     {
-        selectImg.onClick.AddListener(() => fileSelectorUI.OpenImageFilePicker(tile, img));
+        selectImg.onClick.AddListener(() => fileManager.OpenImageFilePicker(tile, img));
         
     }
 
     private void OnEnable()
     {
-        fileSelectorUI.TempImg = null;
-        selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
+        Tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
+        fileManager.TempImg = null;
+        //selectImg.GetComponentInChildren<TextMeshProUGUI>().text = tile.Id.ToString();
 
 
 
         Texture2D loadedTexture;
         if (tile.Img == "")
         {
-            loadedTexture = fileSelectorUI.LoadFromResourceImage("temp");
+            loadedTexture = fileManager.LoadFromResourceImage("temp");
         }
         else
         {
-            loadedTexture = fileSelectorUI.LoadImage(tile.Img);
+            loadedTexture = fileManager.LoadImage(tile.Img);
         }
 
         if (loadedTexture == null)
@@ -131,7 +132,7 @@ public class EditTile : MonoBehaviour
             }
         }
 
-        fileSelectorUI.SaveImg(tile);
+        fileManager.SaveImg(tile);
         Debug.Log(tile.Img);
 
         Debug.Log("Tile language data updated successfully!");

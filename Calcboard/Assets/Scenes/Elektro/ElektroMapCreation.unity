@@ -594,7 +594,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePanel: {fileID: 2067177172}
   editTilePanel: {fileID: 786248897}
-  gamePath: games/elektro/maps/
 --- !u!4 &1335632287
 Transform:
   m_ObjectHideFlags: 0
@@ -722,6 +721,26 @@ PrefabInstance:
     - target: {fileID: 4852953750857427252, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_Name
       value: CalcBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917141237869343264, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2067177172}
+    - target: {fileID: 4917141237869343264, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1335632286}
+    - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ElektroMapManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

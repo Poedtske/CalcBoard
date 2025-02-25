@@ -59,7 +59,7 @@ public class demoGameManager : MonoBehaviour
     {
         if (tileList.Count == 0)
         {
-            Debug.Log("No tiles to play.");
+            Debug.Log("No tileIds to play.");
             return;
         }
 
@@ -67,7 +67,7 @@ public class demoGameManager : MonoBehaviour
         selectedTile = tileList[randomIndex];
         tileList.RemoveAt(randomIndex); // Remove the selected tile from the list
 
-        // Ensure there are other tiles to pick an incorrect meaning from
+        // Ensure there are other tileIds to pick an incorrect meaning from
         string incorrectMeaning = "Incorrect"; // Default fallback
         if (mapData.Tiles.Count > 1)
         {

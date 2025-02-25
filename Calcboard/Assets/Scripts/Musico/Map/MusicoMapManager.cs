@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Unity.VisualScripting;
@@ -7,20 +7,20 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ElektroMapManager : CalcBoardMapMananger
+public class MusicoMapManager : CalcBoardMapMananger
 {
-    private ElektroMapData map;
-    private FileManager<ElektroMapData, ElektroTileData> fileManager;
+    private MusicoMapData map;
+    private FileManager<MusicoMapData, MusicoTileData> fileManager;
 
     [Header("Unity Components")]
     [SerializeField] private GameObject tilePanel;
     [SerializeField] private GameObject editTilePanel;
 
-    public FileManager<ElektroMapData, ElektroTileData> FileManager 
-    { 
-        get { return fileManager; } 
+    public FileManager<MusicoMapData, MusicoTileData> FileManager
+    {
+        get { return fileManager; }
     }
-    public ElektroMapData Map
+    public MusicoMapData Map
     {
         get { return map; }
         set { map = value; }
@@ -28,23 +28,23 @@ public class ElektroMapManager : CalcBoardMapMananger
 
     private void Awake()
     {
-        var mapHolder = FindAnyObjectByType<ElektroMapHolder>();
+        var mapHolder = FindAnyObjectByType<MusicoMapHolder>();
         if (mapHolder != null)
         {
             map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
-            fileManager = new ImgFileManager<ElektroMapData, ElektroTileData>(map);
+            fileManager = new ImgFileManager<MusicoMapData, MusicoTileData>(map);
         }
-        else if(GameObject.Find($"MapHolder")!=null)
+        else if (GameObject.Find($"MapHolder") != null)
         {
             GameObject mapHolderObject = GameObject.Find($"MapHolder");
-            mapHolder=mapHolderObject.AddComponent<ElektroMapHolder>();
-            mapHolder.Initialize(new("test", null, new() { "dutch", "english" }));
+            mapHolder = mapHolderObject.AddComponent<MusicoMapHolder>();
+            mapHolder.Initialize(new("test", null));
             map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
-            fileManager = new ImgFileManager<ElektroMapData, ElektroTileData>(map);
+            fileManager = new ImgFileManager<MusicoMapData, MusicoTileData>(map);
 
         }
         else
@@ -53,20 +53,45 @@ public class ElektroMapManager : CalcBoardMapMananger
         }
     }
 
-    void Start()
+    public override void LoadTiles()
     {
-        LoadTiles();
-        Debug.Log(map);
+        try
+        {
+            for (int i = 1; i <= 24; i++)
+            {
+                // Find the existing GameObject by mapName
+                GameObject existingTile = GameObject.Find($"Tile ({i})");
+                Button btn = existingTile.AddComponent<Button>();
+                Image tempImg = existingTile.AddComponent<Image>();
+                int index = i;
+                btn.onClick.AddListener(() => SetIdAction(index));
+                if (existingTile != null)
+                {
+                    Texture2D texture = fileManager.LoadResourceTextureFromFile("temp");
+                    if (texture != null)
+                    {
+
+                        //Debug.Log(imagePath);
+
+                        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        tempImg.sprite = sprite;
+                    }
 
 
+                }
+                else
+                {
+                    Debug.LogError($"GameObject ElektroTile ({i}) not found in the scene!");
+                }
+
+
+            }
+        }
+        catch (JsonException ex)
+        {
+            Debug.LogError("JSON Deserialization Error: " + ex.Message);
+        }
     }
-
-    public override void Save()
-    {
-        fileManager.Save(map);
-        SceneManager.LoadScene(Scenes.MAIN_MENU);
-    }
-
 
     public override void ReloadTile()
     {
@@ -76,10 +101,10 @@ public class ElektroMapManager : CalcBoardMapMananger
             GameObject tileObject = GameObject.Find($"Tile ({PlayerPrefs.GetInt("tileId")})");
             //ElektroTile tile = tileObject.GetComponent<ElektroTile>();
             Image tempImg = tileObject.GetComponent<Image>();
-            ElektroTileData tile = FindTile(PlayerPrefs.GetInt("tileId"));
+            MusicoTileData tile = FindTile(PlayerPrefs.GetInt("tileId"));
             if (tileObject != null)
             {
-                
+
                 Texture2D texture;
                 if (tile.Img == "")
                 {
@@ -132,7 +157,24 @@ public class ElektroMapManager : CalcBoardMapMananger
         }
     }
 
-    public ElektroTileData FindTile(int id)
+    public override void Save()
+    {
+        fileManager.Save(map);
+        SceneManager.LoadScene(Scenes.MAIN_MENU);
+    }
+
+    public override void SetIdAction(int id)
+    {
+
+        //PlayerPrefs.SetInt("tileId", id);
+
+
+        //editTilePanel.GetComponent<EditElektroTile>().Tile = FindTile(id);
+        //editTilePanel.SetActive(true);
+        //tilePanel.SetActive(false);
+    }
+
+    public MusicoTileData FindTile(int id)
     {
         foreach (var tile in map.Tiles)
         {
@@ -144,61 +186,15 @@ public class ElektroMapManager : CalcBoardMapMananger
         return null;
     }
 
-    
-
-    public override void LoadTiles()
-    {
-        try
-        {
-            for (int i=1;i<=24;i++)
-            {
-                // Find the existing GameObject by mapName
-                GameObject existingTile = GameObject.Find($"Tile ({i})");
-                Button btn= existingTile.AddComponent<Button>();
-                Image tempImg = existingTile.AddComponent<Image>();
-                int index = i;
-                btn.onClick.AddListener(() => SetIdAction(index));
-                if (existingTile != null)
-                { 
-                    Texture2D texture=fileManager.LoadResourceTextureFromFile("temp");
-                    if (texture != null)
-                    {
-                            
-                        //Debug.Log(imagePath);
-
-                        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                        tempImg.sprite = sprite;
-                    }
-
-
-                }
-                else
-                {
-                    Debug.LogError($"GameObject ElektroTile ({i}) not found in the scene!");
-                }
-
-
-            }
-            }
-        catch (JsonException ex)
-        {
-            Debug.LogError("JSON Deserialization Error: " + ex.Message);
-        }    
-    }
-
-    public override void SetIdAction(int id)
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         
-        PlayerPrefs.SetInt("tileId",id);
+    }
 
-
-        //editTilePanel.GetComponent<EditElektroTile>().Tile=FindTile(id);
-        editTilePanel.SetActive(true);
-        tilePanel.SetActive(false);
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
-
-
-
-
-

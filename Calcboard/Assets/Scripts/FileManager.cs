@@ -7,9 +7,10 @@ using Newtonsoft.Json;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class FileManager<T,Y>
+public class FileManager<T,Y,U>
     where T : CalcBoardMapData<T, Y>
     where Y : CalcBoardTileData<Y>
+    where U : SoundFile<U,Y>
 {
     
     public ElektroMapManager gameManagerElektro;
@@ -17,10 +18,12 @@ public class FileManager<T,Y>
 
     private string selectedFilePath;
     private string tempImg;
+    private string tempSound;
 
     // Paths
     private string mapFolderPath;
     private string saveImgPath;
+    private string saveSoundPath;
     private string root = Path.Combine(Application.dataPath, "..");
     private string tempDirectory = Path.Combine(Application.dataPath, "..", "TempImages");
 
@@ -45,6 +48,7 @@ public class FileManager<T,Y>
         // Set paths for the map
         mapFolderPath = Path.Combine(root, "games", game, "maps", mapName);
         saveImgPath = Path.Combine(mapFolderPath, "images");
+        saveSoundPath = Path.Combine(mapFolderPath, "sounds");
 
         List<string> paths = new()
         {
@@ -195,4 +199,55 @@ public class FileManager<T,Y>
         Texture2D texture = new Texture2D(2, 2);
         return texture.LoadImage(fileData) ? texture : null;
     }
+
+    public void OpenSoundFilePicker(U file)
+    {
+        var paths = StandaloneFileBrowser.OpenFilePanel("Select Sound", "mp3,wav,ogg", "", false);
+        if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
+        {
+            selectedFilePath = paths[0];
+            SaveAndLoadNewSoundInTemp(selectedFilePath,file);
+        }
+    }
+
+    private void SaveAndLoadNewSoundInTemp(string filePath, U file)
+    {
+        byte[] fileData = File.ReadAllBytes(filePath);
+
+        string fileExtension = Path.GetExtension(filePath);
+        string tempFileName = "temp_" + file.Name + fileExtension;
+        string tempFilePath = Path.Combine(tempDirectory, tempFileName);
+
+        foreach (string tempFile in Directory.GetFiles(tempDirectory, "temp_" + file.Name + ".*"))
+        {
+            File.Delete(tempFile);
+        }
+
+        File.WriteAllBytes(tempFilePath, fileData);
+        tempSound = tempFileName;
+    }
+
+    public void SaveSound(U file)
+    {
+        if (tempSound == null)
+            return;
+
+        string fileExtension = Path.GetExtension(tempSound);
+        string savedFileName = file.Name + fileExtension;
+        string savedFilePath = Path.Combine(saveSoundPath, savedFileName);
+
+        foreach (string existingFile in Directory.GetFiles(saveSoundPath, file.Name + ".*"))
+        {
+            File.Delete(existingFile);
+        }
+
+        string tempFilePath = Path.Combine(tempDirectory, tempSound);
+        if (File.Exists(tempFilePath))
+        {
+            File.Move(tempFilePath, savedFilePath);
+            file.Name = savedFileName;
+            tempSound = null;
+        }
+    }
+
 }

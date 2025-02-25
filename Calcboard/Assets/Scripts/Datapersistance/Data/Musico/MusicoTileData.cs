@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class MusicoTileData : CalcBoardTileData<MusicoTileData>, IHasImg, IHaveSound
+public class MusicoTileData : CalcBoardTileData<MusicoTileData>, IHasImg, IHasSound
 {
     private string img;
     private List<MusicoSoundFile> soundFiles;
@@ -19,7 +19,7 @@ public class MusicoTileData : CalcBoardTileData<MusicoTileData>, IHasImg, IHaveS
     public string Img { get => img; set => img=value; }
 
     public List<MusicoSoundFile> SoundFiles { get => soundFiles; set => soundFiles = value; }
-    //List<string> IHaveSound.SoundFiles { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    //List<string> IHasSound.SoundFiles { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     //public List<string> Words { get => words; set => words=value; }
 
