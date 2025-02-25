@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.Networking;
 using System.IO;
 using Newtonsoft.Json;
 using Unity.VisualScripting;
@@ -43,9 +45,24 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
     {
         try
         {
+
+            int userId = PlayerPrefs.GetInt("UserId", -1);
+            if (userId == -1)
+            {
+                Debug.LogError("User not logged in or UserId not set.");
+                return;
+            }
+
             ElektroMapData mapData=map.toData();
             // Convert map object to JSON format
-            string jsonData = JsonConvert.SerializeObject(mapData, Formatting.Indented);
+            string jsonData = JsonConvert.SerializeObject(new
+            {
+                userId = userId,
+                map = mapData
+            }, Formatting.Indented);
+
+            // Send Map Data to Backend
+            StartCoroutine(SendMapToBackend(jsonData));
 
             // Define the file path
             string filePath = Path.Combine(gamePath, jsonFileName);
@@ -56,6 +73,8 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
             SceneManager.LoadScene("URP2DSceneTemplate");
 
             Debug.Log("Map saved successfully to: " + filePath);
+
+            
         }
         catch (IOException ex)
         {
@@ -67,6 +86,31 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
         }
     }
 
+    IEnumerator SendMapToBackend(string jsonData)
+    {
+        string apiUrl = "http://localhost:8081/maps/save";  
+          
+
+        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            //request.SetRequestHeader("Authorization", "Bearer " + token);
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Map successfully saved on backend!");
+            }
+            else
+            {
+                Debug.LogError("Failed to save map on backend: " + request.downloadHandler.text);
+            }
+        }
+    }
 
     public void ReloadImages()
     {
