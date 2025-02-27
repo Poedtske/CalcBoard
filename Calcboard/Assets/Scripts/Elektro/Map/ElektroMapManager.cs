@@ -54,6 +54,7 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
             }
 
             ElektroMapData mapData=map.toData();
+            Debug.Log("Serialized map data: " + JsonConvert.SerializeObject(mapData, Formatting.Indented));
             // Convert map object to JSON format
             string jsonData = JsonConvert.SerializeObject(new
             {
@@ -88,16 +89,33 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
 
     IEnumerator SendMapToBackend(string jsonData)
     {
-        string apiUrl = "http://localhost:8081/maps/save";  
-          
+        string apiUrl = "http://localhost:8081/maps/save";
+        string token = PlayerPrefs.GetString("Token", ""); // Retrieve the token
+
+
 
         using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            Debug.Log("Sending map data to backend: " + jsonData);
+
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            //request.SetRequestHeader("Authorization", "Bearer " + token);
+            request.SetRequestHeader("Authorization", "Bearer " + token); // Add the token in Authorization header
+
+            Debug.Log("Tolken: " + token);
+
+
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add token here
+            }
+            else
+            {
+                Debug.LogError("No token found. User may not be authenticated.");
+            }
 
             yield return request.SendWebRequest();
 
@@ -249,9 +267,10 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
                             this.map.Tiles.Add(newTile);
                             Image tempImg = existingTile.AddComponent<Image>();
                             tempImg.sprite = sprite;
-                            
+                            Debug.Log("Map tiles before saving: " + JsonConvert.SerializeObject(map.Tiles, Formatting.Indented));
 
-                            if (newTile != null)
+
+                        if (newTile != null)
                             {
                                 
                                // Debug.Log($"Initialized: {newTile}");
