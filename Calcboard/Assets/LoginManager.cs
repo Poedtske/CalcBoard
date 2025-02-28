@@ -53,6 +53,11 @@ public class LoginManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                LoginResponse response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+
+                PlayerPrefs.SetInt("UserId", (int)response.userId);
+                PlayerPrefs.SetString("Token", response.token); // If you use JWT tokens
+
                 Debug.Log("Login successful: " + request.downloadHandler.text);
                 loginContainer.SetActive(false);
                 menu.SetActive(true);
@@ -63,6 +68,13 @@ public class LoginManager : MonoBehaviour
                 errorMessage.text = "Invalid username or password!";
             }
         }
+    }
+
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public long userId;
+        public string token; // Ensure backend returns this
     }
 
 }
