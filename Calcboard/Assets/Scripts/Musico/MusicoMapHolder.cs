@@ -27,7 +27,7 @@ public class MusicoMapHolder : MapHolder
     {
         if (map != null)
         {
-            Debug.Log($"ElektroMapHolder initialized with map: {map.MapName}");
+            Debug.Log($"MusicoMapHolder initialized with map: {map.MapName}");
         }
     }
 

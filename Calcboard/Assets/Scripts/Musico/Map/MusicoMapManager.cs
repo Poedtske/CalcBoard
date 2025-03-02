@@ -11,10 +11,21 @@ public class MusicoMapManager : CalcBoardMapMananger
 {
     private MusicoMapData map;
     private FileManager<MusicoMapData, MusicoTileData> fileManager;
+    private SoundFileManager soundFileManager;
+    private PathManager pathManager;
 
     [Header("Unity Components")]
     [SerializeField] private GameObject tilePanel;
     [SerializeField] private GameObject editTilePanel;
+    public PathManager PathManager
+    {
+        get { return pathManager; }
+    }
+
+    public SoundFileManager SoundFileManager
+    {
+        get { return soundFileManager; }
+    }
 
     public FileManager<MusicoMapData, MusicoTileData> FileManager
     {
@@ -34,7 +45,7 @@ public class MusicoMapManager : CalcBoardMapMananger
             map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
-            fileManager = new ImgFileManager<MusicoMapData, MusicoTileData>(map);
+            
         }
         else if (GameObject.Find($"MapHolder") != null)
         {
@@ -42,15 +53,15 @@ public class MusicoMapManager : CalcBoardMapMananger
             mapHolder = mapHolderObject.AddComponent<MusicoMapHolder>();
             mapHolder.Initialize(new("test", null));
             map = mapHolder.Map; // Get the map directly from the MapHolder
-
-            //map.MapName += ".json";
-            fileManager = new ImgFileManager<MusicoMapData, MusicoTileData>(map);
-
+            Debug.Log(map);
         }
         else
         {
             Debug.LogError("No MapHolder found in the scene.");
         }
+        fileManager = new FileManager<MusicoMapData, MusicoTileData>(map);
+        pathManager = new(Map.Game(), Map.MapName);
+        soundFileManager = new(map.Game(), map.MapName, pathManager);
     }
 
     public override void LoadTiles()
@@ -166,12 +177,9 @@ public class MusicoMapManager : CalcBoardMapMananger
     public override void SetIdAction(int id)
     {
 
-        //PlayerPrefs.SetInt("tileId", id);
-
-
-        //editTilePanel.GetComponent<EditElektroTile>().Tile = FindTile(id);
-        //editTilePanel.SetActive(true);
-        //tilePanel.SetActive(false);
+        PlayerPrefs.SetInt("tileId", id);
+        editTilePanel.SetActive(true);
+        tilePanel.SetActive(false);
     }
 
     public MusicoTileData FindTile(int id)
@@ -189,7 +197,7 @@ public class MusicoMapManager : CalcBoardMapMananger
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        LoadTiles();
     }
 
     // Update is called once per frame

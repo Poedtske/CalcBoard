@@ -2,11 +2,11 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using static Unity.VisualScripting.Icons;
+using System.Linq;
 
 [System.Serializable]
 public class MusicoMapData : CalcBoardMapData<MusicoMapData,MusicoTileData>
 {
-    private new const string game = Games.MUSICO;
 
     public MusicoMapData(string name, string img) : base(name, img)
     {
@@ -21,6 +21,12 @@ public class MusicoMapData : CalcBoardMapData<MusicoMapData,MusicoTileData>
 
     public override string Game()
     {
-        return game;
+        return Games.MUSICO;
+    }
+
+    public override string ToString()
+    {
+        string tileDataString = string.Join("\n", tiles.Select(tile => tile.ToString()));
+        return $"MusicoMapData: ID={id}, Game={Game()}, Name={mapName}, Img={img}\nTiles:\n{tileDataString}";
     }
 }

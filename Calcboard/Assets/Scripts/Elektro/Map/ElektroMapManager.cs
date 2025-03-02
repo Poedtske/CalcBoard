@@ -34,7 +34,7 @@ public class ElektroMapManager : CalcBoardMapMananger
             map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
-            fileManager = new ImgFileManager<ElektroMapData, ElektroTileData>(map);
+            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
         }
         else if(GameObject.Find($"MapHolder")!=null)
         {
@@ -44,7 +44,7 @@ public class ElektroMapManager : CalcBoardMapMananger
             map = mapHolder.Map; // Get the map directly from the MapHolder
 
             //map.MapName += ".json";
-            fileManager = new ImgFileManager<ElektroMapData, ElektroTileData>(map);
+            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
 
         }
         else
@@ -197,8 +197,3 @@ public class ElektroMapManager : CalcBoardMapMananger
         tilePanel.SetActive(false);
     }
 }
-
-
-
-
-

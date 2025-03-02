@@ -2,13 +2,8 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-public class MusicoSoundFile : SoundFile<MusicoSoundFile, MusicoTileData>, IHasSound
+public class MusicoSoundFile : SoundFile
 {
-    public MusicoSoundFile(MusicoTileData tile, string name) : base(tile, name)
-    {
-        this.tileIds = new();
-        this.name = name;
-    }
+    public MusicoSoundFile(int id, string name, string fileName) : base(id, name, fileName){ }
 
-    public string SoundFile { get => name; set => name = value; }
 }

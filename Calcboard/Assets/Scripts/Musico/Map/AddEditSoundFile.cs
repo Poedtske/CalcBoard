@@ -4,6 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Icons;
 
 public class AddEditSoundFile : MonoBehaviour
 {
@@ -11,10 +12,18 @@ public class AddEditSoundFile : MonoBehaviour
     public Button selectSoundFile;
     public TMP_InputField nameInputField;
     public MusicoMapManager gameManager;
-    private FileManager<MusicoMapData, MusicoTileData> fileManager;
+    private SoundFileManager soundFileManager;
     private MusicoTileData tile;
+    public GameObject soundFiles;
     private string tempFilePath;
     private string finalFilePath;
+    public GameObject languageEntryPrefab;
+    private MusicoSoundFile soundFile;
+    private PathManager pathManager;
+
+
+
+
 
     public MusicoTileData Tile
     {
@@ -24,7 +33,7 @@ public class AddEditSoundFile : MonoBehaviour
 
     private void Awake()
     {
-        fileManager = FindAnyObjectByType<MusicoMapManager>().FileManager;
+        soundFileManager = FindAnyObjectByType<MusicoMapManager>().SoundFileManager;
     }
 
     private void Start()
@@ -36,7 +45,49 @@ public class AddEditSoundFile : MonoBehaviour
     private void OnEnable()
     {
         Tile = gameManager.FindTile(PlayerPrefs.GetInt("tileId"));
+
+        // Clear previous input fields
+        foreach (Transform child in soundFiles.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        nameInputField.text = "";
+
+        List<string> soundFileNames = soundFileManager.GetSavedSoundFileNames();
+
+        // Create UI elements for each sound file
+        foreach (string soundFileName in soundFileNames)
+        {
+            // Instantiate the prefab for the sound file
+            GameObject soundEntry = Instantiate(languageEntryPrefab, soundFiles.transform);
+            soundEntry.name = $"SoundFile_{soundFileName}"; // Rename for debugging
+
+            // Get reference to Label (Assuming it has one)
+            TextMeshProUGUI soundLabel = soundEntry.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+            soundLabel.text = soundFileName; // Display sound file name
+            soundEntry.transform.Find("Delete").gameObject.SetActive(false);
+
+            // Add button functionality to assign sound to tile when clicked
+            Button button = soundEntry.GetComponent<Button>();
+            if (button != null)
+            {
+                button.onClick.AddListener(() => AssignSoundToTile(soundFileName));
+            }
+        }
     }
+
+    // Function to assign sound file to the tile
+    private void AssignSoundToTile(string soundFileName)
+    {
+        Debug.Log($"Assigning sound file: {soundFileName} to tile {Tile.Id}");
+
+        if (Tile != null)
+        {
+            Tile.AddExistantSoundFile(soundFileName); // Assuming Tile has a method to set the sound file
+        }
+    }
+
+
 
     private void HandleSelectSoundFile()
     {
@@ -56,48 +107,21 @@ public class AddEditSoundFile : MonoBehaviour
         }
 
         // Open file picker for sound file selection
-        string filePath = OpenFileExplorer(); // Implement platform-specific file picker
+        string fileName = soundFileManager.OpenSoundFilePicker(nameValue); // Implement platform-specific file picker
 
-        if (!string.IsNullOrEmpty(filePath))
-        {
-            // Create a new sound file entry
-            MusicoSoundFile soundFile = new MusicoSoundFile(tile, nameValue);
-
-            // Move to temporary folder
-            tempFilePath = Path.Combine(Application.persistentDataPath, "Temp", Path.GetFileName(filePath));
-            File.Copy(filePath, tempFilePath, true);
-
-            Debug.Log($"File copied to temp: {tempFilePath}");
-        }
+        soundFile = new(tile.Id, nameValue, fileName);
+        Debug.Log(soundFile);
     }
 
     public void SaveChanges()
     {
-        if (string.IsNullOrEmpty(tempFilePath))
+        if (soundFile == null)
         {
             Debug.LogWarning("No file selected! Please select a sound file before saving.");
             return;
         }
 
-        string soundFilesFolder = Path.Combine(Application.persistentDataPath, "SoundFiles");
-
-        if (!Directory.Exists(soundFilesFolder))
-        {
-            Directory.CreateDirectory(soundFilesFolder);
-        }
-
-        finalFilePath = Path.Combine(soundFilesFolder, Path.GetFileName(tempFilePath));
-
-        File.Move(tempFilePath, finalFilePath);
+        soundFileManager.SaveSound(soundFile);
         Debug.Log($"File moved to final destination: {finalFilePath}");
-    }
-
-    private string OpenFileExplorer()
-    {
-        // This function should be implemented with native file selection
-        // Unity does not have a built-in file explorer, so you'd need
-        // something like Native File Picker for mobile or OpenFileDialog for Windows.
-        Debug.Log("Opening file explorer... (Implement this based on platform)");
-        return null; // Replace with actual path from file picker
     }
 }
