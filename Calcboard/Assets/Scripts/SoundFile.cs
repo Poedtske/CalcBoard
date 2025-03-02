@@ -3,18 +3,24 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public abstract class SoundFile<U, Y>
-    where U : SoundFile<U, Y>
-    where Y : CalcBoardTileData<Y>
+public class SoundFile
 {
     protected List<int> tileIds;
     protected string name;
+    protected string fileName;
 
-    public SoundFile(Y tile, string name) 
+    public string FileName
+    {
+        get { return fileName; }
+        set { fileName = value; }
+    }
+
+    public SoundFile(int id, string name, string FileName) 
     {
         this.tileIds = new();
         this.name = name;
-        tileIds.Add(tile.Id);
+        this.FileName = FileName;
+        tileIds.Add(id);
     }
 
     public List<int> TileIds
@@ -59,4 +65,10 @@ public abstract class SoundFile<U, Y>
         get { return this.name; }
         set { this.name = value; }
     }
+
+    public override string ToString()
+    {
+        return $"SoundFile: Name='{name}', FileName='{fileName}', TileIds=[{string.Join(", ", tileIds)}]";
+    }
+
 }
