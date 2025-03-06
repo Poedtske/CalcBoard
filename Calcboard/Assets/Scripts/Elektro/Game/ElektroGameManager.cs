@@ -107,7 +107,7 @@ public class ElektroGameManager : MonoBehaviour
 
     private void LoadTiles()
     {
-        string filePath = Path.Combine(Application.dataPath, "..", gamePath, jsonFileName);
+        string filePath = Path.Combine(Application.dataPath, "..", gamePath, PlayerPrefs.GetString("mapName"), PlayerPrefs.GetString("mapName") + ".json");
 
         if (!File.Exists(filePath))
         {
@@ -120,6 +120,7 @@ public class ElektroGameManager : MonoBehaviour
         try
         {
             this.mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
+            //imgPath = Path.Combine(gamePath, mapData.MapName, "images");
             if (mapData == null)
             {
                 throw new InvalidOperationException("Deserialized JSON resulted in null object.");
