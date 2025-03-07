@@ -7,16 +7,17 @@ using UnityEngine.UIElements;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.Layouts;
+using System.Linq;
 
 public class ElektroGameManager : MonoBehaviour
 {
     private string gamePath = "games/elektro/maps/";
-    private string jsonFileName = "Temp Test/TempElektroMap.json"; // Adjusted to match your JSON location
+    private string jsonFileName = "Temp Test/Temp Test.json"; // Adjusted to match your JSON location
     private UIDocument doc;
     private VisualElement visualElement;
     private Label label;
     ElektroMapData mapData;
-    public int language=0;
+    public int language = 0;
     private List<ElektroTileData> tileList;
     private ElektroTileData selectedTile;
     public string input;
@@ -42,23 +43,23 @@ public class ElektroGameManager : MonoBehaviour
     void Start()
     {
         LoadTiles();
-        tileList = new List<ElektroTileData>(mapData.tiles); // Create a copy of the tile list
+        tileList = new List<ElektroTileData>(mapData.Tiles.Take(6));
         SelectTile();
     }
 
     private void SelectTile()
     {
-        
+
         if (tileList.Count == 0)
         {
-            Debug.Log("No tiles to play.");
+            Debug.Log("No tileIds to play.");
             return;
         }
         else
         {
             int randomIndex = UnityEngine.Random.Range(0, tileList.Count);
             selectedTile = tileList[randomIndex];
-            label.text = selectedTile.meanings[language];
+            label.text = selectedTile.Words[language];
             tileList.RemoveAt(randomIndex); // Remove the selected tile from the list
 
             // Here, you can process the selected tile (e.g., display it in the UI, wait for user input, etc.)
@@ -66,10 +67,10 @@ public class ElektroGameManager : MonoBehaviour
 
         //while (tileList.Count > 0)
         //{
-            
+
         //}
 
-        //Debug.Log("All tiles have been used!");
+        //Debug.Log("All tileIds have been used!");
     }
 
     private void Update()
@@ -93,21 +94,20 @@ public class ElektroGameManager : MonoBehaviour
 
     private bool ValidateInput()
     {
-        if (input == selectedTile.id.ToString())
+        if (string.IsNullOrEmpty(input) || selectedTile == null)
         {
-            return true;
-        }
-        else
-        {
+            Debug.LogWarning("Input is empty or selectedTile is null.");
             return false;
         }
-        
+
+        return input.Trim() == selectedTile.Id.ToString();
     }
+
 
 
     private void LoadTiles()
     {
-        string filePath = Path.Combine(Application.dataPath, "..", gamePath, jsonFileName);
+        string filePath = Path.Combine(Application.dataPath, "..", gamePath, PlayerPrefs.GetString("mapName"), PlayerPrefs.GetString("mapName") + ".json");
 
         if (!File.Exists(filePath))
         {
@@ -120,6 +120,7 @@ public class ElektroGameManager : MonoBehaviour
         try
         {
             this.mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
+            //imgPath = Path.Combine(gamePath, mapData.MapName, "images");
             if (mapData == null)
             {
                 throw new InvalidOperationException("Deserialized JSON resulted in null object.");

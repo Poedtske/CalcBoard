@@ -23,7 +23,7 @@ public class demoGameManager : MonoBehaviour
     private int score = 0;
     private int rounds = 0;
     private bool untilEverytingIsCorrect;
-    private FileSelectorUI fileSelectorUI;
+    private FileManager<ElektroMapData,ElektroTileData> fileSelectorUI;
     private string correctTile;
 
     private void Awake()
@@ -34,7 +34,7 @@ public class demoGameManager : MonoBehaviour
         label2 = doc.rootVisualElement.Q("Option2") as Label;
         img = doc.rootVisualElement.Q("Img");
         scoreLabel = doc.rootVisualElement.Q("Score") as Label;
-        fileSelectorUI = new FileSelectorUI();
+        
     }
     private void Click(ClickEvent e)
     {
@@ -48,7 +48,9 @@ public class demoGameManager : MonoBehaviour
     void Start()
     {
         this.LoadTiles();
-        tileList = new List<ElektroTileData>(mapData.tiles); // Create a copy of the tile list
+        fileSelectorUI = new(mapData);
+        tileList = new List<ElektroTileData>(mapData.Tiles); // Create a copy of the tile list
+
         this.SelectTile();
         scoreLabel.text = "Score: 0";
     }
@@ -57,7 +59,7 @@ public class demoGameManager : MonoBehaviour
     {
         if (tileList.Count == 0)
         {
-            Debug.Log("No tiles to play.");
+            Debug.Log("No tileIds to play.");
             return;
         }
 
@@ -65,36 +67,36 @@ public class demoGameManager : MonoBehaviour
         selectedTile = tileList[randomIndex];
         tileList.RemoveAt(randomIndex); // Remove the selected tile from the list
 
-        // Ensure there are other tiles to pick an incorrect meaning from
+        // Ensure there are other tileIds to pick an incorrect meaning from
         string incorrectMeaning = "Incorrect"; // Default fallback
-        if (mapData.tiles.Count > 1)
+        if (mapData.Tiles.Count > 1)
         {
             ElektroTileData randomTile;
             do
             {
-                randomTile = mapData.tiles[UnityEngine.Random.Range(0, mapData.tiles.Count)];
+                randomTile = mapData.Tiles[UnityEngine.Random.Range(0, mapData.Tiles.Count)];
             } while (randomTile == selectedTile); // Ensure it's not the same as the correct one
 
-            incorrectMeaning = randomTile.meanings[language];
+            incorrectMeaning = randomTile.Words[language];
         }
 
         // Randomly decide which label gets the correct answer
         if (UnityEngine.Random.value < 0.5f)
         {
-            label1.text = "1. "+selectedTile.meanings[language]; // Correct
+            label1.text = "1. "+selectedTile.Words[language]; // Correct
             label2.text = "2. "+incorrectMeaning;               // Incorrect
             correctTile = "1";
         }
         else
         {
             label1.text = "1. "+incorrectMeaning;               // Incorrect
-            label2.text = "2. " + selectedTile.meanings[language]; // Correct
+            label2.text = "2. " + selectedTile.Words[language]; // Correct
             correctTile = "2";
         }
 
         // Load Image from Resources folder
 
-        Texture2D texture = fileSelectorUI.LoadImage(Path.Combine(Application.dataPath, "..", imgPath, selectedTile.img));
+        Texture2D texture = fileSelectorUI.LoadImage(selectedTile.Img);
 
         if (texture != null)
         {
@@ -102,7 +104,7 @@ public class demoGameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Image not found at path: {Path.Combine(Application.dataPath, "..", imgPath, selectedTile.img)}");
+            Debug.LogError($"Image not found at path: {Path.Combine(Application.dataPath, "..", imgPath, selectedTile.Img)}");
         }
     }
 
@@ -153,7 +155,7 @@ public class demoGameManager : MonoBehaviour
         try
         {
             this.mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
-            imgPath = Path.Combine(gamePath, mapData.name, "images");
+            imgPath = Path.Combine(gamePath, mapData.MapName, "images");
             if (mapData == null)
             {
                 throw new InvalidOperationException("Deserialized JSON resulted in null object.");

@@ -81,7 +81,7 @@ public class MapLoader : MonoBehaviour
     {
         Debug.Log("Loading map: " + mapName);
         PlayerPrefs.SetString("mapName", mapName);
-        SceneManager.LoadScene("ElektroGame");
+        SceneManager.LoadScene(Scenes.ELEKTRO_GAME);
     }
 
 
