@@ -70,6 +70,19 @@ public class LoginManager : MonoBehaviour
         }
     }
 
+
+    public void ShowLogin()
+    {
+        loginContainer.SetActive(true);
+        menu.SetActive(false);
+    }
+
+    public void ShowMenu()
+    {
+        menu.SetActive(true);
+        loginContainer.SetActive(false);
+    }
+
     [System.Serializable]
     public class LoginResponse
     {
