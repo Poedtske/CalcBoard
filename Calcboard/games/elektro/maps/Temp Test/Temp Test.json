@@ -1,204 +1,204 @@
 {
-  "id": 0,
-  "game": "elektro",
-  "name": "Temp Test",
-  "languages": [
+  "Id": 0,
+  "Game": "elektro",
+  "MapName": "Temp Test",
+  "Categories": [
     "English",
     "Nederlands"
   ],
-  "tiles": [
+  "Tiles": [
     {
-      "id": 1,
-      "img": "1.jpg",
-      "meanings": [
+      "Id": 1,
+      "Img": "1.jpg",
+      "Words": [
         "Theodore Roosevelt",
         "Theodore Roosevelt"
       ]
     },
     {
-      "id": 2,
-      "img": "2.jpg",
-      "meanings": [
+      "Id": 2,
+      "Img": "2.jpg",
+      "Words": [
         "Ulysses S. Grant",
         "Ulysses S. Grant"
       ]
     },
     {
-      "id": 3,
-      "img": "3.jpg",
-      "meanings": [
+      "Id": 3,
+      "Img": "3.jpg",
+      "Words": [
         "Abraham Lincoln",
         "Abraham Lincoln"
       ]
     },
     {
-      "id": 4,
-      "img": "4.jpg",
-      "meanings": [
+      "Id": 4,
+      "Img": "4.jpg",
+      "Words": [
         "Andrew Jackson",
         "Andrew Jackson"
       ]
     },
     {
-      "id": 5,
-      "img": "5.jpg",
-      "meanings": [
+      "Id": 5,
+      "Img": "5.jpg",
+      "Words": [
         "Thomas Jefferson",
         "Thomas Jefferson"
       ]
     },
     {
-      "id": 6,
-      "img": "6.jpg",
-      "meanings": [
+      "Id": 6,
+      "Img": "6.jpg",
+      "Words": [
         "John Adams",
         "John Adams"
       ]
     },
     {
-      "id": 7,
-      "img": "7.jpg",
-      "meanings": [
+      "Id": 7,
+      "Img": "7.jpg",
+      "Words": [
         "George Washington",
         "George Washington"
       ]
     },
     {
-      "id": 8,
-      "img": "8.jpg",
-      "meanings": [
+      "Id": 8,
+      "Img": "8.jpg",
+      "Words": [
         "bush",
         "bush"
       ]
     },
     {
-      "id": 9,
-      "img": "9.jpg",
-      "meanings": [
-        "Joe Biden",
-        "Joe Biden"
+      "Id": 9,
+      "Img": "9.jpg",
+      "Words": [
+        "Joe BIden",
+        "Joe BIden"
       ]
     },
     {
-      "id": 10,
-      "img": "10.jpg",
-      "meanings": [
+      "Id": 10,
+      "Img": "10.jpg",
+      "Words": [
         "Donald Trump",
         "Donald Trump"
       ]
     },
     {
-      "id": 11,
-      "img": "11.jpg",
-      "meanings": [
+      "Id": 11,
+      "Img": "11.jpg",
+      "Words": [
         "Barack Obama",
         "Barack Obama"
       ]
     },
     {
-      "id": 12,
-      "img": "12.jpg",
-      "meanings": [
+      "Id": 12,
+      "Img": "12.jpg",
+      "Words": [
         "Bill Clinton",
         "Bill Clinton"
       ]
     },
     {
-      "id": 13,
-      "img": "13.jpg",
-      "meanings": [
+      "Id": 13,
+      "Img": "13.jpg",
+      "Words": [
         "George H. W. Bush",
         "George H. W. Bush"
       ]
     },
     {
-      "id": 14,
-      "img": "14.jpg",
-      "meanings": [
+      "Id": 14,
+      "Img": "14.jpg",
+      "Words": [
         "Reagan",
         "Reagan"
       ]
     },
     {
-      "id": 15,
-      "img": "15.jpg",
-      "meanings": [
+      "Id": 15,
+      "Img": "15.jpg",
+      "Words": [
         "Carter",
         "Carter"
       ]
     },
     {
-      "id": 16,
-      "img": "16.jpg",
-      "meanings": [
+      "Id": 16,
+      "Img": "16.jpg",
+      "Words": [
         "Gerald Ford",
         "Gerald Ford"
       ]
     },
     {
-      "id": 17,
-      "img": "17.jpg",
-      "meanings": [
+      "Id": 17,
+      "Img": "17.jpg",
+      "Words": [
         "Richard Nixon",
         "Richard Nixon"
       ]
     },
     {
-      "id": 18,
-      "img": "18.jpg",
-      "meanings": [
+      "Id": 18,
+      "Img": "18.jpg",
+      "Words": [
         "TRUMAN",
         "TRUMAN"
       ]
     },
     {
-      "id": 19,
-      "img": "19.jpg",
-      "meanings": [
+      "Id": 19,
+      "Img": "19.jpg",
+      "Words": [
         "John F. Kennedy",
         "John F. Kennedy"
       ]
     },
     {
-      "id": 20,
-      "img": "20.jpg",
-      "meanings": [
+      "Id": 20,
+      "Img": "20.jpg",
+      "Words": [
         "FDR",
         "FDR"
       ]
     },
     {
-      "id": 21,
-      "img": "21.jpg",
-      "meanings": [
+      "Id": 21,
+      "Img": "21.jpg",
+      "Words": [
         "Woodrow Wilson",
         "Woodrow Wilson"
       ]
     },
     {
-      "id": 22,
-      "img": "22.jpg",
-      "meanings": [
+      "Id": 22,
+      "Img": "22.jpg",
+      "Words": [
         "William Howard Taft",
         "William Howard Taft"
       ]
     },
     {
-      "id": 23,
-      "img": "23.jpg",
-      "meanings": [
+      "Id": 23,
+      "Img": "23.jpg",
+      "Words": [
         "Dwight D. Eisenhower",
         "Dwight D. Eisenhower"
       ]
     },
     {
-      "id": 24,
-      "img": "24.jpg",
-      "meanings": [
+      "Id": 24,
+      "Img": "24.jpg",
+      "Words": [
         "Andrew Johnson",
         "Andrew Johnson"
       ]
     }
   ],
-  "img": null
+  "Img": null
 }

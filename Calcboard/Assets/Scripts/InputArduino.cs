@@ -8,11 +8,11 @@ public class Input_arduino : MonoBehaviour
     Thread IOThread;
     private static SerialPort sp;
     private static string incomingMsg = "";
-    private static demoGameManager gameManager;
+    private static ElektroGameManager gameManager;
 
     private void Awake()
     {
-        gameManager = GetComponent<demoGameManager>();
+        gameManager = GetComponent<ElektroGameManager>();
     }
 
     void Start()
@@ -64,7 +64,7 @@ public class Input_arduino : MonoBehaviour
 
     private static void DataThread()
     {
-        sp = new SerialPort("COM7", 9600); // Adjust COM port if needed
+        sp = new SerialPort("COM3", 9600); // Adjust COM port if needed
         sp.Open();
 
         while (true)
