@@ -83,7 +83,27 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
             // Now that the map is saved, we proceed to send it along with any image
             StartCoroutine(SendMapToBackend(jsonData, imagesFolderPath));
 
-            SceneManager.LoadScene("URP2DSceneTemplate");
+            string token = PlayerPrefs.GetString("Token", "");
+            if (!string.IsNullOrEmpty(token))
+            {
+                StartCoroutine(ValidateTokenAndLoadScene(token));
+            }
+            else
+            {
+                // No token, go to login
+                SceneManager.LoadScene("URP2DSceneTemplate");
+
+                // Use LoginManager to show the login screen
+                LoginManager loginManager = FindObjectOfType<LoginManager>();
+                if (loginManager != null)
+                {
+                    loginManager.ShowLogin();
+                }
+                else
+                {
+                    Debug.LogError("LoginManager not found in the scene.");
+                }
+            }
 
             Debug.Log("Map saved successfully to: " + filePath);
         }
@@ -97,7 +117,34 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
         }
     }
 
+    IEnumerator ValidateTokenAndLoadScene(string token)
+    {
+        string validateUrl = "http://yourbackend.com/validate-token"; // Replace with actual API URL
+        using (UnityWebRequest request = UnityWebRequest.Get(validateUrl))
+        {
+            request.SetRequestHeader("Authorization", "Bearer " + token);
+            yield return request.SendWebRequest();
 
+            SceneManager.LoadScene("URP2DSceneTemplate"); // Load scene first
+
+            yield return new WaitForSeconds(1); // Give scene time to load
+
+            LoginManager loginManager = FindObjectOfType<LoginManager>();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Token is valid.");
+                loginManager?.ShowMenu();  // Show menu if valid
+            }
+            else
+            {
+                Debug.LogError("Token is invalid or expired.");
+                PlayerPrefs.DeleteKey("Token");
+                PlayerPrefs.DeleteKey("UserId");
+                loginManager?.ShowLogin(); // Show login if invalid
+            }
+        }
+    }
 
 
     IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
@@ -113,7 +160,12 @@ public class ElektroMapManager : MonoBehaviour, IDataPersistance
         new MultipartFormDataSection("mapData", jsonData, "application/json") // ✅ Ensures correct format
     };
 
-        string[] imageFiles = Directory.GetFiles(imagesFolderPath, "*.png");
+        string[] imageFiles = Directory.GetFiles(imagesFolderPath, "*.png")
+                              .Concat(Directory.GetFiles(imagesFolderPath, "*.jpg"))
+                              .Concat(Directory.GetFiles(imagesFolderPath, "*.jpeg"))
+                              .Concat(Directory.GetFiles(imagesFolderPath, "*.bmp"))
+                              .Concat(Directory.GetFiles(imagesFolderPath, "*.wav"))
+                              .ToArray();
 
         foreach (string imagePath in imageFiles)
         {
