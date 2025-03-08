@@ -15,6 +15,7 @@ public class ElektroMapManager : CalcBoardMapMananger
 {
     private ElektroMapData map;
     private FileManager<ElektroMapData, ElektroTileData> fileManager;
+    private PathManager pathManager;
 
     [Header("Unity Components")]
     [SerializeField] private GameObject tilePanel;
@@ -36,9 +37,6 @@ public class ElektroMapManager : CalcBoardMapMananger
         if (mapHolder != null)
         {
             map = mapHolder.Map; // Get the map directly from the MapHolder
-
-            //map.MapName += ".json";
-            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
         }
         else if(GameObject.Find($"MapHolder")!=null)
         {
@@ -46,15 +44,15 @@ public class ElektroMapManager : CalcBoardMapMananger
             mapHolder=mapHolderObject.AddComponent<ElektroMapHolder>();
             mapHolder.Initialize(new("test", null, new() { "dutch", "english" }));
             map = mapHolder.Map; // Get the map directly from the MapHolder
-
-            //map.MapName += ".json";
-            fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
-
         }
         else
         {
             Debug.LogError("No MapHolder found in the scene.");
         }
+
+        fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
+        pathManager = new PathManager(map.Game, map.MapName);
+
     }
 
     void Start()
@@ -71,47 +69,10 @@ public class ElektroMapManager : CalcBoardMapMananger
 //Musico
         fileManager.Save(map);
         SceneManager.LoadScene(Scenes.MAIN_MENU);
-        
-        //Main
-        try
-        {
-            int userId = PlayerPrefs.GetInt("UserId", -1);
-            if (userId == -1)
-            {
-                Debug.LogError("User not logged in or UserId not set.");
-                return;
-            }
 
-            ElektroMapData mapData = map.toData();
-            Debug.Log("Serialized map data: " + JsonConvert.SerializeObject(mapData, Formatting.Indented));
 
-            // Convert map object to JSON format
-            string jsonData = JsonConvert.SerializeObject(new
-            {
-                userId = userId,
-                map = mapData
-            }, Formatting.Indented);
 
-            // Define the path for the map and image folder
-            string imagesFolderPath = Path.Combine(gamePath, "images");
-
-            // Ensure the images folder exists, create it if not
-            if (!Directory.Exists(imagesFolderPath))
-            {
-                Directory.CreateDirectory(imagesFolderPath);
-                Debug.Log("Images folder created at: " + imagesFolderPath);
-            }
-
-            // Define JSON file path
-            string filePath = Path.Combine(gamePath, jsonFileName);
-
-            // Write JSON data to the file
-            File.WriteAllText(filePath, jsonData);
-
-            // Now that the map is saved, we proceed to send it along with any image
-            StartCoroutine(SendMapToBackend(jsonData, imagesFolderPath));
-
-            string token = PlayerPrefs.GetString("Token", "");
+        string token = PlayerPrefs.GetString("Token", "");
             if (!string.IsNullOrEmpty(token))
             {
                 StartCoroutine(ValidateTokenAndLoadScene(token));
@@ -133,115 +94,6 @@ public class ElektroMapManager : CalcBoardMapMananger
                 }
             }
 
-            Debug.Log("Map saved successfully to: " + filePath);
-        }
-        catch (IOException ex)
-        {
-            Debug.LogError("File IO Error: " + ex.Message);
-        }
-        catch (JsonException ex)
-        {
-            Debug.LogError("JSON Serialization Error: " + ex.Message);
-        }
-    }
-
-    IEnumerator ValidateTokenAndLoadScene(string token)
-    {
-        string validateUrl = "http://yourbackend.com/validate-token"; // Replace with actual API URL
-        using (UnityWebRequest request = UnityWebRequest.Get(validateUrl))
-        {
-            request.SetRequestHeader("Authorization", "Bearer " + token);
-            yield return request.SendWebRequest();
-
-            SceneManager.LoadScene("URP2DSceneTemplate"); // Load scene first
-
-            yield return new WaitForSeconds(1); // Give scene time to load
-
-            LoginManager loginManager = FindObjectOfType<LoginManager>();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("Token is valid.");
-                loginManager?.ShowMenu();  // Show menu if valid
-            }
-            else
-            {
-                Debug.LogError("Token is invalid or expired.");
-                PlayerPrefs.DeleteKey("Token");
-                PlayerPrefs.DeleteKey("UserId");
-                loginManager?.ShowLogin(); // Show login if invalid
-            }
-        }
-    }
-
-
-    IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
-    {
-        string apiUrl = "http://localhost:8081/maps/save";
-        string token = PlayerPrefs.GetString("Token", "");
-
-        Debug.Log("🔍 Preparing JSON Data: " + jsonData);
-        Debug.Log("🔍 Using API URL: " + apiUrl);
-
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>
-    {
-        new MultipartFormDataSection("mapData", jsonData, "application/json") // ✅ Ensures correct format
-    };
-
-        string[] imageFiles = Directory.GetFiles(imagesFolderPath, "*.png")
-                              .Concat(Directory.GetFiles(imagesFolderPath, "*.jpg"))
-                              .Concat(Directory.GetFiles(imagesFolderPath, "*.jpeg"))
-                              .Concat(Directory.GetFiles(imagesFolderPath, "*.bmp"))
-                              .Concat(Directory.GetFiles(imagesFolderPath, "*.wav"))
-                              .ToArray();
-
-        foreach (string imagePath in imageFiles)
-        {
-            if (File.Exists(imagePath))
-            {
-                byte[] imageBytes = File.ReadAllBytes(imagePath);
-                formData.Add(new MultipartFormFileSection("file", imageBytes, Path.GetFileName(imagePath), "image/png"));
-                Debug.Log("🖼 Adding image: " + Path.GetFileName(imagePath) + " (Size: " + imageBytes.Length + " bytes)");
-            }
-        }
-
-        using (UnityWebRequest request = UnityWebRequest.Post(apiUrl, formData))
-        {
-            request.SetRequestHeader("Authorization", "Bearer " + token); // ✅ Do NOT manually set Content-Type
-
-            Debug.Log("🛠 Headers Set:");
-            Debug.Log("  - Authorization: Bearer " + token);
-            Debug.Log("  - Content-Type is automatically set by Unity");
-
-            yield return request.SendWebRequest();
-
-            Debug.Log("📡 Response Code: " + request.responseCode);
-            Debug.Log("📡 Response Text: " + request.downloadHandler.text);
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("✅ Map and images successfully saved on backend!");
-            }
-            else
-            {
-                Debug.LogError("❌ Failed to save map on backend: " + request.downloadHandler.text);
-            }
-        }
-    }
-
-
-    public string GetImagePathFromDirectory(string directoryPath)
-    {
-        string[] files = Directory.GetFiles(directoryPath, "*.png"); // Get all .png files in the directory
-        if (files.Length > 0)
-        {
-            return files[0]; // Return the first image (or use your logic to select one)
-        }
-        else
-        {
-            Debug.LogError("No image found in the directory.");
-            return null;
-        }
     }
 
 
