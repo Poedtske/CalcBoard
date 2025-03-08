@@ -71,48 +71,48 @@ public class ElektroMapManager : CalcBoardMapMananger
         SceneManager.LoadScene(Scenes.MAIN_MENU);
         
         //Main
-        try
-        {
+        //try
+        //{
 
-            int userId = PlayerPrefs.GetInt("UserId", -1);
-            if (userId == -1)
-            {
-                Debug.LogError("User not logged in or UserId not set.");
-                return;
-            }
+        //    int userId = PlayerPrefs.GetInt("UserId", -1);
+        //    if (userId == -1)
+        //    {
+        //        Debug.LogError("User not logged in or UserId not set.");
+        //        return;
+        //    }
 
-            ElektroMapData mapData=map.toData();
-            Debug.Log("Serialized map data: " + JsonConvert.SerializeObject(mapData, Formatting.Indented));
-            // Convert map object to JSON format
-            string jsonData = JsonConvert.SerializeObject(new
-            {
-                userId = userId,
-                map = mapData
-            }, Formatting.Indented);
+        //    ElektroMapData mapData=map.toData();
+        //    Debug.Log("Serialized map data: " + JsonConvert.SerializeObject(mapData, Formatting.Indented));
+        //    // Convert map object to JSON format
+        //    string jsonData = JsonConvert.SerializeObject(new
+        //    {
+        //        userId = userId,
+        //        map = mapData
+        //    }, Formatting.Indented);
 
-            // Send Map Data to Backend
-            StartCoroutine(SendMapToBackend(jsonData));
+        //    // Send Map Data to Backend
+        //    StartCoroutine(SendMapToBackend(jsonData));
 
-            // Define the file path
-            string filePath = Path.Combine(gamePath, jsonFileName);
+        //    // Define the file path
+        //    string filePath = Path.Combine(gamePath, jsonFileName);
 
-            // Write JSON data to the file
-            File.WriteAllText(filePath, jsonData);
+        //    // Write JSON data to the file
+        //    File.WriteAllText(filePath, jsonData);
 
-            SceneManager.LoadScene("URP2DSceneTemplate");
+        //    SceneManager.LoadScene("URP2DSceneTemplate");
 
-            Debug.Log("Map saved successfully to: " + filePath);
+        //    Debug.Log("Map saved successfully to: " + filePath);
 
             
-        }
-        catch (IOException ex)
-        {
-            Debug.LogError("File IO Error: " + ex.Message);
-        }
-        catch (JsonException ex)
-        {
-            Debug.LogError("JSON Serialization Error: " + ex.Message);
-        }
+        //}
+        //catch (IOException ex)
+        //{
+        //    Debug.LogError("File IO Error: " + ex.Message);
+        //}
+        //catch (JsonException ex)
+        //{
+        //    Debug.LogError("JSON Serialization Error: " + ex.Message);
+        //}
     }
 
     IEnumerator SendMapToBackend(string jsonData)
