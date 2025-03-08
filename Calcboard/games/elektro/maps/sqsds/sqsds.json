@@ -1,0 +1,21 @@
+{
+  "userId": 0,
+  "map": {
+    "id": 0,
+    "game": "elektro",
+    "name": "sqsds",
+    "languages": [
+      "ls"
+    ],
+    "tiles": [
+      {
+        "id": 1,
+        "img": "1.png",
+        "meanings": [
+          ""
+        ]
+      }
+    ],
+    "img": null
+  }
+}

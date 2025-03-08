@@ -1,0 +1,21 @@
+{
+  "userId": 0,
+  "map": {
+    "id": 0,
+    "game": "elektro",
+    "name": "test",
+    "languages": [
+      "ss"
+    ],
+    "tiles": [
+      {
+        "id": 1,
+        "img": "1.jpg",
+        "meanings": [
+          ""
+        ]
+      }
+    ],
+    "img": null
+  }
+}
