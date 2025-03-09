@@ -17,46 +17,11 @@ public class FileManager<T,Y>
 
     private string selectedFilePath;
     private string tempImg;
-
-    // Paths
-    private string pathMapFolder;
-    private string pathSaveImg;
-    private string root = Path.Combine(Application.dataPath, "..");
-    private string tempDirectory = Path.Combine(Application.dataPath, "..", "TempImages");
-
-    private string game;
-    private string mapName;
+    private PathManager pathManager;
 
     public FileManager(T map)
     {
-        this.mapName = map.MapName;
-        this.game = map.Game();
-        SetPaths();
-    }
-
-    private void CheckExistanceDirectory(string path)
-    {
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-    }
-
-    private void SetPaths()
-    {
-        // Set paths for the map
-        pathMapFolder = Path.Combine(root, "games", game, "maps", mapName);
-        pathSaveImg = Path.Combine(pathMapFolder, "images");
-
-        List<string> paths = new()
-        {
-            pathMapFolder,
-            pathSaveImg,
-            tempDirectory
-        };
-
-        foreach (var path in paths)
-        {
-            CheckExistanceDirectory(path);
-        }
+        pathManager = new(map.Game(), map.MapName);
     }
 
     public string TempImg
@@ -90,7 +55,7 @@ public class FileManager<T,Y>
             string jsonData = JsonConvert.SerializeObject(map, Formatting.Indented);
 
             // Define the file path
-            string filePath = Path.Combine(pathMapFolder, map.MapName+".json");
+            string filePath = Path.Combine(pathManager.Map(), map.MapName+".json");
 
             // Write JSON data to the file
             File.WriteAllText(filePath, jsonData);
@@ -113,9 +78,9 @@ public class FileManager<T,Y>
 
         string fileExtension = Path.GetExtension(filePath);
         string tempFileName = "temp" + tile.Id + fileExtension;
-        string tempFilePath = Path.Combine(tempDirectory, tempFileName);
+        string tempFilePath = Path.Combine(pathManager.TempImg(), tempFileName);
 
-        string[] existingTempFiles = Directory.GetFiles(tempDirectory, "temp" + tile.Id + ".*");
+        string[] existingTempFiles = Directory.GetFiles(pathManager.TempImg(), "temp" + tile.Id + ".*");
         foreach (string tempFile in existingTempFiles)
         {
             File.Delete(tempFile);
@@ -134,15 +99,15 @@ public class FileManager<T,Y>
 
         string fileExtension = Path.GetExtension(tempImg);
         string savedFileName = tile.Id + fileExtension;
-        string savedFilePath = Path.Combine(pathSaveImg, savedFileName);
+        string savedFilePath = Path.Combine(pathManager.Imgs(), savedFileName);
 
-        string[] existingFiles = Directory.GetFiles(pathSaveImg, tile.Id + ".*");
+        string[] existingFiles = Directory.GetFiles(pathManager.Imgs(), tile.Id + ".*");
         foreach (string existingFile in existingFiles)
         {
             File.Delete(existingFile);
         }
 
-        string tempFilePath = Path.Combine(tempDirectory, tempImg);
+        string tempFilePath = Path.Combine(pathManager.TempImg(), tempImg);
         if (File.Exists(tempFilePath))
         {
             File.Move(tempFilePath, savedFilePath);
@@ -191,7 +156,7 @@ public class FileManager<T,Y>
 
     private Texture2D LoadTextureFromFile(string imgName)
     {
-        byte[] fileData = File.ReadAllBytes(Path.Combine(pathSaveImg, imgName));
+        byte[] fileData = File.ReadAllBytes(Path.Combine(pathManager.Imgs(), imgName));
         Texture2D texture = new Texture2D(2, 2);
         return texture.LoadImage(fileData) ? texture : null;
     }

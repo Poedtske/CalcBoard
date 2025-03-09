@@ -12,15 +12,10 @@ public class MusicoMapManager : CalcBoardMapMananger
     private MusicoMapData map;
     private FileManager<MusicoMapData, MusicoTileData> fileManager;
     private SoundFileManager soundFileManager;
-    private PathManager pathManager;
 
     [Header("Unity Components")]
     [SerializeField] private GameObject tilePanel;
     [SerializeField] private GameObject editTilePanel;
-    public PathManager PathManager
-    {
-        get { return pathManager; }
-    }
 
     public SoundFileManager SoundFileManager
     {
@@ -60,8 +55,7 @@ public class MusicoMapManager : CalcBoardMapMananger
             Debug.LogError("No MapHolder found in the scene.");
         }
         fileManager = new FileManager<MusicoMapData, MusicoTileData>(map);
-        pathManager = new(Map.Game(), Map.MapName);
-        soundFileManager = new(map.Game(), map.MapName, pathManager);
+        soundFileManager = new(map.Game(), map.MapName);
     }
 
     public override void LoadTiles()

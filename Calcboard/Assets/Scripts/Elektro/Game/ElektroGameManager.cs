@@ -12,7 +12,6 @@ using System.Linq;
 public class ElektroGameManager : MonoBehaviour
 {
     private string gamePath = "games/elektro/maps/";
-    private string jsonFileName = "Temp Test/Temp Test.json"; // Adjusted to match your JSON location
     private UIDocument doc;
     private VisualElement visualElement;
     private Label label;

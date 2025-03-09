@@ -10,14 +10,9 @@ public class SoundFileManager
     private string tempSound;
     private PathManager pathManager;
 
-    private string game;
-    private string mapName;
-
-    public SoundFileManager(string game, string mapName, PathManager pathManager)
+    public SoundFileManager(string game, string mapName)
     {
-        this.game = game;
-        this.mapName = mapName;
-        this.pathManager = pathManager;
+        this.pathManager = new(game,mapName);
     }
 
     public string OpenSoundFilePicker(string fileName)

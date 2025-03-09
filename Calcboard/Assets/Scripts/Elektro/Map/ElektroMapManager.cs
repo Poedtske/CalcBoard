@@ -15,7 +15,6 @@ public class ElektroMapManager : CalcBoardMapMananger
 {
     private ElektroMapData map;
     private FileManager<ElektroMapData, ElektroTileData> fileManager;
-    private PathManager pathManager;
 
     [Header("Unity Components")]
     [SerializeField] private GameObject tilePanel;
@@ -51,7 +50,6 @@ public class ElektroMapManager : CalcBoardMapMananger
         }
 
         fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
-        pathManager = new PathManager(map.Game, map.MapName);
 
     }
 
@@ -72,27 +70,27 @@ public class ElektroMapManager : CalcBoardMapMananger
 
 
 
-        string token = PlayerPrefs.GetString("Token", "");
-            if (!string.IsNullOrEmpty(token))
-            {
-                StartCoroutine(ValidateTokenAndLoadScene(token));
-            }
-            else
-            {
-                // No token, go to login
-                SceneManager.LoadScene("URP2DSceneTemplate");
+        //string token = PlayerPrefs.GetString("Token", "");
+        //    if (!string.IsNullOrEmpty(token))
+        //    {
+        //        StartCoroutine(ValidateTokenAndLoadScene(token));
+        //    }
+        //    else
+        //    {
+        //        // No token, go to login
+        //        SceneManager.LoadScene("URP2DSceneTemplate");
 
-                // Use LoginManager to show the login screen
-                LoginManager loginManager = FindObjectOfType<LoginManager>();
-                if (loginManager != null)
-                {
-                    loginManager.ShowLogin();
-                }
-                else
-                {
-                    Debug.LogError("LoginManager not found in the scene.");
-                }
-            }
+        //        // Use LoginManager to show the login screen
+        //        LoginManager loginManager = FindObjectOfType<LoginManager>();
+        //        if (loginManager != null)
+        //        {
+        //            loginManager.ShowLogin();
+        //        }
+        //        else
+        //        {
+        //            Debug.LogError("LoginManager not found in the scene.");
+        //        }
+        //    }
 
     }
 

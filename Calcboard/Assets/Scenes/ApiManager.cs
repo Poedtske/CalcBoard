@@ -1,4 +1,15 @@
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.Networking;
+using System.IO;
+using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Linq;
+using System.IO;
 
 public class ApiManager
 {
@@ -17,7 +28,7 @@ public class ApiManager
 
             yield return new WaitForSeconds(1); // Give scene time to load
 
-            LoginManager loginManager = FindObjectOfType<LoginManager>();
+            LoginManager loginManager = Component.FindAnyObjectByType<LoginManager>();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
