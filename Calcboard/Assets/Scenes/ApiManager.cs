@@ -11,10 +11,26 @@ using UnityEngine.UI;
 using System.Linq;
 using System.IO;
 
-public class ApiManager
+public class ApiManager : MonoBehaviour
 {
+    public static ApiManager Instance { get; private set; }
 
+    private void Awake()
+    {
+        Debug.Log("ApiManager Awake() called!");
 
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("ApiManager instance set.");
+        }
+        else
+        {
+            Debug.LogWarning("Duplicate ApiManager detected! Destroying...");
+            Destroy(gameObject);
+        }
+    }
 
     IEnumerator ValidateTokenAndLoadScene(string token)
     {
@@ -46,7 +62,7 @@ public class ApiManager
     }
 
 
-    IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
+    public IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
     {
         string apiUrl = "http://localhost:8081/maps/save";
         string token = PlayerPrefs.GetString("Token", "");
