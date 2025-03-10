@@ -21,7 +21,7 @@ public class FileManager<T,Y>
 
     public FileManager(T map)
     {
-        pathManager = new(map.Game(), map.MapName);
+        pathManager = new(map.Game, map.MapName);
     }
 
     public string TempImg

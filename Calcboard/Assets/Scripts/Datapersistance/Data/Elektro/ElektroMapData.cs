@@ -8,6 +8,8 @@ public class ElektroMapData : CalcBoardMapData<ElektroMapData, ElektroTileData>
     private List<string> categories;
     private new const string game = Games.ELEKTRO;
 
+    public override string Game => game;
+
     public List<string> Categories
     {
         get { return categories; }
@@ -34,11 +36,6 @@ public class ElektroMapData : CalcBoardMapData<ElektroMapData, ElektroTileData>
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"ElektroMapData: ID={id}, Game={Game()}, Name={mapName}, Categories=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
-    }
-
-    public override string Game()
-    {
-        return game;
+        return $"ElektroMapData: ID={id}, Game={Game}, Name={mapName}, Categories=[{string.Join(", ", categories)}], Img={img}\nTiles:\n{tileDataString}";
     }
 }

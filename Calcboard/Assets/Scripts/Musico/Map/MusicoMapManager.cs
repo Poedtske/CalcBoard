@@ -55,7 +55,7 @@ public class MusicoMapManager : CalcBoardMapMananger
             Debug.LogError("No MapHolder found in the scene.");
         }
         fileManager = new FileManager<MusicoMapData, MusicoTileData>(map);
-        soundFileManager = new(map.Game(), map.MapName);
+        soundFileManager = new(map.Game, map.MapName);
     }
 
     public override void LoadTiles()

@@ -10,10 +10,9 @@ public abstract class CalcBoardMapData<T, Y>
     protected string mapName;
     protected List<Y> tiles; // Now uses the specific tile type
     protected string img;
-    protected const string game="";
+    protected string game="";
 
-    public abstract string Game();
-
+    public abstract string Game {  get; }
     public int Id
     {
         get => id;
@@ -51,6 +50,6 @@ public abstract class CalcBoardMapData<T, Y>
         {
             tileDataString += tile.ToString() + "\n";
         }
-        return $"CalcBoardMapData: ID={id}, Game={Game()}, Name={mapName}, Img={img}\nTiles:\n{tileDataString}";
+        return $"CalcBoardMapData: ID={id}, Game={Game}, Name={mapName}, Img={img}\nTiles:\n{tileDataString}";
     }
 }
