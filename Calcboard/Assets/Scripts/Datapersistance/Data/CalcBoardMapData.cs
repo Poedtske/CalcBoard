@@ -20,6 +20,7 @@ public abstract class CalcBoardMapData<T, Y>
         set => id = value;
     }
 
+   
     public string MapName
     {
         get => mapName;

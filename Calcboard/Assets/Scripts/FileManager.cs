@@ -57,8 +57,23 @@ public class FileManager<T,Y>
             // Define the file path
             string filePath = Path.Combine(pathManager.Map(), map.MapName+".json");
 
+            //imagepath
+            string imagepath = Path.Combine(pathManager.Map(), "images");
+
+            Debug.Log(imagepath);
+
+            // Ensure the ApiManager is not null before calling it
+            if (ApiManager.Instance == null)
+            {
+                Debug.LogError("ApiManager.Instance is null. Cannot send data.");
+                return;
+            }
+
+
             // Write JSON data to the file
             File.WriteAllText(filePath, jsonData);
+
+            ApiManager.Instance.StartCoroutine(ApiManager.Instance.SendMapToBackend(jsonData, imagepath));
 
             Debug.Log("Map saved successfully to: " + filePath);
         }
