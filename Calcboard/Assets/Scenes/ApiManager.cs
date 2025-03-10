@@ -69,6 +69,7 @@ public class ApiManager : MonoBehaviour
 
         Debug.Log(" Preparing JSON Data: " + jsonData);
         Debug.Log(" Using API URL: " + apiUrl);
+        Debug.Log(" Image path: " +  imagesFolderPath);
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>
     {
@@ -87,18 +88,18 @@ public class ApiManager : MonoBehaviour
             if (File.Exists(imagePath))
             {
                 byte[] imageBytes = File.ReadAllBytes(imagePath);
-                formData.Add(new MultipartFormFileSection("file", imageBytes, Path.GetFileName(imagePath), "image/png"));
+                formData.Add(new MultipartFormFileSection("tileImages", imageBytes, Path.GetFileName(imagePath), "image/png"));
                 Debug.Log(" Adding image: " + Path.GetFileName(imagePath) + " (Size: " + imageBytes.Length + " bytes)");
+            }
+            else
+            {
+                Debug.LogError("File does not exist: " + imagePath);
             }
         }
 
         using (UnityWebRequest request = UnityWebRequest.Post(apiUrl, formData))
         {
             request.SetRequestHeader("Authorization", "Bearer " + token); // Do NOT manually set Content-Type
-
-            Debug.Log(" Headers Set:");
-            Debug.Log("  - Authorization: Bearer " + token);
-            Debug.Log("  - Content-Type is automatically set by Unity");
 
             yield return request.SendWebRequest();
 
