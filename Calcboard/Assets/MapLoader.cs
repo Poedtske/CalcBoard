@@ -1,33 +1,43 @@
 using UnityEngine;
 using System.IO;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
-
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 public class MapLoader : MonoBehaviour
 {
-    public GameObject buttonPrefab; // Prefab for buttons
-    public Transform buttonParent; // Parent where buttons will be instantiated
+    public GameObject buttonPrefab; // Prefab for map selection buttons
+    public GameObject rowPrefab;    // Prefab for rows
+    public Transform mapsContainer; // Parent container for map selection rows
 
+    public GameObject manageMapPrefab; // Prefab for map management buttons
+    public Transform mapManagementContainer; // Parent container for map management rows
+
+    public GameObject categoryList; // Parent for category buttons
+    public GameObject categoryItemPrefab; // Prefab for category buttons
+
+    public GameObject mapPanel;  // Panel containing map selection UI
+    public GameObject categoryPanel;  // Panel containing category UI
+
+    private PathManager pathManager = new(Games.ELEKTRO);
+    private ElektroMapData mapData;
     private string mapsDirectory;
 
-    /// <summary>
-    /// Get the parent directory of the Assets folder and set the maps directory.
-    /// </summary>
+    private const int maxSelectionRows = 4;
+    private const int maxSelectionColumns = 7;
+    private const int maxManagementRows = 3;
+    private const int maxManagementColumns = 4;
+
     void Start()
     {
-        string projectPath = Directory.GetParent(Application.dataPath).FullName; // Get parent of Assets/
-        mapsDirectory = Path.Combine(projectPath, "games/elektro/maps");
+        mapsDirectory = pathManager.GameMapsDirectory();
+        Debug.Log(mapsDirectory);
         LoadMaps();
     }
 
-
-    /// <summary>
-    /// Load all maps from the maps directory and create buttons for each map.
-    /// </summary>
     void LoadMaps()
     {
         if (!Directory.Exists(mapsDirectory))
@@ -36,44 +46,48 @@ public class MapLoader : MonoBehaviour
             return;
         }
 
-        // Get all map directories (since maps are in folders)
         string[] mapFolders = Directory.GetDirectories(mapsDirectory);
-
         Debug.Log("Found " + mapFolders.Length + " maps in: " + mapsDirectory);
 
+        foreach (Transform child in mapsContainer) { Destroy(child.gameObject); }
+        foreach (Transform child in mapManagementContainer) { Destroy(child.gameObject); }
 
-        // Clear existing buttons
-        foreach (Transform child in buttonParent)
+        int rowCountSelection = 0;
+        int rowCountManagement = 0;
+        GameObject currentSelectionRow = null;
+        GameObject currentManagementRow = null;
+
+        for (int i = 0; i < mapFolders.Length; i++)
         {
-            Destroy(child.gameObject);
-        }
+            string mapName = Path.GetFileName(mapFolders[i]);
+            Debug.Log("Creating buttons for map: " + mapName);
 
-        foreach (string folder in mapFolders)
-        {
-            string mapName = Path.GetFileName(folder);
-            Debug.Log("Creating button for map: " + mapName);
-
-            GameObject button = Instantiate(buttonPrefab, buttonParent);
-
-            if (buttonParent == null)
+            if (i % maxSelectionColumns == 0)
             {
-                Debug.LogError("buttonParent is NULL! Assign a UI Panel in the Inspector.");
-                return;
+                if (rowCountSelection >= maxSelectionRows) break;
+                currentSelectionRow = Instantiate(rowPrefab, mapsContainer);
+                rowCountSelection++;
             }
 
-            Debug.Log("Button instantiated: " + button.name);
+            GameObject selectionButton = Instantiate(buttonPrefab, currentSelectionRow.transform);
+            selectionButton.GetComponentInChildren<TextMeshProUGUI>().text = mapName;
+            selectionButton.GetComponent<Button>().onClick.AddListener(() => LoadMap(mapName));
 
-            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText == null)
+            if (i % maxManagementColumns == 0)
             {
-                Debug.LogError("Button prefab is missing a TextMeshProUGUI component! Check your prefab.");
-                return;
+                if (rowCountManagement >= maxManagementRows) break;
+                currentManagementRow = Instantiate(rowPrefab, mapManagementContainer);
+                rowCountManagement++;
             }
 
-            buttonText.text = mapName;
-            string selectedMapPath = folder;
-            button.GetComponent<Button>().onClick.AddListener(() => LoadMap(mapName));
+            GameObject manageButton = Instantiate(manageMapPrefab, currentManagementRow.transform);
+            manageButton.GetComponentInChildren<TextMeshProUGUI>().text = mapName;
 
+            Button editButton = manageButton.transform.Find("Wood/ManageMap/Edit/EditBtn")?.GetComponent<Button>();
+            Button deleteButton = manageButton.transform.Find("Wood/ManageMap/Delete/DeleteBtn")?.GetComponent<Button>();
+
+            if (editButton != null) editButton.onClick.AddListener(() => EditMap(mapName));
+            if (deleteButton != null) deleteButton.onClick.AddListener(() => DeleteMap(mapName));
         }
     }
 
@@ -81,8 +95,88 @@ public class MapLoader : MonoBehaviour
     {
         Debug.Log("Loading map: " + mapName);
         PlayerPrefs.SetString("mapName", mapName);
-        SceneManager.LoadScene(Scenes.ELEKTRO_GAME);
+
+        string filePath = Path.Combine(pathManager.GameMapsDirectory(), mapName, mapName + ".json");
+
+        if (!File.Exists(filePath)) throw new FileNotFoundException($"JSON file not found: {filePath}");
+
+        string jsonData = File.ReadAllText(filePath);
+        Debug.Log("Raw JSON: " + jsonData);
+
+        try
+        {
+            mapData = JsonConvert.DeserializeObject<ElektroMapData>(jsonData);
+            if (mapData == null) throw new InvalidOperationException("Deserialized JSON resulted in null object.");
+            Debug.Log("Map data loaded successfully.");
+        }
+        catch (JsonException ex)
+        {
+            throw new InvalidOperationException("JSON Deserialization Error: " + ex.Message, ex);
+        }
+
+        // Close map selection panel and open category panel
+        mapPanel.SetActive(false);
+        categoryPanel.SetActive(true);
+
+        LoadCategories();
     }
 
+    void LoadCategories()
+    {
+        if (mapData == null || mapData.Categories == null)
+        {
+            Debug.LogError("Map data or categories are missing.");
+            return;
+        }
 
+        foreach (Transform child in categoryList.transform) { Destroy(child.gameObject); }
+
+        for (int i = 0; i < mapData.Categories.Count; i++)
+        {
+            string categoryName = mapData.Categories[i];
+            Debug.Log("Creating category button: " + categoryName);
+
+            GameObject categoryButton = Instantiate(categoryItemPrefab, categoryList.transform);
+            categoryButton.GetComponentInChildren<TextMeshProUGUI>().text = categoryName;
+            int categoryIndex = i; // Store index to avoid closure issues
+            categoryButton.GetComponent<Button>().onClick.AddListener(() => LoadCategory(categoryIndex));
+        }
+    }
+
+    void LoadCategory(int categoryIndex)
+    {
+        Debug.Log("Loading category: " + mapData.Categories[categoryIndex]);
+        PlayerPrefs.SetInt("categoryIndex", categoryIndex);
+        SceneManager.LoadScene(Scenes.ELEKTRO_GAME); // Replace with correct scene
+    }
+
+    void EditMap(string mapName)
+    {
+        Debug.Log("Editing map: " + mapName);
+        // Add logic to handle map editing
+    }
+
+    void DeleteMap(string mapName)
+    {
+        string mapPath = Path.Combine(mapsDirectory, mapName);
+
+        if (Directory.Exists(mapPath))
+        {
+            Debug.Log($"Deleting map: {mapName}");
+            try
+            {
+                Directory.Delete(mapPath, true);
+                Debug.Log("Map deleted successfully.");
+                LoadMaps();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to delete map: {ex.Message}");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Map directory not found: {mapPath}");
+        }
+    }
 }

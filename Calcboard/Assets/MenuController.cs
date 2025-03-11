@@ -11,21 +11,11 @@ public class MenuController : MonoBehaviour
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private float defaultVolume = 1.0f;
+    [SerializeField] private GameObject mapsContainer;
 
     [Header("Confirmation Prompt")]
     [SerializeField] private GameObject comfirmationPrompt = null;
 
-
-
-    private string games;
-
-    /**
-     * When the user clicks on games on the stating menu, the user will be taken to the games menu
-     * **/
-    public void Games()
-    {
-        SceneManager.LoadScene("Games");
-    }
 
 
     /**
@@ -63,5 +53,10 @@ public class MenuController : MonoBehaviour
         comfirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(2);
         comfirmationPrompt.SetActive(false);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(Scenes.MAIN_MENU);
     }
 }

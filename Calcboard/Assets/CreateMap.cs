@@ -11,6 +11,7 @@ public class CreateMap : MonoBehaviour
     public TMP_InputField languageInputField; // User types language name here
     public Transform languageContainer; // Parent container (should have VerticalLayoutGroup)
     public TMP_InputField mapNameInputField;
+    public GameObject CategoryListItemPrefab; // Prefab for category list items
 
     private List<string> languages = new();
 
@@ -19,7 +20,6 @@ public class CreateMap : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -41,50 +41,16 @@ public class CreateMap : MonoBehaviour
 
     private void CreateLanguageUI(string language)
     {
-        // Create Parent GameObject
-        GameObject entry = new GameObject($"LanguageEntry_{language}");
-        
-        GameObject contentBox = GameObject.Find("ElektroCategoriesContent");
-        entry.transform.SetParent(contentBox.transform, false);
-        HorizontalLayoutGroup layout = entry.AddComponent<HorizontalLayoutGroup>();
-        layout.spacing = 10;
-        layout.childAlignment = TextAnchor.MiddleLeft;
+        // Instantiate prefab and set parent
+        GameObject entry = Instantiate(CategoryListItemPrefab, languageContainer);
+        entry.name = $"LanguageEntry_{language}";
 
-        // Create Language Text
-        GameObject textObj = new GameObject("LanguageText");
-        textObj.transform.SetParent(entry.transform, false);
-        TMP_Text languageText = textObj.AddComponent<TextMeshProUGUI>();
+        // Find child components
+        TMP_Text languageText = entry.transform.Find("Elements/Name").GetComponent<TMP_Text>();
+        Button deleteButton = entry.transform.Find("Elements/Delete").GetComponent<Button>();
+
+        // Assign values
         languageText.text = language;
-        languageText.fontSize = 36;
-        languageText.color = Color.white;
-        languageText.alignment = TextAlignmentOptions.Left;
-
-        // Create Delete Button
-        GameObject buttonObj = new GameObject("DeleteButton");
-        buttonObj.transform.SetParent(entry.transform, false);
-        Button deleteButton = buttonObj.AddComponent<Button>();
-        Image buttonImage = buttonObj.AddComponent<Image>();
-        buttonImage.color = Color.red; // Make the button red
-
-        // Add Text to Button
-        GameObject buttonTextObj = new GameObject("ButtonText");
-        buttonTextObj.transform.SetParent(buttonObj.transform, false);
-        TMP_Text buttonText = buttonTextObj.AddComponent<TextMeshProUGUI>();
-        buttonText.text = "X";
-        buttonText.fontSize = 30;
-        buttonText.alignment = TextAlignmentOptions.Center;
-
-        // Resize and Position Elements
-        RectTransform entryRect = entry.GetComponent<RectTransform>();
-        entryRect.sizeDelta = new Vector2(350, 60); // Width and height
-        RectTransform textRect = textObj.GetComponent<RectTransform>();
-        textRect.sizeDelta = new Vector2(400, 60);
-        RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
-        buttonRect.sizeDelta = new Vector2(60, 60);
-        RectTransform buttonTextRect = buttonTextObj.GetComponent<RectTransform>();
-        buttonTextRect.sizeDelta = new Vector2(60, 60);
-
-        // Set Button Action
         deleteButton.onClick.AddListener(() => RemoveLanguage(language, entry));
     }
 
