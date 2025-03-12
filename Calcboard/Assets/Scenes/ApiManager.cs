@@ -15,6 +15,9 @@ public class ApiManager : MonoBehaviour
 {
     public static ApiManager Instance { get; private set; }
 
+    private string apiUrl = "http://localhost:8081";
+
+
     private void Awake()
     {
         Debug.Log("ApiManager Awake() called!");
@@ -32,9 +35,47 @@ public class ApiManager : MonoBehaviour
         }
     }
 
-    IEnumerator ValidateTokenAndLoadScene(string token)
+    [System.Serializable]
+    public class LoginResponse
     {
-        string validateUrl = "http://10.2.160.151:8081/validate-token"; // Replace with actual API URL
+        public long userId;
+        public string token; // Ensure backend returns this
+    }
+
+    public IEnumerator SendLoginRequest(string username, string password, System.Action<bool, string> callback)
+    {
+        string jsonData = $"{{\"email\":\"{username}\",\"password\":\"{password}\"}}";
+
+        using (UnityWebRequest request = new UnityWebRequest($"{apiUrl}/login", "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                LoginResponse response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+                PlayerPrefs.SetInt("UserId", (int)response.userId);
+                PlayerPrefs.SetString("Token", response.token);
+
+                Debug.Log("Login successful: " + request.downloadHandler.text);
+                callback(true, "Login successful");
+            }
+            else
+            {
+                Debug.LogError("Login failed: " + request.downloadHandler.text);
+                callback(false, "Invalid username or password!");
+            }
+        }
+    }
+
+
+    public IEnumerator ValidateTokenAndLoadScene(string token)
+    {
+        string validateUrl = $"{apiUrl}/validate-token"; // Replace with actual API URL
         using (UnityWebRequest request = UnityWebRequest.Get(validateUrl))
         {
             request.SetRequestHeader("Authorization", "Bearer " + token);
@@ -64,7 +105,7 @@ public class ApiManager : MonoBehaviour
 
     public IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
     {
-        string apiUrl = "http://10.2.160.151:8081/maps/save";
+       
         string token = PlayerPrefs.GetString("Token", "");
 
         Debug.Log(" Preparing JSON Data: " + jsonData);
@@ -97,7 +138,7 @@ public class ApiManager : MonoBehaviour
             }
         }
 
-        using (UnityWebRequest request = UnityWebRequest.Post(apiUrl, formData))
+        using (UnityWebRequest request = UnityWebRequest.Post($"{apiUrl}/maps/save", formData))
         {
             request.SetRequestHeader("Authorization", "Bearer " + token); // Do NOT manually set Content-Type
 
