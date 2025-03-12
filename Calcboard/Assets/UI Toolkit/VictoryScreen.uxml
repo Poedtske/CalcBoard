@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/ElektroGameStyle.uss?fileID=7433441132597879392&amp;guid=594f7d339d6203a4d9244d37ce2103bf&amp;type=3#ElektroGameStyle" />
+    <engine:VisualElement name="Container" enabled="true" style="flex-grow: 1;">
+        <engine:VisualElement name="ButtonContainer" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); -unity-text-align: middle-center; justify-content: center;">
+            <engine:Label text="Victory" name="Victory" style="font-size: 300%; -unity-text-align: upper-center;" />
+            <engine:Button text="replay" name="ReplayBtn" class="btn" />
+            <engine:Button text="go back" name="GoBackBtn" class="btn" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -9,15 +8,17 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem.Layouts;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ElektroGameManager : MonoBehaviour
 {
     private string gamePath = "games/elektro/maps/";
-    private UIDocument doc;
+    private UIDocument gameDoc;
+    private UIDocument victoryDoc;
     private VisualElement visualElement;
     private Label label;
     ElektroMapData mapData;
-    public int language = 0;
+    public int language;
     private List<ElektroTileData> tileList;
     private ElektroTileData selectedTile;
     public string input;
@@ -35,13 +36,18 @@ public class ElektroGameManager : MonoBehaviour
     public AudioClip correctSound;
     public AudioSource backgroundMusicManager;
     public AudioSource SFXManager;
+    public GameObject gameScreen;
+    public GameObject victoryScreen;
 
     private void Awake()
     {
-        doc = GetComponent<UIDocument>();
-        visualElement = doc.rootVisualElement.Q("Container");
+        gameDoc = gameScreen.GetComponent<UIDocument>();
+        visualElement = gameDoc.rootVisualElement.Q("Container");
         visualElement.RegisterCallback<ClickEvent>(Click);
-        label = doc.rootVisualElement.Q("Header") as Label;
+        label = gameDoc.rootVisualElement.Q("Header") as Label;
+        victoryDoc= victoryScreen.GetComponent<UIDocument>();
+        language = PlayerPrefs.GetInt("CategoryIndex");
+
     }
 
     private void Click(ClickEvent e)
@@ -92,6 +98,7 @@ public class ElektroGameManager : MonoBehaviour
     {
         if (tileList.Count == 0)
         {
+            ActivateVictoryScreen();
             Debug.Log("No tileIds to play.");
 
             // Stop the background music process
@@ -105,8 +112,9 @@ public class ElektroGameManager : MonoBehaviour
             // Play victory sound, then start victory music
             SFXManager.clip = victorySound;
             SFXManager.Play();
-
+            
             StartCoroutine(PlayBackgroundMusicAfterSFX());
+
             return;
         }
         else
@@ -117,6 +125,50 @@ public class ElektroGameManager : MonoBehaviour
             tileList.RemoveAt(randomIndex);
         }
     }
+
+    private void ActivateVictoryScreen()
+    {
+        gameScreen.SetActive(false);
+        victoryScreen.SetActive(true);
+
+        Button replayBtn = victoryDoc.rootVisualElement.Q<Button>("ReplayBtn");
+        Button goBackBtn = victoryDoc.rootVisualElement.Q<Button>("GoBackBtn");
+
+        if (replayBtn != null)
+        {
+            replayBtn.clicked += Replay;
+        }
+        else
+        {
+            Debug.LogError("ReplayBtn not found!");
+        }
+
+        if (goBackBtn != null)
+        {
+            goBackBtn.clicked += GoBack;
+        }
+        else
+        {
+            Debug.LogError("GoBackBtn not found!");
+        }
+    }
+
+    private void GoBack()
+    {
+        SceneManager.LoadScene(Scenes.ELEKTRO_ACTIONS);
+    }
+
+    private void Replay()
+    {
+        // Reset game variables if necessary
+        score = 0;
+        rounds = 0;
+        tileList = new List<ElektroTileData>(mapData.Tiles.Take(6)); // Reset tiles
+
+        // Restart the game scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 
     private IEnumerator PlayBackgroundMusicAfterSFX()
     {

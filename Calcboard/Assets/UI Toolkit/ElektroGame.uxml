@@ -1,6 +1,9 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/ElektroGameStyle.uss?fileID=7433441132597879392&amp;guid=594f7d339d6203a4d9244d37ce2103bf&amp;type=3#ElektroGameStyle" />
-    <engine:VisualElement name="Container" style="flex-grow: 1;">
-        <engine:Label text="Main Menu" name="Header" class="header" style="font-size: 100%;" />
+    <engine:VisualElement name="Container" enabled="true" style="flex-grow: 1;">
+        <engine:Label text="Main Menu" name="Header" class="header" style="font-size: 200%; -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;);" />
+    </engine:VisualElement>
+    <engine:VisualElement style="flex-grow: 1;">
+        <engine:Label text="Label" name="Timer" class="header" style="font-size: 200%; -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;);" />
     </engine:VisualElement>
 </engine:UXML>
