@@ -63,9 +63,8 @@ public class ElektroMapManager : CalcBoardMapMananger
 
     public override void Save()
     {
-
-//Musico
         fileManager.Save(map);
+
       
         string token = PlayerPrefs.GetString("Token", "");
 
@@ -75,6 +74,7 @@ public class ElektroMapManager : CalcBoardMapMananger
             ApiManager.Instance.StartCoroutine(ApiManager.Instance.ValidateTokenAndLoadScene(token));
 
         }
+
 
     }
 
