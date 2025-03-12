@@ -34,7 +34,7 @@ public class ApiManager : MonoBehaviour
 
     IEnumerator ValidateTokenAndLoadScene(string token)
     {
-        string validateUrl = "http://yourbackend.com/validate-token"; // Replace with actual API URL
+        string validateUrl = "http://10.2.160.151:8081/validate-token"; // Replace with actual API URL
         using (UnityWebRequest request = UnityWebRequest.Get(validateUrl))
         {
             request.SetRequestHeader("Authorization", "Bearer " + token);
@@ -64,7 +64,7 @@ public class ApiManager : MonoBehaviour
 
     public IEnumerator SendMapToBackend(string jsonData, string imagesFolderPath)
     {
-        string apiUrl = "http://localhost:8081/maps/save";
+        string apiUrl = "http://10.2.160.151:8081/maps/save";
         string token = PlayerPrefs.GetString("Token", "");
 
         Debug.Log(" Preparing JSON Data: " + jsonData);

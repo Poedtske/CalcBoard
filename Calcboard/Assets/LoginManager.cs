@@ -16,7 +16,7 @@ public class LoginManager : MonoBehaviour
     public Button loginButton;
     public Text errorMessage;
 
-    private string apiUrl = "http://localhost:8081/login";
+    private string apiUrl = "http://10.2.160.151:8081/login";
 
 
     public GameObject loginContainer; // The login UI panel
