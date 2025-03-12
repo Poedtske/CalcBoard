@@ -75,6 +75,8 @@ public class FileManager<T,Y>
 
             ApiManager.Instance.StartCoroutine(ApiManager.Instance.SendMapToBackend(jsonData, imagepath));
 
+            SceneManager.LoadScene(Scenes.MAIN_MENU);
+
             Debug.Log("Map saved successfully to: " + filePath);
         }
         catch (IOException ex)

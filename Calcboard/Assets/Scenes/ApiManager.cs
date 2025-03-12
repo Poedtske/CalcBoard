@@ -81,8 +81,7 @@ public class ApiManager : MonoBehaviour
             request.SetRequestHeader("Authorization", "Bearer " + token);
             yield return request.SendWebRequest();
 
-            SceneManager.LoadScene(Scenes.MAIN_MENU); // Load scene first
-
+          
             yield return new WaitForSeconds(1); // Give scene time to load
 
             LoginManager loginManager = Component.FindAnyObjectByType<LoginManager>();

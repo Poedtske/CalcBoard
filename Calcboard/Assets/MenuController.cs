@@ -16,6 +16,23 @@ public class MenuController : MonoBehaviour
     [Header("Confirmation Prompt")]
     [SerializeField] private GameObject comfirmationPrompt = null;
 
+    public void Awake()
+    {
+        string token = PlayerPrefs.GetString("Token", "");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+
+            ApiManager.Instance.StartCoroutine(ApiManager.Instance.ValidateTokenAndLoadScene(token));
+
+        }
+        else
+        {
+            Debug.LogError("No token.");
+
+        }
+    }
+
 
 
     /**
@@ -53,6 +70,11 @@ public class MenuController : MonoBehaviour
         comfirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(2);
         comfirmationPrompt.SetActive(false);
+    }
+
+    public void Logout()
+    {
+        PlayerPrefs.DeleteKey("Token");
     }
 
     public void BackToMainMenu()

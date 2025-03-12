@@ -65,16 +65,6 @@ public class ElektroMapManager : CalcBoardMapMananger
     {
         fileManager.Save(map);
 
-      
-        string token = PlayerPrefs.GetString("Token", "");
-
-        if (!string.IsNullOrEmpty(token))
-        {
-
-            ApiManager.Instance.StartCoroutine(ApiManager.Instance.ValidateTokenAndLoadScene(token));
-
-        }
-
 
     }
 
