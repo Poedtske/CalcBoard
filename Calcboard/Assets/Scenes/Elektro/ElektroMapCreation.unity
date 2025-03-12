@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 1335632287}
   - component: {fileID: 1335632286}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: ElektroMapManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,13 +666,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 202680270915209989, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 2067177172}
-    - target: {fileID: 202680270915209989, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
+    - target: {fileID: 402510855730741773, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 402510855730741773, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2096671660180134305, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: gameManager
@@ -766,28 +766,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: CalcBoard
       objectReference: {fileID: 0}
-    - target: {fileID: 4917141237869343264, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2067177172}
-    - target: {fileID: 4917141237869343264, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+    - target: {fileID: 5023054410756145826, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1335632286}
-    - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Save
+    - target: {fileID: 8093497791672262632, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -500
       objectReference: {fileID: 0}
-    - target: {fileID: 5944655647934920799, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ElektroMapManager, Assembly-CSharp
+    - target: {fileID: 8934200806594475476, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 99711269141808344, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
