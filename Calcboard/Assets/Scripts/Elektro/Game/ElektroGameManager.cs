@@ -26,6 +26,10 @@ public class ElektroGameManager : MonoBehaviour
     private int rounds = 0;
     private bool untilEverytingIsCorrect;
 
+    private Label timerLabel; // Timer UI label
+    private float timer = 0f; // Timer variable
+    private bool isTimerRunning = true; // Controls whether the timer is active
+
     private List<AudioClip> audioClipList;
     private Coroutine backgroundMusicCoroutine; // Store coroutine reference
 
@@ -43,21 +47,10 @@ public class ElektroGameManager : MonoBehaviour
     {
         gameDoc = gameScreen.GetComponent<UIDocument>();
         visualElement = gameDoc.rootVisualElement.Q("Container");
-        visualElement.RegisterCallback<ClickEvent>(Click);
         label = gameDoc.rootVisualElement.Q("Header") as Label;
         victoryDoc= victoryScreen.GetComponent<UIDocument>();
         language = PlayerPrefs.GetInt("CategoryIndex");
-
-    }
-
-    private void Click(ClickEvent e)
-    {
-        Debug.Log("pressed it");
-    }
-
-    private void OnDisable()
-    {
-        visualElement.UnregisterCallback<ClickEvent>(Click);
+        timerLabel = gameDoc.rootVisualElement.Q<Label>("Timer"); // Get the Timer label
     }
 
     void Start()
@@ -98,6 +91,7 @@ public class ElektroGameManager : MonoBehaviour
     {
         if (tileList.Count == 0)
         {
+            isTimerRunning = false;
             ActivateVictoryScreen();
             Debug.Log("No tileIds to play.");
 
@@ -133,6 +127,11 @@ public class ElektroGameManager : MonoBehaviour
 
         Button replayBtn = victoryDoc.rootVisualElement.Q<Button>("ReplayBtn");
         Button goBackBtn = victoryDoc.rootVisualElement.Q<Button>("GoBackBtn");
+        Label time = victoryDoc.rootVisualElement.Q<Label>("Time");
+
+        TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+
+        time.text = "Time: " + timeSpan.ToString(@"m\:ss\.fff");
 
         if (replayBtn != null)
         {
@@ -163,9 +162,11 @@ public class ElektroGameManager : MonoBehaviour
         // Reset game variables if necessary
         score = 0;
         rounds = 0;
+        timer = 0f;
+        isTimerRunning = true;
         tileList = new List<ElektroTileData>(mapData.Tiles.Take(6)); // Reset tiles
 
-        // Restart the game scene
+        //Restart the game scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -184,6 +185,12 @@ public class ElektroGameManager : MonoBehaviour
 
     private void Update()
     {
+        if (isTimerRunning) // Update timer if the game is still running
+        {
+            timer += Time.deltaTime;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+            timerLabel.text = $"Time: {timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
+        }
         if (!string.IsNullOrEmpty(input))
         {
             if (ValidateInput())
