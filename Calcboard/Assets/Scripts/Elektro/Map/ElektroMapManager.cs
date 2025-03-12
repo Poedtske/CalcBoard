@@ -66,31 +66,15 @@ public class ElektroMapManager : CalcBoardMapMananger
 
 //Musico
         fileManager.Save(map);
-        SceneManager.LoadScene(Scenes.MAIN_MENU);
+      
+        string token = PlayerPrefs.GetString("Token", "");
 
+        if (!string.IsNullOrEmpty(token))
+        {
 
+            ApiManager.Instance.StartCoroutine(ApiManager.Instance.ValidateTokenAndLoadScene(token));
 
-        //string token = PlayerPrefs.GetString("Token", "");
-        //    if (!string.IsNullOrEmpty(token))
-        //    {
-        //        StartCoroutine(ValidateTokenAndLoadScene(token));
-        //    }
-        //    else
-        //    {
-        //        // No token, go to login
-        //        SceneManager.LoadScene("URP2DSceneTemplate");
-
-        //        // Use LoginManager to show the login screen
-        //        LoginManager loginManager = FindObjectOfType<LoginManager>();
-        //        if (loginManager != null)
-        //        {
-        //            loginManager.ShowLogin();
-        //        }
-        //        else
-        //        {
-        //            Debug.LogError("LoginManager not found in the scene.");
-        //        }
-        //    }
+        }
 
     }
 

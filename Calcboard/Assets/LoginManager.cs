@@ -16,8 +16,6 @@ public class LoginManager : MonoBehaviour
     public Button loginButton;
     public Text errorMessage;
 
-    private string apiUrl = "http://10.2.160.151:8081/login";
-
 
     public GameObject loginContainer; // The login UI panel
     public GameObject menu;  // The menu container panel
@@ -30,43 +28,35 @@ public class LoginManager : MonoBehaviour
 
     void AttemptLogin()
     {
+
+        if (usernameInput == null || passwordInput == null)
+        {
+            Debug.LogError("Username or Password input field is not assigned!");
+            return;
+        }
+
+        if (ApiManager.Instance == null)
+        {
+            Debug.LogError("ApiManager instance is NULL! Make sure it's in the scene.");
+            return;
+        }
+
         string username = usernameInput.text;
         string password = passwordInput.text;
 
-        StartCoroutine(SendLoginRequest(username, password));
-
+        ApiManager.Instance.StartCoroutine(ApiManager.Instance.SendLoginRequest(username, password, HandleLoginResponse));
     }
 
-    IEnumerator SendLoginRequest(string username, string password)
+    void HandleLoginResponse(bool success, string message)
     {
-        // Prepare JSON payload
-        string jsonData = $"{{\"email\":\"{username}\",\"password\":\"{password}\"}}";
-
-        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
+        if (success)
         {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                LoginResponse response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
-
-                PlayerPrefs.SetInt("UserId", (int)response.userId);
-                PlayerPrefs.SetString("Token", response.token); // If you use JWT tokens
-
-                Debug.Log("Login successful: " + request.downloadHandler.text);
-                loginContainer.SetActive(false);
-                menu.SetActive(true);
-            }
-            else
-            {
-                Debug.LogError("Login failed: " + request.downloadHandler.text);
-                errorMessage.text = "Invalid username or password!";
-            }
+            ShowMenu();
+        }
+        else
+        {
+            ShowLogin();
+            errorMessage.text = message;
         }
     }
 
@@ -83,11 +73,6 @@ public class LoginManager : MonoBehaviour
         loginContainer.SetActive(false);
     }
 
-    [System.Serializable]
-    public class LoginResponse
-    {
-        public long userId;
-        public string token; // Ensure backend returns this
-    }
+   
 
 }
