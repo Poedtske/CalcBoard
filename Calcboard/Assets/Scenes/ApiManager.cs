@@ -15,7 +15,7 @@ public class ApiManager : MonoBehaviour
 {
     public static ApiManager Instance { get; private set; }
 
-    private string apiUrl = "http://localhost:8081";
+    private string apiUrl = "http://10.2.160.151:8081";
 
 
     private void Awake()
