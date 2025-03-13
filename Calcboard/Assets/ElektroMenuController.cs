@@ -1,9 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElektroMenuController : MonoBehaviour
 {
+    private bool playMusic = true;
+    public Image image;
 
+    public Sprite playSound;
+    public Sprite muteSound;
     public GameObject backgroundMusic;
     private void Awake()
     {
@@ -12,6 +17,22 @@ public class ElektroMenuController : MonoBehaviour
         if (backgroundMusic != null)
         {
             DontDestroyOnLoad(backgroundMusic);
+        }
+    }
+
+    public void Music()
+    {
+        if (playMusic)
+        {
+            backgroundMusic.GetComponent<AudioSource>().Stop();
+            playMusic = false;
+            image.sprite = muteSound;
+        }
+        else
+        {
+            backgroundMusic.GetComponent<AudioSource>().Play();
+            playMusic = true;
+            image.sprite = playSound;
         }
     }
 }

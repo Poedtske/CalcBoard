@@ -13790,6 +13790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41aaf2e7484c7f409438b3985f886ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 1993290395}
+  playSound: {fileID: 21300000, guid: 30e8bed184acdf747a7fa940a7553967, type: 3}
+  muteSound: {fileID: -1429257004864675077, guid: 2087805fac0409c429514e68d51a5c00, type: 3}
   backgroundMusic: {fileID: 207441830}
 --- !u!4 &1615712413
 Transform:
@@ -14850,9 +14853,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 414256046}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 1615712412}
+        m_TargetAssemblyTypeName: ElektroMenuController, Assembly-CSharp
+        m_MethodName: Music
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

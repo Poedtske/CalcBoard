@@ -81,7 +81,7 @@ public class ApiManager : MonoBehaviour
 
             LoginManager loginManager = Component.FindAnyObjectByType<LoginManager>();
 
-            if (request.result == UnityWebRequest.Result.Success)
+            if (request.responseCode == 200)
             {
                 Debug.Log("Token is valid.");
                 loginManager?.ShowMenu();  // Show menu if valid

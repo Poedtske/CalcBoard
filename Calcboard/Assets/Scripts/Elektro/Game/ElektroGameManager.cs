@@ -212,6 +212,7 @@ public class ElektroGameManager : MonoBehaviour
                 SFXManager.clip = errorSound;
                 SFXManager.Play();
                 Debug.Log("incorrect");
+                timer += 2f;
             }
             rounds++;
             input = null;
