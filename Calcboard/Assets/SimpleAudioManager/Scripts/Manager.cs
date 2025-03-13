@@ -15,10 +15,10 @@ namespace SimpleAudioManager
         private static Manager _instance = null;
 
         /// <summary>
-        /// The attached audio source
+        /// The attached backgroundMusic source
         /// </summary>
         [Header("CONFIGURATIONS")]
-        [Tooltip("The audio source prefab which will be used in the audio source pool.")] public GameObject audioSourcePrefab = null;
+        [Tooltip("The backgroundMusic source prefab which will be used in the backgroundMusic source pool.")] public GameObject audioSourcePrefab = null;
         private List<AudioSource> sourcePool = new List<AudioSource>();
         private int _currentSourceIndex = -1;
         private AudioSource _currentSource => (_currentSourceIndex == -1 || sourcePool == null || sourcePool.Count <= 0 || sourcePool.Count < _currentSourceIndex) ? null : sourcePool[_currentSourceIndex];
@@ -35,7 +35,7 @@ namespace SimpleAudioManager
         public float clipTimeRemaining => (_nextLoopStartTime != 0f) ? ((float)(_nextLoopStartTime - AudioSettings.dspTime) + ((!loopCurrentSong)? _currentSongData.reverbTail : 0f)) : 0f;
         private double _nextLoopStartTime = 0;
         [Tooltip("Should the manager play the first song on awake?")] public bool playOnAwake = true;
-        [Tooltip("The maximum volume for the audio clips.")][Range(0f, 1f)] public float maxVolume = 1f;
+        [Tooltip("The maximum volume for the backgroundMusic clips.")][Range(0f, 1f)] public float maxVolume = 1f;
         [Tooltip("The amount of time it will take for different songs to blend between one-another.")] public float defaultSongBlendDuration = 1f;
         [Tooltip("The amount of time it will take for different intensities of the same song to blend between one-another.")] public float defaultIntensityBlendDuration = 1f;
 
@@ -106,11 +106,11 @@ namespace SimpleAudioManager
             //  Do our best to match intensity
             if (_data[pOptions.song].intensityClips.Count <= pOptions.intensity) pOptions.intensity = _data[pOptions.song].intensityClips.Count - 1;
 
-            //  Get the next available audio source
+            //  Get the next available backgroundMusic source
             if (_currentSourceIndex != -1)
             {
                 AudioSource _current = _currentSource;
-                //  Passing in -1 blendOutTime will let the source play the audio out until the end of the track at its current volume
+                //  Passing in -1 blendOutTime will let the source play the backgroundMusic out until the end of the track at its current volume
                 float _endVolume = (pOptions.blendOutTime == -1f) ? _current.volume : 0f;
                 float _fadeTime = (pOptions.blendOutTime == -1f) ? _currentSongData.reverbTail : pOptions.blendOutTime;
                 StartCoroutine(_FadeVolume(_current, _current.volume, _endVolume, _fadeTime));
@@ -210,7 +210,7 @@ namespace SimpleAudioManager
         }
 
         /// <summary>
-        /// Force an audio source to fade in or out
+        /// Force an backgroundMusic source to fade in or out
         /// </summary>
         private IEnumerator _FadeVolume(AudioSource pSource, float pStart, float pEnd, float pDuration)
         {
@@ -232,7 +232,7 @@ namespace SimpleAudioManager
             //  The fade was between the same values (this is used when looping to allow for the previous clip to play out without fading)
             if (pSource.volume == 0f || pEnd == pStart)
             {
-                //  If the fade is for the current audio source
+                //  If the fade is for the current backgroundMusic source
                 if (pSource == _currentSource)
                 {
                     sourcePool.ForEach(s => s.Stop());
@@ -257,7 +257,7 @@ namespace SimpleAudioManager
             yield return new WaitForSecondsRealtime(_waitTime);
             if (!loopCurrentSong)
             {
-                //  Queue the current audio source to play out for the remainder of the duration
+                //  Queue the current backgroundMusic source to play out for the remainder of the duration
                 AudioSource _current = _currentSource;
                 StartCoroutine(_FadeVolume(_current, _current.volume, _current.volume, _currentSongData.reverbTail));
                 yield break;

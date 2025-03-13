@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public static class Scenes
 {
@@ -14,4 +15,18 @@ public static class Scenes
     public static readonly string MUSICO_ACTIONS = "MusicoActions";
     public static readonly string MUSICO_GAME = "MusicoGame";
     public static readonly string MUSICO_MAP_CREATION = "MusicoMapCreation";
+
+    public static List<AudioSource> DeleteCrossScenesAudio(AudioSource[] audioSources)
+    {
+        List<AudioSource> toBeRemoved = new();
+        foreach (AudioSource audio in audioSources)
+        {
+            if (audio.gameObject.scene.buildIndex == -1) // Objects marked as DontDestroyOnLoad have this index
+            {
+                toBeRemoved.Add(audio);
+            }
+        }
+        return toBeRemoved;
+
+    }
 }

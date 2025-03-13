@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static Unity.VisualScripting.Icons;
 
 [System.Serializable]
 public class ElektroMapData : CalcBoardMapData<ElektroMapData, ElektroTileData>

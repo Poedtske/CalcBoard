@@ -49,8 +49,14 @@ public class ElektroGameManager : MonoBehaviour
         visualElement = gameDoc.rootVisualElement.Q("Container");
         label = gameDoc.rootVisualElement.Q("Header") as Label;
         victoryDoc= victoryScreen.GetComponent<UIDocument>();
-        language = PlayerPrefs.GetInt("CategoryIndex");
+        language = PlayerPrefs.GetInt("categoryIndex");
         timerLabel = gameDoc.rootVisualElement.Q<Label>("Timer"); // Get the Timer label
+
+        // Check for an AudioSource that persists between scenes
+        AudioSource[] audioSources = FindObjectsByType<AudioSource>(new());
+
+        List<AudioSource> toBeDeleted = Scenes.DeleteCrossScenesAudio(FindObjectsByType<AudioSource>(new()));
+        toBeDeleted.ForEach(Destroy);
     }
 
     void Start()

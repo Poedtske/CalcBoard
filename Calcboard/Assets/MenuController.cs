@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Linq;
 
 public class MenuController : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class MenuController : MonoBehaviour
     [Header("Confirmation Prompt")]
     [SerializeField] private GameObject comfirmationPrompt = null;
 
+
     public void Awake()
     {
-        string token = PlayerPrefs.GetString("Token", "");
+        string token = PlayerPrefs.GetString("Token");
 
         if (!string.IsNullOrEmpty(token))
         {
@@ -31,6 +33,11 @@ public class MenuController : MonoBehaviour
             Debug.LogError("No token.");
 
         }
+
+        List<AudioSource> toBeDeleted = Scenes.DeleteCrossScenesAudio(FindObjectsByType<AudioSource>(new()));
+        toBeDeleted.ForEach(Destroy);
+
+        
     }
 
 
@@ -56,7 +63,7 @@ public class MenuController : MonoBehaviour
 
     public void VolumeReset(string MenuType)
     {
-       if(MenuType == "Audio")
+       if(MenuType == "backgroundMusic")
         {
             AudioListener.volume = defaultVolume;
             volumeSlider.value = defaultVolume;
@@ -80,5 +87,10 @@ public class MenuController : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(Scenes.MAIN_MENU);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

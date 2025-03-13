@@ -158,8 +158,9 @@ public class MapLoader : MonoBehaviour
 
     void DeleteMap(string mapName)
     {
+        Debug.Log(mapsDirectory);
         string mapPath = Path.Combine(mapsDirectory, mapName);
-
+        Debug.Log(mapPath);
         if (Directory.Exists(mapPath))
         {
             Debug.Log($"Deleting map: {mapName}");

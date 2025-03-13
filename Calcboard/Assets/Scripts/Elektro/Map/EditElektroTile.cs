@@ -14,7 +14,7 @@ public class EditElektroTile : MonoBehaviour
     public ElektroMapManager gameManager;
     private FileManager<ElektroMapData,ElektroTileData> fileManager;
     public TMP_InputField inputFieldPrefab; // Prefab for input fields
-
+    public TMP_FontAsset customFont;
     
 
     public ElektroTileData Tile
@@ -94,17 +94,20 @@ public class EditElektroTile : MonoBehaviour
             label.text = languageName; // Set label text
             label.fontSize = 40;
             label.alignment = TextAlignmentOptions.Center;
+            label.font = customFont; //  Set the custom font here
 
             // Create Input Field
             TMP_InputField input = Instantiate(inputFieldPrefab, entry.transform);
             input.name = $"InputField_{i}"; // Name input fields by index
             input.text = tileValue; // Set input field value
             input.image.enabled = true;
+
             // Set Placeholder Text Correctly
             if (input.placeholder is TextMeshProUGUI placeholderText)
             {
                 placeholderText.text = languageName;
             }
+
             input.GetComponent<TMP_InputField>().enabled = true;
 
             inputFields.Add(input); // Store reference

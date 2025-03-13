@@ -668,12 +668,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402510855730741773, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 402510855730741773, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2096671660180134305, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: customFont
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b7ab04bf30a6fd4f96e9dd28adff465, type: 2}
     - target: {fileID: 2096671660180134305, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: gameManager
       value: 
@@ -776,7 +780,35 @@ PrefabInstance:
       objectReference: {fileID: 1335632286}
     - target: {fileID: 8093497791672262632, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -500
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1335632286}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoBackToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ElektroMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212576507578224147, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8934200806594475476, guid: 71b49b4f789cf2a4fa59acbcb0a307ec, type: 3}
       propertyPath: m_IsActive

@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections;
-using UnityEngine.Networking;
-using System.IO;
-using Newtonsoft.Json;
-using Unity.VisualScripting;
+﻿using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Linq;
-using System.IO;
+
 
 public class ElektroMapManager : CalcBoardMapMananger
 {
@@ -48,7 +41,6 @@ public class ElektroMapManager : CalcBoardMapMananger
         {
             Debug.LogError("No MapHolder found in the scene.");
         }
-
         fileManager = new FileManager<ElektroMapData, ElektroTileData>(map);
 
     }
@@ -59,6 +51,11 @@ public class ElektroMapManager : CalcBoardMapMananger
         Debug.Log(map);
 
 
+    }
+
+    public void GoBackToMenu()
+    {
+        SceneManager.LoadScene(Scenes.ELEKTRO_ACTIONS);
     }
 
     public override void Save()

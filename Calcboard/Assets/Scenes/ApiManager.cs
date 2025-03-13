@@ -2,14 +2,9 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Networking;
 using System.IO;
-using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Linq;
-using System.IO;
+
 
 public class ApiManager : MonoBehaviour
 {
