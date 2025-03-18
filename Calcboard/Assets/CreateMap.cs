@@ -67,6 +67,6 @@ public class CreateMap : MonoBehaviour
         ElektroMapHolder holder = FindAnyObjectByType<ElektroMapHolder>();
         holder.Map = new(mapName, null, languages);
 
-        SceneManager.LoadScene("ElektroMapCreation");
+        SceneManager.LoadScene(Scenes.ELEKTRO_MAP_CREATION);
     }
 }

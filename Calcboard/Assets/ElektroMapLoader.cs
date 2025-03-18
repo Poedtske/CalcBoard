@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-public class MapLoader : MonoBehaviour
+public class ElektroMapLoader : MonoBehaviour
 {
     public GameObject buttonPrefab; // Prefab for map selection buttons
     public GameObject rowPrefab;    // Prefab for rows

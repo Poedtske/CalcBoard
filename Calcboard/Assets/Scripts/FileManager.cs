@@ -12,7 +12,6 @@ public class FileManager<T,Y>
     where Y : CalcBoardTileData<Y>
 {
     
-    public ElektroMapManager gameManagerElektro;
     private RawImage img;
 
     private string selectedFilePath;
